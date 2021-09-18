@@ -31,7 +31,7 @@ class Ui_LoginForm(object):
         self.LoginContainer.setStyleSheet("background-color: transparent;")
         self.LoginContainer.setObjectName("LoginContainer")
         self.LeftSide = QtWidgets.QLabel(self.LoginContainer)
-        self.LeftSide.setGeometry(QtCore.QRect(49, 49, 541, 681))
+        self.LeftSide.setGeometry(QtCore.QRect(49, 49, 541, 710))
         self.LeftSide.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(37, 99, 235, 1), stop:1 rgba(79, 70, 229, 1));\n"
                                     "border-top-left-radius: 20px;\n"
                                     "border-bottom-left-radius: 20px;")
@@ -39,7 +39,7 @@ class Ui_LoginForm(object):
         self.LeftSide.setObjectName("LeftSide")
         self.login_details_container = QtWidgets.QLabel(self.LoginContainer)
         self.login_details_container.setGeometry(
-            QtCore.QRect(420, 49, 791, 681))
+            QtCore.QRect(420, 49, 791, 710))
         self.login_details_container.setToolTipDuration(0)
         self.login_details_container.setStyleSheet("background-color: rgb(255, 255, 255);\n"
                                                    "border-top-right-radius: 20px;\n"
@@ -179,7 +179,7 @@ class Ui_LoginForm(object):
         self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget_2)
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
-        font.setPointSize(12)
+        font.setPointSize(10)
         font.setItalic(True)
         self.label_2.setFont(font)
         self.label_2.setToolTipDuration(0)
@@ -222,6 +222,59 @@ class Ui_LoginForm(object):
                                                "}")
         self.register_now_button.setObjectName("register_now_button")
         self.verticalLayout.addWidget(self.register_now_button)
+        self.Admin_layout = QtWidgets.QWidget(self.LoginContainer)
+        self.Admin_layout.setGeometry(
+            QtCore.QRect(620, 640, 391, 81))
+        self.Admin_layout.setObjectName("Admin_layout")
+        self.Admin_login = QtWidgets.QVBoxLayout(self.Admin_layout)
+        self.Admin_login.setContentsMargins(0, 0, 0, 0)
+        self.Admin_login.setObjectName("Admin_login")
+        self.admin_prompt = QtWidgets.QLabel(self.Admin_layout)
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(10)
+        font.setItalic(True)
+        self.admin_prompt.setFont(font)
+        self.admin_prompt.setToolTipDuration(0)
+        self.admin_prompt.setAlignment(QtCore.Qt.AlignCenter)
+        self.admin_prompt.setObjectName("admin_prompt")
+        self.Admin_login.addWidget(self.admin_prompt)
+        self.Admin_login_button = QtWidgets.QPushButton(
+            self.Admin_layout)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(
+            self.Admin_login_button.sizePolicy().hasHeightForWidth())
+        self.Admin_login_button.setSizePolicy(sizePolicy)
+        font = QtGui.QFont()
+        font.setPointSize(-1)
+        self.Admin_login_button.setFont(font)
+        self.Admin_login_button.setToolTipDuration(0)
+        self.Admin_login_button.setStyleSheet("QPushButton#Admin_login_button {\n"
+                                              "    border-top-right-radius: 10px;\n"
+                                              "    border-top-left-radius: 10px;\n"
+                                              "    border-bottom-right-radius: 10px;\n"
+                                              "    border-bottom-left-radius: 10px;\n"
+                                              "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(45, 212, 191, 1), stop:1 rgba(6, 182, 212, 1));\n"
+                                              "    font-size: 16px;\n"
+                                              "    color: rgb(255, 255, 255);\n"
+                                              "}\n"
+                                              "\n"
+                                              "QPushButton#Admin_login_button:hover {\n"
+                                              "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #0F766E\n"
+                                              ", stop:1 #0E7490);\n"
+                                              "}\n"
+                                              "\n"
+                                              "QPushButton#Admin_login_button:pressed {\n"
+                                              "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #0F766E\n"
+                                              ", stop:1 #0E7490);\n"
+                                              "    padding-left: 5px;\n"
+                                              "    padding-top: 5px;\n"
+                                              "}")
+        self.Admin_login_button.setObjectName("Admin_login_button")
+        self.Admin_login.addWidget(self.Admin_login_button)
 
         # Add Drop Shadow effect to selected Widgets
         self.login_button.setGraphicsEffect(
@@ -244,6 +297,10 @@ class Ui_LoginForm(object):
             "LoginForm", "Don\'t Have An Account?"))
         self.register_now_button.setText(
             _translate("LoginForm", "Register Now!"))
+        self.admin_prompt.setText(_translate(
+            "LoginForm", "Already An Admin?"))
+        self.Admin_login_button.setText(
+            _translate("LoginForm", "Admin Login"))
 
 
 if __name__ == "__main__":
