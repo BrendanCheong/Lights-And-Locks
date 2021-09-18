@@ -43,7 +43,7 @@
       <x>49</x>
       <y>49</y>
       <width>541</width>
-      <height>681</height>
+      <height>710</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -61,7 +61,7 @@ border-bottom-left-radius: 20px;</string>
       <x>420</x>
       <y>49</y>
       <width>791</width>
-      <height>681</height>
+      <height>710</height>
      </rect>
     </property>
     <property name="toolTipDuration">
@@ -317,6 +317,82 @@ QPushButton#register_now_button:hover {
 }
 
 QPushButton#register_now_button:pressed {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #B91C1C
+, stop:1 #C2410C);
+	padding-left: 5px;
+	padding-top: 5px;
+}</string>
+       </property>
+       <property name="text">
+        <string>Register Now!</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="verticalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>640</y>
+      <width>391</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="Admin_login">
+     <item>
+      <widget class="QLabel" name="admin_prompt">
+       <property name="font">
+        <font>
+         <family>Segoe UI</family>
+         <pointsize>12</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="toolTipDuration">
+        <number>0</number>
+       </property>
+       <property name="text">
+        <string>Don't Have An Account?</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="Admin_login_button">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>-1</pointsize>
+        </font>
+       </property>
+       <property name="toolTipDuration">
+        <number>0</number>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton#Admin_login_button {
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #EF4444, stop:1 #F97316);
+	font-size: 16px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton#Admin_login_button:hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #B91C1C
+, stop:1 #C2410C);
+}
+
+QPushButton#Admin_login_button:pressed {
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #B91C1C
 , stop:1 #C2410C);
 	padding-left: 5px;
