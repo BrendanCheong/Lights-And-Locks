@@ -19,6 +19,14 @@ def index():
 
 @app.errorhandler(404)
 def not_found(error=None):
+    """[summary]
+
+    Args:
+        error ([type], optional): [specifies error type to be sent]. Defaults to None.
+
+    Returns:
+        [Dict(str)]: [sends back 404 data not found error message should I choose to use it]
+    """
     message = {
         'status': 404,
         'message': 'Not Found: ' + request.url,
