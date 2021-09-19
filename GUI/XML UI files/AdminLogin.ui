@@ -82,7 +82,7 @@ border-bottom-right-radius: 20px;</string>
       <x>510</x>
       <y>90</y>
       <width>581</width>
-      <height>411</height>
+      <height>441</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="LoginTextContainerAdmin">
@@ -112,7 +112,7 @@ border-bottom-right-radius: 20px;</string>
         <string notr="true">color: rgba(0, 0, 0, 200);</string>
        </property>
        <property name="text">
-        <string>Welcome Back Administrator!</string>
+        <string>Welcome Back Admin!</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -209,7 +209,7 @@ border-bottom-right-radius: 20px;</string>
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="username_label_2">
+      <widget class="QLabel" name="admin_key_label">
        <property name="font">
         <font>
          <family>Segoe UI</family>
@@ -224,7 +224,7 @@ border-bottom-right-radius: 20px;</string>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="username_enter_2">
+      <widget class="QLineEdit" name="Admin_key_password">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
          <horstretch>0</horstretch>
@@ -249,6 +249,9 @@ border-bottom-right-radius: 20px;</string>
 	border-bottom-left-radius: 10px;
 }</string>
        </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
       </widget>
      </item>
     </layout>
@@ -258,8 +261,8 @@ border-bottom-right-radius: 20px;</string>
      <rect>
       <x>650</x>
       <y>560</y>
-      <width>301</width>
-      <height>41</height>
+      <width>311</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
@@ -302,14 +305,14 @@ QPushButton#login_button:pressed {
      <rect>
       <x>640</x>
       <y>630</y>
-      <width>191</width>
+      <width>221</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Segoe UI</family>
-      <pointsize>12</pointsize>
+      <pointsize>10</pointsize>
      </font>
     </property>
     <property name="text">
@@ -322,19 +325,28 @@ QPushButton#login_button:pressed {
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>820</x>
+      <x>830</x>
       <y>630</y>
-      <width>121</width>
+      <width>141</width>
       <height>41</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Segoe UI</family>
-      <pointsize>12</pointsize>
+      <pointsize>10</pointsize>
       <italic>true</italic>
       <underline>true</underline>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	color: #6366F1;
+}
+
+QPushButton:hover{
+	color: #4338CA;
+}</string>
     </property>
     <property name="text">
      <string>Go Back</string>
