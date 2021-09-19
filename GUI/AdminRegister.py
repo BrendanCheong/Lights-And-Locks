@@ -119,6 +119,7 @@ class Ui_AdminRegisterForm(object):
                                            "    border-bottom-right-radius: 10px;\n"
                                            "    border-bottom-left-radius: 10px;\n"
                                            "}")
+        self.admin_key_enter.setEchoMode(QtWidgets.QLineEdit.Password)
         self.admin_key_enter.setObjectName("admin_key_enter")
         self.RegisterTextContainer.addWidget(self.admin_key_enter)
         self.register_button = QtWidgets.QPushButton(self.RegisterContainer)
