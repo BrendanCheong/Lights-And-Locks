@@ -5,11 +5,13 @@ TODO: Add in props attribute to the function
 TODO: Eventually add in functionality to the buttons etc
 """
 
+from RegisterForm import Ui_RegisterForm as RegisterForm
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_LoginForm(object):
     def setupUi(self, LoginForm):
+        PROPS = dict()
         LoginForm.setObjectName("LoginForm")
         LoginForm.resize(1331, 867)
 
@@ -249,7 +251,7 @@ class Ui_LoginForm(object):
             self.Admin_login_button.sizePolicy().hasHeightForWidth())
         self.Admin_login_button.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(1)
         self.Admin_login_button.setFont(font)
         self.Admin_login_button.setToolTipDuration(0)
         self.Admin_login_button.setStyleSheet("QPushButton#Admin_login_button {\n"
@@ -282,8 +284,41 @@ class Ui_LoginForm(object):
         self.LoginContainer.setGraphicsEffect(
             QtWidgets.QGraphicsDropShadowEffect(blurRadius=15, xOffset=0, yOffset=6))
 
+        """
+        Button Functionalities Start Here
+        """
+        # Connect to Register Now Page
+        self.register_now_button.clicked.connect(lambda:
+                                                 self.open_register_form(PROPS))
+        self.register_now_button.clicked.connect(LoginForm.close)
+
+        # Connect to Admin Login Page
+        self.Admin_login_button.clicked.connect(self.open_admin_login)
+        self.Admin_login_button.clicked.connect(LoginForm.close)
+        """
+        Button Functionalities End
+        """
         self.retranslateUi(LoginForm)
         QtCore.QMetaObject.connectSlotsByName(LoginForm)
+
+    def open_register_form(self, PROPS):
+        """ Make sure that the RegisterForm.py setupUI form has PROPS
+        in its arguments. 
+
+        Args:
+            PROPS (Dict(str)): [key in the User's Textfield inputs in dictionary]
+        """
+        self.register_widget = QtWidgets.QWidget()
+        self.ui = RegisterForm()
+        self.ui.setupUi(self.register_widget, PROPS)
+        self.register_widget.show()
+
+    def open_admin_login(self):
+        from AdminLogin import Ui_AdminLogin as AdminLoginForm
+        self.admin_login_widget = QtWidgets.QWidget()
+        self.ui = AdminLoginForm()
+        self.ui.setupUi(self.admin_login_widget)
+        self.admin_login_widget.show()
 
     def retranslateUi(self, LoginForm):
         _translate = QtCore.QCoreApplication.translate

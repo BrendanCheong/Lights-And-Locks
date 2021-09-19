@@ -3,11 +3,10 @@ Updated: 19 September 2021
 TODO: Add Button Functionality
 """
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_LoginForm(object):
+class Ui_AdminLogin(object):
     def setupUi(self, LoginForm):
         LoginForm.setObjectName("LoginForm")
         LoginForm.resize(1331, 867)
@@ -211,28 +210,44 @@ class Ui_LoginForm(object):
         self.label.setFont(font)
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
-        self.pushButton = QtWidgets.QPushButton(self.LoginContainer)
-        self.pushButton.setGeometry(QtCore.QRect(830, 630, 141, 41))
+        self.go_back_button = QtWidgets.QPushButton(self.LoginContainer)
+        self.go_back_button.setGeometry(QtCore.QRect(830, 630, 141, 41))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
         font.setItalic(True)
         font.setUnderline(True)
-        self.pushButton.setFont(font)
-        self.pushButton.setStyleSheet("QPushButton{\n"
-                                      "    color: #6366F1;\n"
-                                      "}\n"
-                                      "\n"
-                                      "QPushButton:hover{\n"
-                                      "    color: #4338CA;\n"
-                                      "}")
-        self.pushButton.setObjectName("pushButton")
+        self.go_back_button.setFont(font)
+        self.go_back_button.setStyleSheet("QPushButton{\n"
+                                          "    color: #6366F1;\n"
+                                          "}\n"
+                                          "\n"
+                                          "QPushButton:hover{\n"
+                                          "    color: #4338CA;\n"
+                                          "}")
+        self.go_back_button.setObjectName("go_back_button")
 
         self.login_button.setGraphicsEffect(
             QtWidgets.QGraphicsDropShadowEffect(blurRadius=15, xOffset=0, yOffset=6))
 
+        """
+        Button Functionality Start
+        """
+        self.go_back_button.clicked.connect(self.open_login_form)
+        self.go_back_button.clicked.connect(LoginForm.close)
+        """
+        Button Functionality End
+        """
         self.retranslateUi(LoginForm)
         QtCore.QMetaObject.connectSlotsByName(LoginForm)
+
+    def open_login_form(self):
+        from LoginForm import Ui_LoginForm as LoginFormCustomer
+
+        self.login_form_widget = QtWidgets.QWidget()
+        self.ui = LoginFormCustomer()
+        self.ui.setupUi(self.login_form_widget)
+        self.login_form_widget.show()
 
     def retranslateUi(self, LoginForm):
         _translate = QtCore.QCoreApplication.translate
@@ -245,14 +260,14 @@ class Ui_LoginForm(object):
         self.login_button.setText(_translate(
             "LoginForm", "Login && Initialise"))
         self.label.setText(_translate("LoginForm", "Not an Administrator?"))
-        self.pushButton.setText(_translate("LoginForm", "Go Back"))
+        self.go_back_button.setText(_translate("LoginForm", "Go Back"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     LoginForm = QtWidgets.QWidget()
-    ui = Ui_LoginForm()
+    ui = Ui_AdminLogin()
     ui.setupUi(LoginForm)
     LoginForm.show()
     sys.exit(app.exec_())

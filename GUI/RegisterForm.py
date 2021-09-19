@@ -4,12 +4,12 @@ TODO: Connect Login and Register Page together
 TODO: Connect to Admin Registration page
 TODO: Add Error handling on Client-side using QMessageBox
 """
-
+from AdminRegister import Ui_AdminRegisterForm as AdminRegisterForm
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_RegisterForm(object):
-    def setupUi(self, RegisterForm):
+    def setupUi(self, RegisterForm, PROPS):
         RegisterForm.setObjectName("RegisterForm")
         RegisterForm.resize(1720, 1500)
 
@@ -493,7 +493,35 @@ class Ui_RegisterForm(object):
 
         self.retranslateUi(RegisterForm)
         self.gender_comboBox.setCurrentIndex(-1)
+        """
+        Button Functionalities Start
+        """
+        # Connect Admin Registration Button
+        self.admin_registration_button.clicked.connect(
+            self.open_admin_registration)
+        self.admin_registration_button.clicked.connect(RegisterForm.close)
+
+        # Connect Login Now Back Button
+        self.login_now_button.clicked.connect(self.open_login_form_back)
+        self.login_now_button.clicked.connect(RegisterForm.close)
+        """
+        Button Functionalities End
+        """
         QtCore.QMetaObject.connectSlotsByName(RegisterForm)
+
+    def open_admin_registration(self):
+        self.admin_registration_widget = QtWidgets.QWidget()
+        self.ui = AdminRegisterForm()
+        self.ui.setupUi(self.admin_registration_widget)
+        self.admin_registration_widget.show()
+
+    def open_login_form_back(self):
+        from LoginForm import Ui_LoginForm as LoginForm
+
+        self.login_form_widget = QtWidgets.QWidget()
+        self.ui = LoginForm()
+        self.ui.setupUi(self.login_form_widget)
+        self.login_form_widget.show()
 
     def retranslateUi(self, RegisterForm):
         _translate = QtCore.QCoreApplication.translate
@@ -524,6 +552,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     RegisterForm = QtWidgets.QWidget()
     ui = Ui_RegisterForm()
-    ui.setupUi(RegisterForm)
+    ui.setupUi(RegisterForm, PROPS=dict())
     RegisterForm.show()
     sys.exit(app.exec_())

@@ -4,7 +4,6 @@ TODO: Add Button logic
 TODO: Copy over Error handling
 """
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -417,7 +416,23 @@ class Ui_AdminRegisterForm(object):
 
         self.retranslateUi(AdminRegisterForm)
         self.gender_comboBox.setCurrentIndex(-1)
+        """
+        Button Functionalities Start
+        """
+        self.go_back_button.clicked.connect(self.open_register_form_back)
+        self.go_back_button.clicked.connect(AdminRegisterForm.close)
+        """
+        Button Functionalities End
+        """
         QtCore.QMetaObject.connectSlotsByName(AdminRegisterForm)
+
+    def open_register_form_back(self):
+        from RegisterForm import Ui_RegisterForm as RegisterForm
+
+        self.register_form = QtWidgets.QWidget()
+        self.ui = RegisterForm()
+        self.ui.setupUi(self.register_form, PROPS=dict())
+        self.register_form.show()
 
     def retranslateUi(self, AdminRegisterForm):
         _translate = QtCore.QCoreApplication.translate
