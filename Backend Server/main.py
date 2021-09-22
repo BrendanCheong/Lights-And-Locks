@@ -1,22 +1,14 @@
 import pymysql
 import http
+import os
 from app import app
-from flask import jsonify
+from flask import jsonify, Flask, g
 from flask import flash, request
 import yaml
 from app import app
+from db_config import *
 from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
-
-db = yaml.load(open('db_secrets.yaml'), Loader=yaml.FullLoader)
-mysql = MySQL(app)
-bcrypt = Bcrypt(app)
-# connect to MySQL database hosted on AWS free tier
-app.config['MYSQL_USER'] = db['mysql_user']
-app.config['MYSQL_PASSWORD'] = db['mysql_password']
-app.config['MYSQL_DB'] = db['mysql_db']
-app.config['MYSQL_PORT'] = 3306
-app.config['MYSQL_HOST'] = db['mysql_host']
 
 # pw_hash = bcrypt.generate_password_hash("hunter2").decode("utf-8")
 # print(bcrypt.check_password_hash(pw_hash, 'hunter2'))
@@ -50,25 +42,46 @@ def add_user():
             # form the raw sql statement with f strings, USE THIS EXACT FORMAT, any random indents can cause an error
             sql = f"""-- sql
                 INSERT INTO `Customer` (`Customer ID`, `Password`, `Name`, `Gender`, `PhoneNumber`, `Address`, `Email`)
-                VALUES ("{_customer_id}", "{_hashed_password}", "{_name}", "{_gender}", "{_phone_number}", "{_address}", "{_email}");
+                VALUES ("{_customer_id}", "{_hashed_password}", "{_name}",
+                        "{_gender}", "{_phone_number}", "{_address}", "{_email}");
                 """
             cursor.execute(sql)  # execute formed sql
             conn.commit()  # if can execute, push changes to database
-            resp = jsonify(Nice='User added successfully!')
+            resp = jsonify(success='User added successfully!')
             resp.status_code = 200
             return resp
         else:
-            return not_found()
+            return not_found("Missing User Details")
     except Exception as e:
         print(str(e))
-        resp = jsonify(Bad=str(e))
+        resp = jsonify(error=str(e))
         resp.status_code = 500
         return resp
     finally:
         cursor.close()  # always have a finally block to close the database connection
 
 
-@app.errorhandler(404)
+@app.route('/api/Initialise', methods=["GET"])
+def initialise_db():
+    conn = mysql.connection
+    cursor = conn.cursor()
+    cur_path = os.path.dirname(__file__)[:-14]
+    new_path = cur_path + 'SQL Scripts\\Initialise_OSHES_database.sql'
+    try:
+        with open(new_path) as f:
+            cursor.execute(f.read())
+        resp = jsonify(success='Database Initialised!')
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(str(e))
+        resp = jsonify(error=str(e))
+        resp.status_code = 500
+    finally:
+        cursor.close()
+
+
+@ app.errorhandler(404)
 def not_found(error=None):
     """[summary]
 
@@ -80,7 +93,8 @@ def not_found(error=None):
     """
     message = {
         'status': 404,
-        'message': 'Not Found: ' + request.url,
+        'message': 'Not Found: ' + error,
+        'error location': request.url
     }
     response = jsonify(message)
     response.status_code = 404

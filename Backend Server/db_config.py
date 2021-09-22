@@ -12,5 +12,3 @@ app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_DB'] = db['mysql_db']
 app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_HOST'] = db['mysql_host']
-
-# mysql.init_app(app)
