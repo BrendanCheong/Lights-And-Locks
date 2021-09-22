@@ -1,10 +1,22 @@
 import pymysql
 import http
 from app import app
-from db_config import bcrypt
-from db_config import mysql
 from flask import jsonify
 from flask import flash, request
+import yaml
+from app import app
+from flask_mysqldb import MySQL
+from flask_bcrypt import Bcrypt
+
+db = yaml.load(open('db_secrets.yaml'), Loader=yaml.FullLoader)
+mysql = MySQL(app)
+bcrypt = Bcrypt(app)
+# connect to MySQL database hosted on AWS free tier
+app.config['MYSQL_USER'] = db['mysql_user']
+app.config['MYSQL_PASSWORD'] = db['mysql_password']
+app.config['MYSQL_DB'] = db['mysql_db']
+app.config['MYSQL_PORT'] = 3306
+app.config['MYSQL_HOST'] = db['mysql_host']
 
 # pw_hash = bcrypt.generate_password_hash("hunter2").decode("utf-8")
 # print(bcrypt.check_password_hash(pw_hash, 'hunter2'))
@@ -14,7 +26,46 @@ from flask import flash, request
 
 @app.route("/", methods=["GET"])
 def index():
-    return "Welcome to Lights and Lock's Server!"
+    return jsonify(Welcome="Welcome to Lights and Lock's Server!")
+
+
+@app.route('/api/Customer/add', methods=['POST'])
+def add_user():
+    conn = mysql.connection  # start off by creating a connection
+    cursor = conn.cursor()  # then create a cursor to interact with the database
+    try:
+        _json = request.json
+        _name = str(_json['Name'])
+        _email = str(_json['Email'])
+        _password = str(_json['Password'])
+        _customer_id = str(_json["Customer ID"])
+        _gender = str(_json["Gender"])
+        _phone_number = str(_json["PhoneNumber"])
+        _address = str(_json["Address"])
+        # validate the received values
+        if _name and _email and _password and request.method == 'POST':
+            # do not save password as a plain text
+            _hashed_password = bcrypt.generate_password_hash(
+                _password).decode("utf-8")
+            # form the raw sql statement with f strings, USE THIS EXACT FORMAT, any random indents can cause an error
+            sql = f"""-- sql
+                INSERT INTO `Customer` (`Customer ID`, `Password`, `Name`, `Gender`, `PhoneNumber`, `Address`, `Email`)
+                VALUES ("{_customer_id}", "{_hashed_password}", "{_name}", "{_gender}", "{_phone_number}", "{_address}", "{_email}");
+                """
+            cursor.execute(sql)  # execute formed sql
+            conn.commit()  # if can execute, push changes to database
+            resp = jsonify(Nice='User added successfully!')
+            resp.status_code = 200
+            return resp
+        else:
+            return not_found()
+    except Exception as e:
+        print(str(e))
+        resp = jsonify(Bad=str(e))
+        resp.status_code = 500
+        return resp
+    finally:
+        cursor.close()  # always have a finally block to close the database connection
 
 
 @app.errorhandler(404)

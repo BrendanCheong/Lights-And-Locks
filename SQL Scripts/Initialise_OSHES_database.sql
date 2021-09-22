@@ -15,9 +15,9 @@ DROP TABLE IF EXISTS `OSHES`.`Customer` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Customer` (
   `Customer ID` CHAR(36) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(60) NOT NULL,
   `Name` VARCHAR(100) NOT NULL,
-  `Gender` CHAR(1) NOT NULL,
+  `Gender` VARCHAR(10) NOT NULL,
   `PhoneNumber` CHAR(8) NOT NULL,
   `Address` VARCHAR(45) NOT NULL,
   `Email` VARCHAR(45) NOT NULL,
@@ -54,9 +54,9 @@ DROP TABLE IF EXISTS `OSHES`.`Administrator` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Administrator` (
   `Admin ID` CHAR(36) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
+  `Password` VARCHAR(60) NOT NULL,
   `Name` VARCHAR(45) NOT NULL,
-  `Gender` CHAR(1) NOT NULL,
+  `Gender` VARCHAR(10) NOT NULL,
   `PhoneNumber` CHAR(8) NOT NULL,
   PRIMARY KEY (`Admin ID`),
   UNIQUE INDEX `Admin ID_UNIQUE` (`Admin ID` ASC))
