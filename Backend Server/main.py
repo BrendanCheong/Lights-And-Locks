@@ -1,11 +1,11 @@
 import pymysql
 import http
 import os
+from pymongo import MongoClient
 from app import app
-from flask import jsonify, Flask, g
-from flask import flash, request
-import yaml
+from flask import jsonify, flash, request
 from app import app
+# NOTE:change this to db_local_config (if needed) for those who cannot connect to our AWS RDS and call the Initalise database GET route
 from db_config import *
 from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
@@ -70,6 +70,11 @@ def initialise_db():
     try:
         with open(new_path) as f:
             cursor.execute(f.read())
+
+        # testing out mongoDB connection
+        collection = mongo["products"]
+        for doc in collection.find({}):
+            print(doc)
         resp = jsonify(success='Database Initialised!')
         resp.status_code = 200
         return resp
