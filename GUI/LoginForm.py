@@ -3,6 +3,10 @@ Updated: 15 September 2021
 TODO: Add in props attribute to the function
 """
 import requests
+import os
+import urllib.parse
+import json
+from check_email import check as check_email
 from RegisterForm import Ui_RegisterForm as RegisterForm
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -282,6 +286,10 @@ class Ui_LoginForm(object):
         self.LoginContainer.setGraphicsEffect(
             QtWidgets.QGraphicsDropShadowEffect(blurRadius=15, xOffset=0, yOffset=6))
 
+        # This will be our success messageBox to be used later for Loging in
+        self.msg = QtWidgets.QMessageBox()
+        self.msg.setWindowTitle("Registration Success")
+
         """
         Button Functionalities Start Here
         """
@@ -303,13 +311,67 @@ class Ui_LoginForm(object):
         QtCore.QMetaObject.connectSlotsByName(LoginForm)
 
     def login(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.login_button.setText(_translate("LoginForm", "Loading!"))
-        self.request()
+        """Start Query, if Query is Correct, then Open new Page with Data"""
+        _email = self.username_enter.text()
+        _password = self.password_enter.text()
 
-    def request(self):
-        r = requests.get("http://localhost:5000")
-        print(r.json())
+        if (check_email(_email) and len(_password) > 1):
+            PAYLOAD = {
+                "Email": _email,
+                "Password": _password
+            }
+            # create JSON payload to send to server to find if Customer exists in SQLdb
+            r = requests.post(
+                "http://localhost:5000/api/Customer/login", json=PAYLOAD)
+            response = r.json()
+
+            # Check successful or not
+            if ("success" in response):
+                resp = response["success"]
+                print(resp["Customer ID"], resp["Email"], resp["Name"])
+                return self.success_popup({
+                    "Customer ID": resp["Customer ID"],
+                    "Email": resp["Email"],
+                    "Name": resp["Name"]
+                })
+            else:
+                return self.error_popup(response["error"])
+        else:
+            return self.error_popup("Email or Password Invalid")
+
+    def success_popup(self, data):
+        # msg = QtWidgets.QMessageBox()
+        # msg.setWindowTitle("Registration Success")
+        self.msg.setText("Login Success!")
+        self.msg.setInformativeText("Click ok to Login Lights and Locks!")
+        self.msg.setIcon(QtWidgets.QMessageBox.Information)
+
+        self.msg.buttonClicked.connect(
+            lambda info, arg=data: self.popup_button_controller(info, arg))
+        x = self.msg.exec_()
+        if (x == 1024):
+            self.msg.close()
+
+    def error_popup(self, error):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Oh No! Its an Error")
+        msg.setText(error)
+        msg.setIcon(QtWidgets.QMessageBox.Warning)
+        msg.setStandardButtons(QtWidgets.QMessageBox.Retry)
+
+        msg.buttonClicked.connect(self.popup_button_controller)
+        y = msg.exec_()
+
+    def popup_button_controller(self, info, data):
+        information = info.text()
+        if (information == "OK"):
+            # If the Login Details are correct
+            # Close the Login Form and Open the Main UI menu & pass the data
+            # uses system to redirect to MainUI file to open main.py
+            LoginForm.close()
+            self.msg.close()
+            dict1 = urllib.parse.quote(json.dumps(data))
+            os.system(f"cd GUI/MainUI && python main.py {dict1}")
 
     def open_register_form(self, PROPS):
         """ Make sure that the RegisterForm.py setupUI form has PROPS

@@ -1,14 +1,9 @@
-import pymysql
-import http
 import os
-from pymongo import MongoClient
 from app import app
 from flask import jsonify, flash, request
 from app import app
 # NOTE:change this to db_local_config (if needed) for those who cannot connect to our AWS RDS and call the Initalise database GET route
 from db_config import *
-from flask_mysqldb import MySQL
-from flask_bcrypt import Bcrypt
 
 # pw_hash = bcrypt.generate_password_hash("hunter2").decode("utf-8")
 # zombie = bcrypt.generate_password_hash("hunter2").decode("utf-8")
@@ -22,6 +17,11 @@ from flask_bcrypt import Bcrypt
 @app.route("/", methods=["GET"])
 def index():
     return jsonify(Welcome="Welcome to Lights and Lock's Server!")
+
+
+"""
+Add Customer Routes Here
+"""
 
 
 @app.route('/api/Customer/add', methods=['POST'])
@@ -58,11 +58,45 @@ def add_user():
             return not_found("Missing User Details")
     except Exception as e:
         print(str(e))
-        resp = jsonify(error=str(e))
-        resp.status_code = 500
-        return resp
+        return invalid(str(e))
     finally:
         cursor.close()  # always have a finally block to close the database connection
+
+
+@app.route("/api/Customer/login", methods=["POST"])
+def login_user():
+    conn = mysql.connection  # start off by creating a connection
+    cursor = conn.cursor()  # then create a cursor to interact with the database
+    try:
+        _json = request.json
+        _email = _json["Email"]
+        _password = _json["Password"]
+        if _email and _password:
+            sql = f"""-- sql
+            SELECT `Customer ID`, `Email`,`Name`, `Password` 
+            FROM `OSHES`.`Customer`
+            WHERE `Email` = "{_email}";
+            """
+            cursor.execute(sql)
+            rows = cursor.fetchone()
+            if (bcrypt.check_password_hash(rows[-1], _password)):
+                return_load = {
+                    "Customer ID": rows[0],
+                    "Email": rows[1],
+                    "Name": rows[2]
+                }
+                resp = jsonify(success=return_load)
+                resp.status_code = 200
+                return resp
+            else:
+                return invalid("Wrong Password Entered!")
+        else:
+            return not_found("Missing User Details")
+    except Exception as e:
+        print(str(e))
+        return invalid(str(e))
+    finally:
+        cursor.close()
 
 
 @app.route('/api/Initialise', methods=["GET"])
@@ -107,6 +141,18 @@ def not_found(error=None):
     }
     response = jsonify(message)
     response.status_code = 404
+    return response
+
+
+@app.errorhandler(500)
+def invalid(error=None):
+    message = {
+        'status': 500,
+        'error': error,
+        'error location': request.url
+    }
+    response = jsonify(message)
+    response.status_code = 500
     return response
 
 
