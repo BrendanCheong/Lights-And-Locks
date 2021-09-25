@@ -1,12 +1,3 @@
-################################################################################
-##
-# BY: WANDERSON M.PIMENTA
-# PROJECT MADE WITH: Qt Designer and PySide2
-# V: 1.0.0
-##
-################################################################################
-
-# ==> GUI FILE
 from main import MainWindow
 from PyQt5 import QtCore
 from PyQt5.QtCore import *
@@ -20,10 +11,10 @@ class UIFunctions(MainWindow):
             # GET WIDTH
             width = self.ui.frame_left_menu.width()
             maxExtend = maxWidth
-            standard = 70
+            standard = 100
 
-            # SET MAX WIDTH
-            if width == 70:
+            # set Max Width
+            if width == 100:
                 widthExtended = maxExtend
             else:
                 widthExtended = standard
