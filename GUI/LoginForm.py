@@ -1,10 +1,8 @@
 """
 Updated: 15 September 2021
-TODO: Add in "Esc" Key to Exit
 TODO: Add in props attribute to the function
-TODO: Eventually add in functionality to the buttons etc
 """
-
+import requests
 from RegisterForm import Ui_RegisterForm as RegisterForm
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -295,11 +293,23 @@ class Ui_LoginForm(object):
         # Connect to Admin Login Page
         self.Admin_login_button.clicked.connect(self.open_admin_login)
         self.Admin_login_button.clicked.connect(LoginForm.close)
+
+        # Connect to Login Function
+        self.login_button.clicked.connect(self.login)
         """
         Button Functionalities End
         """
         self.retranslateUi(LoginForm)
         QtCore.QMetaObject.connectSlotsByName(LoginForm)
+
+    def login(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.login_button.setText(_translate("LoginForm", "Loading!"))
+        self.request()
+
+    def request(self):
+        r = requests.get("http://localhost:5000")
+        print(r.json())
 
     def open_register_form(self, PROPS):
         """ Make sure that the RegisterForm.py setupUI form has PROPS
@@ -325,7 +335,7 @@ class Ui_LoginForm(object):
         LoginForm.setWindowTitle(_translate("LoginForm", "Form"))
         self.welcome_message.setText(_translate(
             "LoginForm", "Welcome to Light & Locks!"))
-        self.username_label.setText(_translate("LoginForm", "Username"))
+        self.username_label.setText(_translate("LoginForm", "Email"))
         self.password_label.setText(_translate("LoginForm", "Password"))
         self.login_button.setText(_translate("LoginForm", "Login"))
         self.label_2.setText(_translate(

@@ -11,6 +11,9 @@ from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
 
 # pw_hash = bcrypt.generate_password_hash("hunter2").decode("utf-8")
+# zombie = bcrypt.generate_password_hash("hunter2").decode("utf-8")
+# print(pw_hash)
+# print(zombie)
 # print(bcrypt.check_password_hash(pw_hash, 'hunter2'))
 # print(bcrypt.check_password_hash(pw_hash, 'false'))
 # print(pw_hash)
@@ -34,6 +37,7 @@ def add_user():
         _gender = str(_json["Gender"])
         _phone_number = str(_json["PhoneNumber"])
         _address = str(_json["Address"])
+
         # validate the received values
         if _name and _email and _password and request.method == 'POST':
             # do not save password as a plain text

@@ -11,4 +11,4 @@ VALUES ("f50ec0b7-f960-400d-91f0-c42a6d44e3d0",
 
 SELECT * FROM `OSHES`.`Customer`;
 
-DELETE FROM `OSHES`.`Customer` WHERE `Customer ID` = "f50ec0b7-f960-400d-91f0-c42a6d44e3d0";
+DELETE FROM `OSHES`.`Customer`;

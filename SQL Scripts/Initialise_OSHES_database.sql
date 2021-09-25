@@ -14,13 +14,13 @@ DROP TABLE IF EXISTS `OSHES`.`Customer` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Customer` (
-  `Customer ID` CHAR(36) NOT NULL,
-  `Password` VARCHAR(60) NOT NULL,
+  `Customer ID` VARCHAR(60) NOT NULL,
+  `Password` VARCHAR(60) UNIQUE NOT NULL,
   `Name` VARCHAR(100) NOT NULL,
   `Gender` VARCHAR(10) NOT NULL,
   `PhoneNumber` CHAR(8) NOT NULL,
   `Address` VARCHAR(45) NOT NULL,
-  `Email` VARCHAR(45) NOT NULL,
+  `Email` VARCHAR(150) UNIQUE NOT NULL,
   PRIMARY KEY (`Customer ID`),
   UNIQUE INDEX `Customer ID_UNIQUE` (`Customer ID` ASC))
 ENGINE = InnoDB;
