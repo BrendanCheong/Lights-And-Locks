@@ -1,18 +1,4 @@
-################################################################################
-##
-# BY: WANDERSON M.PIMENTA
-# PROJECT MADE WITH: Qt Designer and PyQt5
-# V: 1.0.0
-##
-################################################################################
-
 import sys
-import platform
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import (QCoreApplication, QPropertyAnimation, QDate, QDateTime,
-                          QMetaObject, QObject, QPoint, QRect, QSize, QTime, QUrl, Qt, QEvent)
-from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont, QFontDatabase,
-                         QIcon, QKeySequence, QLinearGradient, QPalette, QPainter, QPixmap, QRadialGradient)
 from PyQt5.QtWidgets import *
 
 # GUI FILE
@@ -28,10 +14,10 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # TOGGLE/BURGUER MENU
+        # TOGGLE/BURGER MENU
         ########################################################################
         self.ui.Btn_Toggle.clicked.connect(
-            lambda: UIFunctions.toggleMenu(self, 250, True))
+            lambda: UIFunctions.toggleMenu(self, 300, True))
 
         # PAGES
         ########################################################################

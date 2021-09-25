@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="menuBurger">
+    <file>icons8-menu-48.png</file>
+  </qresource>
+  <qresource prefix="SideBar">
+    <file>icons8-exit-48.png</file>
+    <file>icons8-computer-support-48.png</file>
+    <file>icons8-shopping-cart-48.png</file>
+    <file>icons8-shop-48.png</file>
+  </qresource>
+</RCC>
