@@ -35,9 +35,9 @@ DROP TABLE IF EXISTS `OSHES`.`Product` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Product` (
   `Product ID` INT NOT NULL,
-  `Model` VARCHAR(45) NOT NULL,
-  `Category` VARCHAR(45) NOT NULL,
-  `Warranty` VARCHAR(45) NOT NULL,
+  `Model` VARCHAR(15) NOT NULL,
+  `Category` VARCHAR(15) NOT NULL,
+  `Warranty` INT NOT NULL,
   `Price` INT NOT NULL,
   `Cost` INT NOT NULL,
   PRIMARY KEY (`Product ID`),
@@ -72,11 +72,13 @@ DROP TABLE IF EXISTS `OSHES`.`Item` ;
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Item` (
   `Item ID` CHAR(4) NOT NULL,
+  `Category` VARCHAR(10) NOT NULL,
   `Production Year` INT(4) NOT NULL,
   `Power Supply` VARCHAR(45) NOT NULL,
   `Color` VARCHAR(45) NOT NULL,
   `Factory` VARCHAR(45) NOT NULL,
   `Purchase Status` VARCHAR(45) NOT NULL,
+  `Model` VARCHAR(15) NOT NULL,
   `Product ID` INT NOT NULL,
   PRIMARY KEY (`Item ID`),
   UNIQUE INDEX `Item ID_UNIQUE` (`Item ID` ASC),
