@@ -11,4 +11,8 @@ VALUES ("f50ec0b7-f960-400d-91f0-c42a6d44e3d0",
 
 SELECT * FROM `OSHES`.`Customer`;
 
+SELECT `Customer ID`, `Email`,`Name`, `Password` 
+FROM `OSHES`.`Customer`
+WHERE `Email` = "brendancej82@gmail.com";
+
 DELETE FROM `OSHES`.`Customer`;
