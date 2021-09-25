@@ -105,14 +105,36 @@ def initialise_db():
     cursor = conn.cursor()
     cur_path = os.path.dirname(__file__)[:-14]
     new_path = cur_path + 'SQL Scripts\\Initialise_OSHES_database.sql'
+    # creates a path to the folder containing the initialise database script
+    # then read and execute the sql file with cursor
     try:
         with open(new_path) as f:
             cursor.execute(f.read())
 
-        # testing out mongoDB connection
+        # Add MongoDB's Products and Items According to MySQL schema
+        # takes like 20 seconds to execute all lol
         collection = mongo["products"]
         for doc in collection.find({}):
-            print(doc)
+            sql = f"""-- sql
+            INSERT INTO `Product` (`Product ID`, `Model`, `Category`, `Warranty`, `Price`, `Cost`)
+            VALUES({doc["ProductID"]}, "{doc["Model"]}", "{doc["Category"]}", {doc["Warranty (months)"]}, {doc["Price ($)"]}, {doc["Cost ($)"]});
+            """
+            cursor.execute(sql)
+            conn.commit()
+        collection = mongo["items"]
+
+        # For each document in the collection selected, iterate through all of them
+        # then insert into the MySQL database
+        for doc in collection.find({}):
+            sql = f"""-- sql
+            INSERT INTO `Item` (`Item ID`, `Category`, `Production Year`, `Power Supply`, `Color`, `Factory`, `Purchase Status`, `Model`, `Product ID`)
+            VALUES("{doc["ItemID"]}", "{doc["Category"]}", {int(doc["ProductionYear"])}, "{doc["PowerSupply"]}", "{doc["Color"]}", "{doc["Factory"]}", "{doc["PurchaseStatus"]}", "{doc["Model"]}", 
+                (SELECT `Product ID` FROM `Product`
+                WHERE `Model` = "{doc["Model"]}"
+                AND `Category` = "{doc["Category"]}"));
+            """
+            cursor.execute(sql)
+            conn.commit()
         resp = jsonify(success='Database Initialised!')
         resp.status_code = 200
         return resp
@@ -125,7 +147,7 @@ def initialise_db():
 
 
 @ app.errorhandler(404)
-def not_found(error=None):
+def not_found(error):
     """[summary]
 
     Args:
@@ -145,7 +167,7 @@ def not_found(error=None):
 
 
 @app.errorhandler(500)
-def invalid(error=None):
+def invalid(error):
     message = {
         'status': 500,
         'error': error,
@@ -157,4 +179,5 @@ def invalid(error=None):
 
 
 if __name__ == "__main__":
+    import AdminRoutes.admin
     app.run(debug=True)
