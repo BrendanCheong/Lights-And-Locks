@@ -1,9 +1,10 @@
 """
-Updated 16 September 2021
-TODO: Connect Login and Register Page together
-TODO: Connect to Admin Registration page
-TODO: Add Error handling on Client-side using QMessageBox
+Updated 25 September 2021
+
 """
+import requests
+import uuid
+from check_email import check as check_email
 from AdminRegister import Ui_AdminRegisterForm as AdminRegisterForm
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -504,10 +505,70 @@ class Ui_RegisterForm(object):
         # Connect Login Now Back Button
         self.login_now_button.clicked.connect(self.open_login_form_back)
         self.login_now_button.clicked.connect(RegisterForm.close)
+
+        # Connect Register Button
+        self.register_button.clicked.connect(self.register)
         """
         Button Functionalities End
         """
         QtCore.QMetaObject.connectSlotsByName(RegisterForm)
+
+    def register(self):
+        gender = self.gender_comboBox.currentText()
+        name = self.firstname_enter.text() + " " + self.last_name_enter.text()
+        email_address = self.email_address_enter.text()
+        address = self.address_enter.text()
+        phone_number = self.phone_number_enter.text()
+        password = self.password_enter.text()
+        confirm_password = self.confirm_password_enter.text()
+        # Collect all the textfield and check against them for validity
+        if (gender and len(name) > 1 and email_address and address and phone_number and password and confirm_password):
+            if (confirm_password != password):
+                return self.error_popup("Password Not The Same!")
+            elif (len(phone_number) != 8):
+                return self.error_popup("Invalid Phone Number")
+            elif (not check_email(email_address)):
+                return self.error_popup("Invalid Email!")
+            else:
+                # create payload for POST request to add Customer into SQLdb
+                ID = str(uuid.uuid4())
+                PAYLOAD = {
+                    "Name": name,
+                    "Email": email_address,
+                    "Password": password,
+                    "Customer ID": ID,
+                    "Gender": gender,
+                    "PhoneNumber": phone_number,
+                    "Address": address
+                }
+                r = requests.post(
+                    "http://localhost:5000/api/Customer/add", json=PAYLOAD)
+                response = r.json()
+                # check if successfully entered into SQLdb or not
+                if ("success" in response):
+                    return self.success_popup(name)
+                else:
+                    return self.error_popup(response["error"])
+
+        else:
+            return self.error_popup("One Of the Fields Is Not Filled!")
+
+    def error_popup(self, text):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Oh No! An Error!")
+        msg.setText(text)
+        msg.setIcon(QtWidgets.QMessageBox.Warning)
+        msg.setStandardButtons(QtWidgets.QMessageBox.Retry)
+
+        x = msg.exec_()
+
+    def success_popup(self, text):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Registration Success")
+        msg.setText(text + " Registered Successfully")
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+
+        y = msg.exec_()
 
     def open_admin_registration(self):
         self.admin_registration_widget = QtWidgets.QWidget()
