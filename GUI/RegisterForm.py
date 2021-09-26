@@ -515,14 +515,15 @@ class Ui_RegisterForm(object):
 
     def register(self):
         gender = self.gender_comboBox.currentText()
-        name = self.firstname_enter.text() + " " + self.last_name_enter.text()
+        name = self.firstname_enter.text()
+        customer_id = self.last_name_enter.text()
         email_address = self.email_address_enter.text()
         address = self.address_enter.text()
         phone_number = self.phone_number_enter.text()
         password = self.password_enter.text()
         confirm_password = self.confirm_password_enter.text()
         # Collect all the textfield and check against them for validity
-        if (gender and len(name) > 1 and email_address and address and phone_number and password and confirm_password):
+        if (gender and len(name) > 1 and email_address and address and phone_number and password and confirm_password and len(customer_id) > 1):
             if (confirm_password != password):
                 return self.error_popup("Password Not The Same!")
             elif (len(phone_number) != 8):
@@ -531,12 +532,11 @@ class Ui_RegisterForm(object):
                 return self.error_popup("Invalid Email!")
             else:
                 # create payload for POST request to add Customer into SQLdb
-                ID = str(uuid.uuid4())
                 PAYLOAD = {
                     "Name": name,
                     "Email": email_address,
                     "Password": password,
-                    "Customer ID": ID,
+                    "Customer ID": customer_id,
                     "Gender": gender,
                     "PhoneNumber": phone_number,
                     "Address": address
@@ -548,7 +548,7 @@ class Ui_RegisterForm(object):
                 if ("success" in response):
                     return self.success_popup(name)
                 else:
-                    return self.error_popup(response["error"])
+                    return self.error_popup("That User ID is already taken fool")
 
         else:
             return self.error_popup("One Of the Fields Is Not Filled!")
@@ -587,7 +587,7 @@ class Ui_RegisterForm(object):
     def retranslateUi(self, RegisterForm):
         _translate = QtCore.QCoreApplication.translate
         RegisterForm.setWindowTitle(_translate("RegisterForm", "Form"))
-        self.username_label.setText(_translate("RegisterForm", "First Name"))
+        self.username_label.setText(_translate("RegisterForm", "Full Name"))
         self.email_address_label.setText(
             _translate("RegisterForm", "Email Address"))
         self.address_label.setText(_translate("RegisterForm", "Address"))
@@ -597,7 +597,7 @@ class Ui_RegisterForm(object):
         self.password_label.setText(_translate("RegisterForm", "Password"))
         self.confirm_password_label.setText(
             _translate("RegisterForm", "Confirm Password"))
-        self.last_name_label.setText(_translate("RegisterForm", "Last Name"))
+        self.last_name_label.setText(_translate("RegisterForm", "User ID"))
         self.phone_number_label.setText(
             _translate("RegisterForm", "Phone Number"))
         self.gender_label.setText(_translate("RegisterForm", "Gender"))
