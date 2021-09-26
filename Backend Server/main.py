@@ -127,8 +127,8 @@ def initialise_db():
         # then insert into the MySQL database
         for doc in collection.find({}):
             sql = f"""-- sql
-            INSERT INTO `Item` (`Item ID`, `Category`, `Production Year`, `Power Supply`, `Color`, `Factory`, `Purchase Status`, `Model`, `Product ID`)
-            VALUES("{doc["ItemID"]}", "{doc["Category"]}", {int(doc["ProductionYear"])}, "{doc["PowerSupply"]}", "{doc["Color"]}", "{doc["Factory"]}", "{doc["PurchaseStatus"]}", "{doc["Model"]}", 
+            INSERT INTO `Item` (`Item ID`, `Production Year`, `Power Supply`, `Color`, `Factory`, `Purchase Status`, `Product ID`)
+            VALUES("{doc["ItemID"]}", {int(doc["ProductionYear"])}, "{doc["PowerSupply"]}", "{doc["Color"]}", "{doc["Factory"]}", "{doc["PurchaseStatus"]}", 
                 (SELECT `Product ID` FROM `Product`
                 WHERE `Model` = "{doc["Model"]}"
                 AND `Category` = "{doc["Category"]}"));
