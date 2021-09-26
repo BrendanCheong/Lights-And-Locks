@@ -254,7 +254,7 @@ class Ui_AdminLogin(object):
         LoginForm.setWindowTitle(_translate("LoginForm", "Form"))
         self.welcome_message_admin.setText(
             _translate("LoginForm", "Welcome Back Admin!"))
-        self.username_label.setText(_translate("LoginForm", "Username"))
+        self.username_label.setText(_translate("LoginForm", "Admin ID"))
         self.password_label.setText(_translate("LoginForm", "Password"))
         self.admin_key_label.setText(_translate("LoginForm", "Admin Key"))
         self.login_button.setText(_translate(

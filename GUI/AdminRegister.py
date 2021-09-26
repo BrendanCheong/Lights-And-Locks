@@ -439,7 +439,7 @@ class Ui_AdminRegisterForm(object):
         AdminRegisterForm.setWindowTitle(
             _translate("AdminRegisterForm", "Form"))
         self.username_label.setText(_translate(
-            "AdminRegisterForm", "First Name"))
+            "AdminRegisterForm", "Name"))
         self.admin_key.setText(_translate("AdminRegisterForm", "Admin Key"))
         self.register_button.setText(
             _translate("AdminRegisterForm", "Register!"))
@@ -450,7 +450,7 @@ class Ui_AdminRegisterForm(object):
         self.confirm_password_label.setText(
             _translate("AdminRegisterForm", "Confirm Password"))
         self.last_name_label.setText(
-            _translate("AdminRegisterForm", "Last Name"))
+            _translate("AdminRegisterForm", "Admin ID"))
         self.phone_number_label.setText(
             _translate("AdminRegisterForm", "Phone Number"))
         self.gender_label.setText(_translate("AdminRegisterForm", "Gender"))

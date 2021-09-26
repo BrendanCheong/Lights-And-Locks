@@ -53,9 +53,9 @@ DROP TABLE IF EXISTS `OSHES`.`Administrator` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Administrator` (
-  `Admin ID` CHAR(36) NOT NULL,
-  `Password` VARCHAR(60) NOT NULL,
-  `Name` VARCHAR(45) NOT NULL,
+  `Admin ID` VARCHAR(255) NOT NULL,
+  `Password` VARCHAR(255) NOT NULL,
+  `Name` VARCHAR(100) NOT NULL,
   `Gender` VARCHAR(10) NOT NULL,
   `PhoneNumber` CHAR(8) NOT NULL,
   PRIMARY KEY (`Admin ID`),
