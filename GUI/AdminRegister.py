@@ -3,7 +3,7 @@ Updated: 18 September 2021
 TODO: Add Button logic
 TODO: Copy over Error handling
 """
-
+import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -421,10 +421,65 @@ class Ui_AdminRegisterForm(object):
         """
         self.go_back_button.clicked.connect(self.open_register_form_back)
         self.go_back_button.clicked.connect(AdminRegisterForm.close)
+
+        self.register_button.clicked.connect(self.register)
         """
         Button Functionalities End
         """
         QtCore.QMetaObject.connectSlotsByName(AdminRegisterForm)
+
+    def register(self):
+        name = self.firstname_enter.text()
+        admin_id = self.last_name_enter.text()
+        admin_key = self.admin_key_enter.text()
+        gender = self.gender_comboBox.currentText()
+        phone_number = self.phone_number_enter.text()
+        password = self.password_enter.text()
+        confirm_password = self.confirm_password_enter.text()
+        if (gender and len(name) > 1 and len(admin_id) > 1 and phone_number and password and confirm_password and admin_key):
+            if (confirm_password != password):
+                return self.error_popup("Password Not The Same!")
+            elif (len(phone_number) != 8):
+                return self.error_popup("Invalid Phone Number")
+            elif (admin_key != "group16"):
+                return self.error_popup("Invalid Admin Key!")
+            else:
+                # create payload for POST request to add Customer into SQLdb
+                PAYLOAD = {
+                    "Name": name,
+                    "Password": password,
+                    "Admin ID": admin_id,
+                    "Gender": gender,
+                    "Phone Number": phone_number
+                }
+                r = requests.post(
+                    "http://localhost:5000/api/Admin/add", json=PAYLOAD)
+                response = r.json()
+                # check if successfully entered into SQLdb or not
+                if ("success" in response):
+                    return self.success_popup(name)
+                else:
+                    return self.error_popup("That Admin ID is already taken fool")
+
+        else:
+            return self.error_popup("One Of the Fields Is Not Filled Properly!")
+
+    def error_popup(self, text):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Oh No! An Error!")
+        msg.setText(text)
+        msg.setIcon(QtWidgets.QMessageBox.Warning)
+        msg.setStandardButtons(QtWidgets.QMessageBox.Retry)
+
+        x = msg.exec_()
+
+    def success_popup(self, text):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Registration Success")
+        msg.setText(text + " Registered Successfully")
+        msg.setIcon(QtWidgets.QMessageBox.Information)
+
+        y = msg.exec_()
 
     def open_register_form_back(self):
         from RegisterForm import Ui_RegisterForm as RegisterForm
