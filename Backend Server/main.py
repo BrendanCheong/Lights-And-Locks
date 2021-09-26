@@ -1,5 +1,4 @@
 import os
-from app import app
 from flask import jsonify, flash, request
 from app import app
 # NOTE:change this to db_local_config (if needed) for those who cannot connect to our AWS RDS and call the Initalise database GET route
