@@ -69,13 +69,13 @@ def login_user():
     cursor = conn.cursor()  # then create a cursor to interact with the database
     try:
         _json = request.json
-        _email = _json["Email"]
+        _customer_id = _json["Customer ID"]
         _password = _json["Password"]
-        if _email and _password:
+        if _customer_id and _password:
             sql = f"""-- sql
             SELECT `Customer ID`, `Email`,`Name`, `Password` 
             FROM `OSHES`.`Customer`
-            WHERE `Email` = "{_email}";
+            WHERE `Customer ID` = "{_customer_id}";
             """
             cursor.execute(sql)
             rows = cursor.fetchone()
