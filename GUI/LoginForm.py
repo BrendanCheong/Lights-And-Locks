@@ -312,12 +312,12 @@ class Ui_LoginForm(object):
 
     def login(self):
         """Start Query, if Query is Correct, then Open new Page with Data"""
-        _email = self.username_enter.text()
+        _user_id = self.username_enter.text()
         _password = self.password_enter.text()
 
-        if (check_email(_email) and len(_password) > 1):
+        if (_user_id and len(_password) > 1):
             PAYLOAD = {
-                "Email": _email,
+                "Customer ID": _user_id,
                 "Password": _password
             }
             # create JSON payload to send to server to find if Customer exists in SQLdb
@@ -343,7 +343,7 @@ class Ui_LoginForm(object):
         # msg = QtWidgets.QMessageBox()
         # msg.setWindowTitle("Registration Success")
         self.msg.setText("Login Success!")
-        self.msg.setInformativeText("Click ok to Login Lights and Locks!")
+        self.msg.setInformativeText("Click ok to Login To Lights and Locks!")
         self.msg.setIcon(QtWidgets.QMessageBox.Information)
 
         self.msg.buttonClicked.connect(
@@ -397,7 +397,7 @@ class Ui_LoginForm(object):
         LoginForm.setWindowTitle(_translate("LoginForm", "Form"))
         self.welcome_message.setText(_translate(
             "LoginForm", "Welcome to Light & Locks!"))
-        self.username_label.setText(_translate("LoginForm", "Email"))
+        self.username_label.setText(_translate("LoginForm", "User ID"))
         self.password_label.setText(_translate("LoginForm", "Password"))
         self.login_button.setText(_translate("LoginForm", "Login"))
         self.label_2.setText(_translate(
