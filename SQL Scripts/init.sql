@@ -2,7 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-DROP SCHEMA IF EXISTS `OSHES` ;
+-- DROP SCHEMA IF EXISTS `OSHES` ;
 CREATE SCHEMA IF NOT EXISTS `OSHES` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 SHOW WARNINGS;
 USE `OSHES` ;
@@ -10,7 +10,7 @@ USE `OSHES` ;
 -- -----------------------------------------------------
 -- Table `OSHES`.`Customer`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `OSHES`.`Customer` ;
+-- DROP TABLE IF EXISTS `OSHES`.`Customer` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Customer` (
@@ -49,7 +49,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `OSHES`.`Administrator`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `OSHES`.`Administrator` ;
+-- DROP TABLE IF EXISTS `OSHES`.`Administrator` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Administrator` (
@@ -93,7 +93,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `OSHES`.`Request`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `OSHES`.`Request` ;
+-- DROP TABLE IF EXISTS `OSHES`.`Request` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Request` (
@@ -130,7 +130,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `OSHES`.`Service`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `OSHES`.`Service` ;
+-- DROP TABLE IF EXISTS `OSHES`.`Service` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Service` (
@@ -159,7 +159,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `OSHES`.`Purchase`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `OSHES`.`Purchase` ;
+-- DROP TABLE IF EXISTS `OSHES`.`Purchase` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Purchase` (
