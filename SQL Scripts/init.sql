@@ -53,7 +53,7 @@ SHOW WARNINGS;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Administrator` (
-  `Admin ID` CHAR(36) NOT NULL,
+  `Admin ID` VARCHAR(255) NOT NULL,
   `Password` VARCHAR(60) NOT NULL,
   `Name` VARCHAR(45) NOT NULL,
   `Gender` VARCHAR(10) NOT NULL,
@@ -100,8 +100,8 @@ CREATE TABLE IF NOT EXISTS `OSHES`.`Request` (
   `Request ID` INT NOT NULL AUTO_INCREMENT,
   `Request Date` DATE NOT NULL,
   `Request Status` VARCHAR(45) NOT NULL,
-  `Customer ID` CHAR(36) NOT NULL,
-  `Admin ID` CHAR(36) NOT NULL,
+  `Customer ID` VARCHAR(255) NOT NULL,
+  `Admin ID` VARCHAR(255) NOT NULL,
   `Item ID` CHAR(4) NOT NULL,
   PRIMARY KEY (`Request ID`),
   UNIQUE INDEX `Request ID_UNIQUE` (`Request ID` ASC),
@@ -136,7 +136,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Service` (
   `Service ID` INT NOT NULL AUTO_INCREMENT,
   `Service Status` VARCHAR(45) NOT NULL,
-  `Admin ID` CHAR(36) NOT NULL,
+  `Admin ID` VARCHAR(255) NOT NULL,
   `Item ID` CHAR(4) NOT NULL,
   PRIMARY KEY (`Service ID`),
   UNIQUE INDEX `Service ID_UNIQUE` (`Service ID` ASC),
@@ -165,7 +165,7 @@ SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Purchase` (
   `Item ID` CHAR(4) NOT NULL,
   `Purchase Date` DATE NOT NULL,
-  `Customer ID` CHAR(36) NOT NULL,
+  `Customer ID` VARCHAR(255) NOT NULL,
   INDEX `fk_Purchase_Customer1_idx` (`Customer ID` ASC),
   PRIMARY KEY (`Item ID`),
   CONSTRAINT `fk_Purchase_Customer1`
