@@ -337,7 +337,7 @@ class Ui_LoginForm(object):
             else:
                 return self.error_popup(response["error"])
         else:
-            return self.error_popup("Email or Password Invalid")
+            return self.error_popup("Customer ID or Password Invalid")
 
     def success_popup(self, data):
         # msg = QtWidgets.QMessageBox()

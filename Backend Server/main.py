@@ -103,7 +103,8 @@ def initialise_db():
     conn = mysql.connection
     cursor = conn.cursor()
     cur_path = os.path.dirname(__file__)[:-14]
-    new_path = cur_path + 'SQL Scripts\\Initialise_OSHES_database.sql'
+    new_path = cur_path + 'SQL Scripts\\init.sql'
+    print(new_path)
     # creates a path to the folder containing the initialise database script
     # then read and execute the sql file with cursor
     try:
@@ -139,8 +140,7 @@ def initialise_db():
         return resp
     except Exception as e:
         print(str(e))
-        resp = jsonify(error=str(e))
-        resp.status_code = 500
+        return invalid(str(e))
     finally:
         cursor.close()
 

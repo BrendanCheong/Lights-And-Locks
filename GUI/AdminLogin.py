@@ -2,7 +2,10 @@
 Updated: 19 September 2021
 TODO: Add Button Functionality
 """
-
+import requests
+import os
+import urllib.parse
+import json
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -230,16 +233,85 @@ class Ui_AdminLogin(object):
         self.login_button.setGraphicsEffect(
             QtWidgets.QGraphicsDropShadowEffect(blurRadius=15, xOffset=0, yOffset=6))
 
+        self.msg = QtWidgets.QMessageBox()
+        self.msg.setWindowTitle("Registration Success")
+
         """
         Button Functionality Start
         """
         self.go_back_button.clicked.connect(self.open_login_form)
         self.go_back_button.clicked.connect(LoginForm.close)
+
+        self.login_button.clicked.connect(self.login)
         """
         Button Functionality End
         """
         self.retranslateUi(LoginForm)
         QtCore.QMetaObject.connectSlotsByName(LoginForm)
+
+    def login(self):
+        admin_id = self.username_enter.text()
+        password = self.password_enter.text()
+        admin_key = self.Admin_key_password.text()
+
+        if (admin_id and len(password) > 1 and admin_key == "group16"):
+            PAYLOAD = {
+                "Admin ID": admin_id,
+                "Password": password
+            }
+            # create JSON payload to send to server to find if Customer exists in SQLdb
+            r = requests.post(
+                "http://localhost:5000/api/Admin/login", json=PAYLOAD)
+            response = r.json()
+
+            # Check successful or not
+            if ("success" in response):
+                resp = response["success"]
+                print(resp["Admin ID"], resp["Name"])
+                return self.success_popup({
+                    "Admin ID": resp["Admin ID"],
+                    "Name": resp["Name"]
+                })
+            else:
+                return self.error_popup(response["error"])
+        else:
+            return self.error_popup("Admin ID or Password or Admin Key Invalid")
+
+    def success_popup(self, data):
+        # msg = QtWidgets.QMessageBox()
+        # msg.setWindowTitle("Registration Success")
+        self.msg.setText("Login Success!")
+        self.msg.setInformativeText("Click Ok to Initialise Lights and Locks!")
+        self.msg.setDetailedText(
+            "NOTE: This could take up to 20 seconds so hang on tight")
+        self.msg.setIcon(QtWidgets.QMessageBox.Information)
+
+        self.msg.buttonClicked.connect(
+            lambda info, arg=data: self.popup_button_controller(info, arg))
+        x = self.msg.exec_()
+
+    def error_popup(self, error):
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle("Oh No! Its an Error")
+        msg.setText(error)
+        msg.setIcon(QtWidgets.QMessageBox.Warning)
+        msg.setStandardButtons(QtWidgets.QMessageBox.Retry)
+
+        msg.buttonClicked.connect(self.popup_button_controller)
+        y = msg.exec_()
+
+    def popup_button_controller(self, info, data):
+        information = info.text()
+        if (information == "OK"):
+            # If the Login Details are correct
+            # Close the Login Form and Open the Main UI menu & pass the data
+            # uses system to redirect to MainUI file to open main.py
+            print(data)
+            r = requests.get("http://localhost:5000/api/Initialise")
+            # LoginForm.close()
+            self.msg.close()
+            # dict1 = urllib.parse.quote(json.dumps(data))
+            # os.system(f"cd GUI/MainUI && python main.py {dict1}")
 
     def open_login_form(self):
         from LoginForm import Ui_LoginForm as LoginFormCustomer
