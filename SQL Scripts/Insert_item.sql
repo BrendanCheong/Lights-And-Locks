@@ -8,4 +8,8 @@ VALUES("1001", 2014, "Battery", "White", "Malaysia", "Sold",
 
 SELECT * FROM `Item`;
 
-SELECT DISTINCT `Power Supply` FROM `Item`; 
+SELECT `Item ID` FROM `Item`
+WHERE `Purchase Status` = "Unsold"
+	AND `Product ID` = 1
+ORDER BY `Item ID` ASC
+LIMIT 1;
