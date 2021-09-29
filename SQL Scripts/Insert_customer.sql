@@ -3,7 +3,7 @@ USE `OSHES`;
 INSERT INTO `Customer` (`Customer ID`, `Password`, `Name`, `Gender`, `PhoneNumber`, `Address`, `Email`)
 VALUES ("Zuko",
 "$2b$12$X1OqzBS2q4g4ZLefVZuAgepWHT4PJ64pPU3YiwLBEBi1QgaTd.zWG",
-"Brendan Cheong Ern Jie",
+"Brendan Cheong Ern Jie",  
 "Male",
 "94569855",
 "Telok Chapel Lodgings",

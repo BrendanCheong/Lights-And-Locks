@@ -6,4 +6,6 @@ VALUES("1001", 2014, "Battery", "White", "Malaysia", "Sold",
 	WHERE `Model` = "Light1"
 	AND `Category` = "Lights"));
 
-SELECT * FROM `Item`
+SELECT * FROM `Item`;
+
+SELECT DISTINCT `Power Supply` FROM `Item`; 
