@@ -2,6 +2,7 @@ import sys
 import time
 import json
 import urllib.parse
+from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 
@@ -39,7 +40,7 @@ class MainWindow(QMainWindow):
             lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_3))
 
         # Render Tables
-        self.ui.buttontest.clicked.connect(
+        self.ui.submit_query.clicked.connect(
             lambda: UIFunctions.get_products_api(self)
         )
 
@@ -51,6 +52,8 @@ class MainWindow(QMainWindow):
         ## ==> END ##
 
     def get_products_api(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.ui.buttontest.setText(_translate("MainWindow", "Loading..."))
         self.worker = Get_Products_Thread()
         self.worker.start()  # start the parallel function
         # execute function once api done with no data
@@ -63,6 +66,8 @@ class MainWindow(QMainWindow):
 
     def event_worker_finished(self):
         QtWidgets.QMessageBox.information(self, "Done", "API Request Complete")
+        _translate = QtCore.QCoreApplication.translate
+        self.ui.buttontest.setText(_translate("MainWindow", "Test"))
 
 
 class Get_Products_Thread(QThread):
