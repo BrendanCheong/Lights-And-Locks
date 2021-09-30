@@ -53,7 +53,7 @@ class MainWindow(QMainWindow):
 
     def get_products_api(self):
         _translate = QtCore.QCoreApplication.translate
-        self.ui.buttontest.setText(_translate("MainWindow", "Loading..."))
+        self.ui.submit_query.setText(_translate("MainWindow", "Loading..."))
         self.worker = Get_Products_Thread()
         self.worker.start()  # start the parallel function
         # execute function once api done with no data
@@ -67,7 +67,7 @@ class MainWindow(QMainWindow):
     def event_worker_finished(self):
         QtWidgets.QMessageBox.information(self, "Done", "API Request Complete")
         _translate = QtCore.QCoreApplication.translate
-        self.ui.buttontest.setText(_translate("MainWindow", "Test"))
+        self.ui.submit_query.setText(_translate("MainWindow", "Test"))
 
 
 class Get_Products_Thread(QThread):
