@@ -13,3 +13,8 @@ WHERE `Purchase Status` = "Unsold"
 	AND `Product ID` = 1
 ORDER BY `Item ID` ASC
 LIMIT 1;
+
+SELECT `Item ID`,`Color`, `Category`, `Factory`, `Model`, `Power Supply`,`Warranty`, `Price`
+FROM `Item`
+INNER JOIN `Product`
+ON `Item`.`Product ID` = `Product`.`Product ID`;
