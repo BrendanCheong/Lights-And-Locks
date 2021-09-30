@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
         # TOGGLE/BURGER MENU
         ########################################################################
         self.ui.Btn_Toggle.clicked.connect(
-            lambda: UIFunctions.toggleMenu(self, 300, True))
+            lambda: UIFunctions.toggleMenu(self, 320, True))
 
         # PAGES
         ########################################################################
@@ -38,6 +38,11 @@ class MainWindow(QMainWindow):
         # PAGE 3
         self.ui.btn_page_3.clicked.connect(
             lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_3))
+
+        # Exit Button
+        self.ui.btn_page_4.clicked.connect(
+            lambda: UIFunctions.exit_mainwindow(self)
+        )
 
         # Render Tables
         self.ui.submit_query.clicked.connect(

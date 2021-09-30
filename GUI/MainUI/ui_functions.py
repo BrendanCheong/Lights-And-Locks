@@ -1,3 +1,4 @@
+import os
 from main import MainWindow
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
@@ -29,3 +30,7 @@ class UIFunctions(MainWindow):
             self.animation.setEndValue(widthExtended)
             self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
             self.animation.start()
+
+    def exit_mainwindow(self):
+        self.close()
+        os.system("cd .. && python LoginForm.py")
