@@ -1,6 +1,5 @@
-
-from PyQt5 import QtCore, QtGui, QtWidgets
 import resources_rc
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
@@ -61,7 +60,7 @@ class Ui_MainWindow(object):
                                       "color: rgb(255, 255, 255);\n"
                                       "border: 0px solid;\n"
                                       "background-color: rgb(35, 35, 25);\n"
-                                      "padding-left:15px;")
+                                      "padding-left: 25px;")
         self.Btn_Toggle.setText("")
         self.Btn_Toggle.setObjectName("Btn_Toggle")
         self.verticalLayout_2.addWidget(self.Btn_Toggle)
@@ -94,7 +93,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.frame_left_menu = QtWidgets.QFrame(self.Content)
-        self.frame_left_menu.setMinimumSize(QtCore.QSize(70, 0))
+        self.frame_left_menu.setMinimumSize(QtCore.QSize(0, 0))
         self.frame_left_menu.setMaximumSize(QtCore.QSize(100, 16777215))
         self.frame_left_menu.setStyleSheet("background-color: rgb(35, 35, 35);\n"
                                            "padding:1px;")
@@ -115,7 +114,7 @@ class Ui_MainWindow(object):
                                       "    color: rgb(255, 255, 255);\n"
                                       "    background-color: rgb(35, 35, 35);\n"
                                       "    border: 0px solid;\n"
-                                      "    padding-right: 15px;\n"
+                                      "    padding-right: 0px;\n"
                                       "}\n"
                                       "QPushButton:hover {\n"
                                       "    \n"
@@ -136,7 +135,7 @@ class Ui_MainWindow(object):
                                       "    color: rgb(255, 255, 255);\n"
                                       "    background-color: rgb(35, 35, 35);\n"
                                       "    border: 0px solid;\n"
-                                      "    padding-right: 15px;\n"
+                                      "    padding-right: 0px;\n"
                                       "}\n"
                                       "QPushButton:hover {\n"
                                       "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #2DD4BF, stop:1 #0EA5E9);\n"
@@ -157,7 +156,7 @@ class Ui_MainWindow(object):
                                       "    color: rgb(255, 255, 255);\n"
                                       "    background-color: rgb(35, 35, 35);\n"
                                       "    border: 0px solid;\n"
-                                      "    padding-right: 15px;\n"
+                                      "    padding-right: 0px;\n"
                                       "}\n"
                                       "QPushButton:hover {\n"
                                       "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #2DD4BF, stop:1 #0EA5E9);\n"
@@ -184,7 +183,7 @@ class Ui_MainWindow(object):
                                       "    color: rgb(255, 255, 255);\n"
                                       "    background-color: rgb(35, 35, 35);\n"
                                       "    border: 0px solid;\n"
-                                      "    padding-right: 15px;\n"
+                                      "    padding-right: 0px;\n"
                                       "}\n"
                                       "QPushButton:hover {\n"
                                       "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #2DD4BF, stop:1 #0EA5E9);\n"
@@ -193,6 +192,7 @@ class Ui_MainWindow(object):
         self.btn_page_4.setObjectName("btn_page_4")
         self.verticalLayout_3.addWidget(self.btn_page_4)
         self.frame_top_menus = QtWidgets.QFrame(self.frame_left_menu)
+        self.frame_top_menus.setMinimumSize(QtCore.QSize(0, 0))
         self.frame_top_menus.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.frame_top_menus.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame_top_menus.setObjectName("frame_top_menus")
@@ -289,7 +289,7 @@ class Ui_MainWindow(object):
         item = QtWidgets.QTableWidgetItem()
         self.product_table.setItem(6, 5, item)
         self.product_table.horizontalHeader().setCascadingSectionResizes(False)
-        self.product_table.horizontalHeader().setDefaultSectionSize(276)
+        self.product_table.horizontalHeader().setDefaultSectionSize(270)
         self.product_table.horizontalHeader().setMinimumSectionSize(26)
         self.product_table.horizontalHeader().setStretchLastSection(True)
         self.product_table.verticalHeader().setDefaultSectionSize(87)
@@ -298,7 +298,7 @@ class Ui_MainWindow(object):
         self.submit_query = QtWidgets.QPushButton(self.page_1)
         self.submit_query.setGeometry(QtCore.QRect(1470, 250, 301, 51))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -1470,37 +1470,209 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_1)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
-        self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.page_2)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(-10, 0, 1471, 80))
-        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
-        self.title_page_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
-        self.title_page_2.setContentsMargins(0, 0, 0, 0)
-        self.title_page_2.setObjectName("title_page_2")
-        self.label_2 = QtWidgets.QLabel(self.verticalLayoutWidget_2)
+        self.item_table = QtWidgets.QTableWidget(self.page_2)
+        self.item_table.setGeometry(QtCore.QRect(20, 215, 1761, 671))
+        self.item_table.setSizeIncrement(QtCore.QSize(0, 0))
         font = QtGui.QFont()
-        font.setPointSize(40)
-        self.label_2.setFont(font)
-        self.label_2.setStyleSheet("color: #FFF;")
-        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_2.setObjectName("label_2")
-        self.title_page_2.addWidget(self.label_2)
+        font.setFamily("8514oem")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.item_table.setFont(font)
+        self.item_table.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.item_table.setAutoFillBackground(False)
+        self.item_table.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                      "alternate-background-color: rgb(241, 245, 249);\n"
+                                      "font: 10pt \"8514oem\";\n"
+                                      "")
+        self.item_table.setFrameShape(QtWidgets.QFrame.Box)
+        self.item_table.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.item_table.setLineWidth(10)
+        self.item_table.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.item_table.setAlternatingRowColors(True)
+        self.item_table.setSelectionMode(
+            QtWidgets.QAbstractItemView.SingleSelection)
+        self.item_table.setSelectionBehavior(
+            QtWidgets.QAbstractItemView.SelectRows)
+        self.item_table.setIconSize(QtCore.QSize(0, 0))
+        self.item_table.setTextElideMode(QtCore.Qt.ElideLeft)
+        self.item_table.setRowCount(1)
+        self.item_table.setColumnCount(11)
+        self.item_table.setObjectName("item_table")
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(7, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(8, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(9, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setHorizontalHeaderItem(10, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.item_table.setItem(0, 3, item)
+        self.item_table.horizontalHeader().setCascadingSectionResizes(False)
+        self.item_table.horizontalHeader().setDefaultSectionSize(168)
+        self.item_table.horizontalHeader().setMinimumSectionSize(26)
+        self.item_table.horizontalHeader().setSortIndicatorShown(True)
+        self.item_table.horizontalHeader().setStretchLastSection(False)
+        self.item_table.verticalHeader().setDefaultSectionSize(81)
+        self.item_table.verticalHeader().setSortIndicatorShown(True)
+        self.item_table.verticalHeader().setStretchLastSection(False)
+        self.fetch_orders_button = QtWidgets.QPushButton(self.page_2)
+        self.fetch_orders_button.setGeometry(QtCore.QRect(20, 130, 301, 51))
+        font = QtGui.QFont()
+        font.setPointSize(1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.fetch_orders_button.setFont(font)
+        self.fetch_orders_button.setToolTipDuration(0)
+        self.fetch_orders_button.setStyleSheet("QPushButton {\n"
+                                               "    border-top-right-radius: 10px;\n"
+                                               "    border-top-left-radius: 10px;\n"
+                                               "    border-bottom-right-radius: 10px;\n"
+                                               "    border-bottom-left-radius: 10px;\n"
+                                               "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #F59E0B, stop:1#E11D48);\n"
+                                               "    font: 22px;\n"
+                                               "    color: rgb(255, 255, 255);\n"
+                                               "}\n"
+                                               "\n"
+                                               "QPushButton:hover {\n"
+                                               "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #B45309\n"
+                                               ", stop:1 #9F1239);\n"
+                                               "}\n"
+                                               "\n"
+                                               "QPushButton:pressed {\n"
+                                               "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #B45309\n"
+                                               ", stop:1 #9F1239);\n"
+                                               "    padding-left: 5px;\n"
+                                               "    padding-top: 5px;\n"
+                                               "}")
+        self.fetch_orders_button.setObjectName("fetch_orders_button")
+        self.my_purchases_label = QtWidgets.QLabel(self.page_2)
+        self.my_purchases_label.setGeometry(QtCore.QRect(670, 0, 411, 91))
+        font = QtGui.QFont()
+        font.setFamily("8514oem")
+        font.setPointSize(25)
+        self.my_purchases_label.setFont(font)
+        self.my_purchases_label.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                              "image: url(:/SideBar/icons8-shopping-cart-48.png);\n"
+                                              "padding-right:50px;")
+        self.my_purchases_label.setAlignment(
+            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.my_purchases_label.setObjectName("my_purchases_label")
         self.stackedWidget.addWidget(self.page_2)
         self.page_3 = QtWidgets.QWidget()
         self.page_3.setObjectName("page_3")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.page_3)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 1471, 80))
-        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.title_page_3 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
-        self.title_page_3.setContentsMargins(0, 0, 0, 0)
-        self.title_page_3.setObjectName("title_page_3")
-        self.label_3 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.my_requests_label = QtWidgets.QLabel(self.page_3)
+        self.my_requests_label.setGeometry(QtCore.QRect(670, 0, 411, 91))
         font = QtGui.QFont()
-        font.setPointSize(40)
-        self.label_3.setFont(font)
-        self.label_3.setStyleSheet("color: #FFF;")
-        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_3.setObjectName("label_3")
-        self.title_page_3.addWidget(self.label_3)
+        font.setFamily("8514oem")
+        font.setPointSize(25)
+        self.my_requests_label.setFont(font)
+        self.my_requests_label.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                             "image: url(:/SideBar/icons8-computer-support-48.png);\n"
+                                             "padding-right:50px;")
+        self.my_requests_label.setAlignment(
+            QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
+        self.my_requests_label.setObjectName("my_requests_label")
+        self.requests_table = QtWidgets.QTableWidget(self.page_3)
+        self.requests_table.setGeometry(QtCore.QRect(20, 215, 1761, 671))
+        self.requests_table.setSizeIncrement(QtCore.QSize(0, 0))
+        font = QtGui.QFont()
+        font.setFamily("8514oem")
+        font.setPointSize(10)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.requests_table.setFont(font)
+        self.requests_table.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.requests_table.setAutoFillBackground(False)
+        self.requests_table.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                          "alternate-background-color: rgb(241, 245, 249);\n"
+                                          "font: 10pt \"8514oem\";\n"
+                                          "")
+        self.requests_table.setFrameShape(QtWidgets.QFrame.Box)
+        self.requests_table.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.requests_table.setLineWidth(10)
+        self.requests_table.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.requests_table.setAlternatingRowColors(True)
+        self.requests_table.setSelectionMode(
+            QtWidgets.QAbstractItemView.SingleSelection)
+        self.requests_table.setSelectionBehavior(
+            QtWidgets.QAbstractItemView.SelectRows)
+        self.requests_table.setIconSize(QtCore.QSize(0, 0))
+        self.requests_table.setTextElideMode(QtCore.Qt.ElideLeft)
+        self.requests_table.setRowCount(1)
+        self.requests_table.setColumnCount(6)
+        self.requests_table.setObjectName("requests_table")
+        item = QtWidgets.QTableWidgetItem()
+        self.requests_table.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.requests_table.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.requests_table.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.requests_table.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.requests_table.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.requests_table.setHorizontalHeaderItem(5, item)
+        self.requests_table.horizontalHeader().setCascadingSectionResizes(False)
+        self.requests_table.horizontalHeader().setDefaultSectionSize(282)
+        self.requests_table.horizontalHeader().setMinimumSectionSize(26)
+        self.requests_table.horizontalHeader().setSortIndicatorShown(True)
+        self.requests_table.horizontalHeader().setStretchLastSection(False)
+        self.requests_table.verticalHeader().setDefaultSectionSize(81)
+        self.requests_table.verticalHeader().setSortIndicatorShown(True)
+        self.requests_table.verticalHeader().setStretchLastSection(False)
+        self.view_requests_button = QtWidgets.QPushButton(self.page_3)
+        self.view_requests_button.setGeometry(QtCore.QRect(20, 130, 301, 51))
+        font = QtGui.QFont()
+        font.setPointSize(1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.view_requests_button.setFont(font)
+        self.view_requests_button.setToolTipDuration(0)
+        self.view_requests_button.setStyleSheet("QPushButton {\n"
+                                                "    border-top-right-radius: 10px;\n"
+                                                "    border-top-left-radius: 10px;\n"
+                                                "    border-bottom-right-radius: 10px;\n"
+                                                "    border-bottom-left-radius: 10px;\n"
+                                                "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1#7C3AED);\n"
+                                                "    font: 22px;\n"
+                                                "    color: rgb(255, 255, 255);\n"
+                                                "}\n"
+                                                "\n"
+                                                "QPushButton:hover {\n"
+                                                "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3\n"
+                                                ", stop:1 #5B21B6);\n"
+                                                "}\n"
+                                                "\n"
+                                                "QPushButton:pressed {\n"
+                                                "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3\n"
+                                                ", stop:1 #5B21B6);\n"
+                                                "    padding-left: 5px;\n"
+                                                "    padding-top: 5px;\n"
+                                                "}")
+        self.view_requests_button.setObjectName("view_requests_button")
         self.stackedWidget.addWidget(self.page_3)
         self.verticalLayout_5.addWidget(self.stackedWidget)
         self.horizontalLayout_2.addWidget(self.frame_pages)
@@ -1518,7 +1690,7 @@ class Ui_MainWindow(object):
         self.btn_page_1.setText(_translate(
             "MainWindow", "                 Shop"))
         self.btn_page_2.setText(_translate(
-            "MainWindow", "                Purchases"))
+            "MainWindow", "                  Purchases"))
         self.btn_page_3.setText(_translate(
             "MainWindow", "                 Requests"))
         self.btn_page_4.setText(_translate(
@@ -1607,5 +1779,49 @@ class Ui_MainWindow(object):
         self.warranty_comboBox.setItemText(1, _translate("MainWindow", "8"))
         self.warranty_comboBox.setItemText(2, _translate("MainWindow", "10"))
         self.warranty_comboBox.setItemText(3, _translate("MainWindow", "12"))
-        self.label_2.setText(_translate("MainWindow", "Purchases"))
-        self.label_3.setText(_translate("MainWindow", "Requests"))
+        self.item_table.setSortingEnabled(True)
+        item = self.item_table.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Item ID"))
+        item = self.item_table.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Request Now"))
+        item = self.item_table.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Price"))
+        item = self.item_table.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Purchase Date"))
+        item = self.item_table.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Warranty End"))
+        item = self.item_table.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "Warranty"))
+        item = self.item_table.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "Color"))
+        item = self.item_table.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "Category"))
+        item = self.item_table.horizontalHeaderItem(8)
+        item.setText(_translate("MainWindow", "Factory"))
+        item = self.item_table.horizontalHeaderItem(9)
+        item.setText(_translate("MainWindow", "Model"))
+        item = self.item_table.horizontalHeaderItem(10)
+        item.setText(_translate("MainWindow", "Power Supply"))
+        __sortingEnabled = self.item_table.isSortingEnabled()
+        self.item_table.setSortingEnabled(False)
+        self.item_table.setSortingEnabled(__sortingEnabled)
+        self.fetch_orders_button.setText(
+            _translate("MainWindow", "Fetch Purchases"))
+        self.my_purchases_label.setText(
+            _translate("MainWindow", "My Purchases"))
+        self.my_requests_label.setText(_translate("MainWindow", "My Requests"))
+        self.requests_table.setSortingEnabled(True)
+        item = self.requests_table.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Item ID"))
+        item = self.requests_table.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Admin ID"))
+        item = self.requests_table.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Request Date"))
+        item = self.requests_table.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Status"))
+        item = self.requests_table.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Cancel"))
+        item = self.requests_table.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "Pay Service Fee"))
+        self.view_requests_button.setText(
+            _translate("MainWindow", "View Requests"))

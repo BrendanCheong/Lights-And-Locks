@@ -8,7 +8,8 @@ SELECT * FROM `Purchase`;
 SELECT `Item ID`, `Purchase Date` FROM `Purchase`
 WHERE `Customer ID` = "Zuko";
 
-SELECT  `Purchase Date`, 
+SELECT  `Purchase`.`Item ID`,
+		`Purchase Date`, 
 		`Color`, 
         `Category`, 
         `Factory`, 

@@ -150,7 +150,7 @@
 color: rgb(255, 255, 255);
 border: 0px solid;
 background-color: rgb(35, 35, 25);
-padding-left:15px;</string>
+padding-left: 25px;</string>
             </property>
             <property name="text">
              <string/>
@@ -240,7 +240,7 @@ padding-left:15px;</string>
         <widget class="QFrame" name="frame_left_menu">
          <property name="minimumSize">
           <size>
-           <width>70</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
@@ -284,7 +284,7 @@ padding:1px;</string>
 	color: rgb(255, 255, 255);
 	background-color: rgb(35, 35, 35);
 	border: 0px solid;
-	padding-right: 15px;
+	padding-right: 0px;
 }
 QPushButton:hover {
 	
@@ -320,7 +320,7 @@ QPushButton:hover {
 	color: rgb(255, 255, 255);
 	background-color: rgb(35, 35, 35);
 	border: 0px solid;
-	padding-right: 15px;
+	padding-right: 0px;
 }
 QPushButton:hover {
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #2DD4BF, stop:1 #0EA5E9);
@@ -328,7 +328,7 @@ QPushButton:hover {
 }</string>
             </property>
             <property name="text">
-             <string>                Purchases</string>
+             <string>                  Purchases</string>
             </property>
            </widget>
           </item>
@@ -356,7 +356,7 @@ QPushButton:hover {
 	color: rgb(255, 255, 255);
 	background-color: rgb(35, 35, 35);
 	border: 0px solid;
-	padding-right: 15px;
+	padding-right: 0px;
 }
 QPushButton:hover {
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #2DD4BF, stop:1 #0EA5E9);
@@ -397,7 +397,7 @@ QPushButton:hover {
 	color: rgb(255, 255, 255);
 	background-color: rgb(35, 35, 35);
 	border: 0px solid;
-	padding-right: 15px;
+	padding-right: 0px;
 }
 QPushButton:hover {
 	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #2DD4BF, stop:1 #0EA5E9);
@@ -411,6 +411,12 @@ QPushButton:hover {
           </item>
           <item>
            <widget class="QFrame" name="frame_top_menus">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
             </property>
@@ -534,7 +540,7 @@ QPushButton:hover {
              <enum>QFrame::NoFrame</enum>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="page_1">
              <widget class="QTableWidget" name="product_table">
@@ -616,7 +622,7 @@ font: 10pt &quot;8514oem&quot;;
                <bool>false</bool>
               </attribute>
               <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>276</number>
+               <number>270</number>
               </attribute>
               <attribute name="horizontalHeaderMinimumSectionSize">
                <number>26</number>
@@ -3316,7 +3322,7 @@ font: 10pt &quot;8514oem&quot;;
                <number>1</number>
               </property>
               <property name="columnCount">
-               <number>10</number>
+               <number>11</number>
               </property>
               <attribute name="horizontalHeaderCascadingSectionResizes">
                <bool>false</bool>
@@ -3345,7 +3351,32 @@ font: 10pt &quot;8514oem&quot;;
               <row/>
               <column>
                <property name="text">
+                <string>Item ID</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Request Now</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Price</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
                 <string>Purchase Date</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Warranty End</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Warranty</string>
                </property>
               </column>
               <column>
@@ -3373,27 +3404,7 @@ font: 10pt &quot;8514oem&quot;;
                 <string>Power Supply</string>
                </property>
               </column>
-              <column>
-               <property name="text">
-                <string>Warranty</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Warranty End</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Price</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Request Now</string>
-               </property>
-              </column>
-              <item row="0" column="0">
+              <item row="0" column="3">
                <property name="text">
                 <string/>
                </property>
@@ -3436,20 +3447,20 @@ QPushButton:hover {
 }
 
 QPushButton:pressed {
-	background-color: qqlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #B45309
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #B45309
 , stop:1 #9F1239);
 	padding-left: 5px;
 	padding-top: 5px;
 }</string>
               </property>
               <property name="text">
-               <string>Fetch Orders</string>
+               <string>Fetch Purchases</string>
               </property>
              </widget>
-             <widget class="QLabel" name="label">
+             <widget class="QLabel" name="my_purchases_label">
               <property name="geometry">
                <rect>
-                <x>680</x>
+                <x>670</x>
                 <y>0</y>
                 <width>411</width>
                 <height>91</height>
@@ -3475,35 +3486,210 @@ padding-right:50px;</string>
              </widget>
             </widget>
             <widget class="QWidget" name="page_3">
-             <widget class="QWidget" name="verticalLayoutWidget">
+             <widget class="QLabel" name="my_requests_label">
               <property name="geometry">
                <rect>
-                <x>0</x>
+                <x>670</x>
                 <y>0</y>
-                <width>1471</width>
-                <height>80</height>
+                <width>411</width>
+                <height>91</height>
                </rect>
               </property>
-              <layout class="QVBoxLayout" name="title_page_3">
-               <item>
-                <widget class="QLabel" name="label_3">
-                 <property name="font">
-                  <font>
-                   <pointsize>40</pointsize>
-                  </font>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">color: #FFF;</string>
-                 </property>
-                 <property name="text">
-                  <string>Requests</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                 </property>
-                </widget>
-               </item>
-              </layout>
+              <property name="font">
+               <font>
+                <family>8514oem</family>
+                <pointsize>25</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);
+image: url(:/SideBar/icons8-computer-support-48.png);
+padding-right:50px;</string>
+              </property>
+              <property name="text">
+               <string>My Requests</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+             <widget class="QTableWidget" name="requests_table">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>215</y>
+                <width>1761</width>
+                <height>671</height>
+               </rect>
+              </property>
+              <property name="sizeIncrement">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>8514oem</family>
+                <pointsize>10</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="autoFillBackground">
+               <bool>false</bool>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+alternate-background-color: rgb(241, 245, 249);
+font: 10pt &quot;8514oem&quot;;
+</string>
+              </property>
+              <property name="frameShape">
+               <enum>QFrame::Box</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Raised</enum>
+              </property>
+              <property name="lineWidth">
+               <number>10</number>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QAbstractScrollArea::AdjustToContents</enum>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="selectionMode">
+               <enum>QAbstractItemView::SingleSelection</enum>
+              </property>
+              <property name="selectionBehavior">
+               <enum>QAbstractItemView::SelectRows</enum>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="textElideMode">
+               <enum>Qt::ElideLeft</enum>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <property name="rowCount">
+               <number>1</number>
+              </property>
+              <property name="columnCount">
+               <number>6</number>
+              </property>
+              <attribute name="horizontalHeaderCascadingSectionResizes">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderDefaultSectionSize">
+               <number>282</number>
+              </attribute>
+              <attribute name="horizontalHeaderMinimumSectionSize">
+               <number>26</number>
+              </attribute>
+              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="verticalHeaderDefaultSectionSize">
+               <number>81</number>
+              </attribute>
+              <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="verticalHeaderStretchLastSection">
+               <bool>false</bool>
+              </attribute>
+              <row/>
+              <column>
+               <property name="text">
+                <string>Item ID</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Admin ID</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Request Date</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Status</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Cancel</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Pay Service Fee</string>
+               </property>
+              </column>
+             </widget>
+             <widget class="QPushButton" name="view_requests_button">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>130</y>
+                <width>301</width>
+                <height>51</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>-1</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="toolTipDuration">
+               <number>0</number>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1#7C3AED);
+	font: 22px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3
+, stop:1 #5B21B6);
+}
+
+QPushButton:pressed {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3
+, stop:1 #5B21B6);
+	padding-left: 5px;
+	padding-top: 5px;
+}</string>
+              </property>
+              <property name="text">
+               <string>View Requests</string>
+              </property>
              </widget>
             </widget>
            </widget>
