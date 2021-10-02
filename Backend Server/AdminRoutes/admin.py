@@ -75,7 +75,7 @@ def admin_login():
             resp.status_code = 404
             return resp
     except Exception as e:
-        resp = jsonify(error=str(e))
+        resp = jsonify(error="Admin Not Found")
         resp.status_code = 500
         return resp
     finally:

@@ -93,7 +93,7 @@ def login_user():
             return not_found("Missing User Details")
     except Exception as e:
         print(str(e))
-        return invalid(str(e))
+        return invalid("Customer Not Found")
     finally:
         cursor.close()
 

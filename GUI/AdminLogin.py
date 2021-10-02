@@ -7,6 +7,9 @@ import os
 import urllib.parse
 import json
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 
 class Ui_AdminLogin(object):
@@ -17,6 +20,8 @@ class Ui_AdminLogin(object):
         # Add Transparent Background, Only show the Widget and Not the GUI Frame
         LoginForm.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         LoginForm.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.LoginForm = LoginForm
+        print(self.LoginForm)
 
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
@@ -297,7 +302,8 @@ class Ui_AdminLogin(object):
         msg.setIcon(QtWidgets.QMessageBox.Warning)
         msg.setStandardButtons(QtWidgets.QMessageBox.Retry)
 
-        msg.buttonClicked.connect(self.popup_button_controller)
+        msg.buttonClicked.connect(
+            lambda info, arg={}: self.popup_button_controller(info, arg))
         y = msg.exec_()
 
     def popup_button_controller(self, info, data):
@@ -308,10 +314,10 @@ class Ui_AdminLogin(object):
             # uses system to redirect to MainUI file to open main.py
             print(data)
             r = requests.get("http://localhost:5000/api/Initialise")
-            # LoginForm.close()
+            self.LoginForm.close()
             self.msg.close()
-            # dict1 = urllib.parse.quote(json.dumps(data))
-            # os.system(f"cd GUI/MainUI && python main.py {dict1}")
+            dict1 = urllib.parse.quote(json.dumps(data))
+            os.system(f"cd GUI/AdminUI && python main.py {dict1}")
 
     def open_login_form(self):
         from LoginForm import Ui_LoginForm as LoginFormCustomer
