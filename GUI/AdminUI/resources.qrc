@@ -1,0 +1,18 @@
+<RCC>
+  <qresource prefix="menuBurger">
+    <file>icons8-menu-48.png</file>
+  </qresource>
+  <qresource prefix="adminSideBar">
+    <file>icons8-attract-customers-48.png</file>
+    <file>icons8-home-48.png</file>
+    <file>icons8-product-management-48.png</file>
+    <file>icons8-products-49.png</file>
+    <file>icons8-service-48.png</file>
+  </qresource>
+  <qresource prefix="SideBar">
+    <file>icons8-exit-48.png</file>
+    <file>icons8-computer-support-48.png</file>
+    <file>icons8-shopping-cart-48.png</file>
+    <file>icons8-shop-48.png</file>
+  </qresource>
+</RCC>

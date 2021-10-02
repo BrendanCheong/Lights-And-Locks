@@ -4,7 +4,7 @@ from flask_mysqldb import MySQL
 from flask_bcrypt import Bcrypt
 from pymongo import MongoClient
 
-db = yaml.load(open('db_secrets.yaml'), Loader=yaml.FullLoader)
+db = yaml.load(open('db_local.yaml'), Loader=yaml.FullLoader)
 mysql = MySQL(app)
 bcrypt = Bcrypt(app)
 cluster = MongoClient(db["mongo_uri"])

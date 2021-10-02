@@ -20,6 +20,7 @@ class Ui_LoginForm(object):
         # Add Transparent Background, Only show the Widget and Not the GUI Frame
         LoginForm.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         LoginForm.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        self.CustomerLoginForm = LoginForm
 
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
@@ -359,7 +360,8 @@ class Ui_LoginForm(object):
         msg.setIcon(QtWidgets.QMessageBox.Warning)
         msg.setStandardButtons(QtWidgets.QMessageBox.Retry)
 
-        msg.buttonClicked.connect(self.popup_button_controller)
+        msg.buttonClicked.connect(
+            lambda info, arg={}: self.popup_button_controller(info, arg))
         y = msg.exec_()
 
     def popup_button_controller(self, info, data):
@@ -368,7 +370,7 @@ class Ui_LoginForm(object):
             # If the Login Details are correct
             # Close the Login Form and Open the Main UI menu & pass the data
             # uses system to redirect to MainUI file to open main.py
-            LoginForm.close()
+            self.CustomerLoginForm.close()
             self.msg.close()
             dict1 = urllib.parse.quote(json.dumps(data))
             os.system(f"cd GUI/MainUI && python main.py {dict1}")
