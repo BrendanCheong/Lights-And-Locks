@@ -1,4 +1,3 @@
-
 import resources_rc
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -177,7 +176,8 @@ class Ui_MainWindow(object):
         self.btn_page_5.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_page_5.setStyleSheet("QPushButton {\n"
                                       "    \n"
-                                      "    image: url(:/adminSideBar/icons8-service-48.png);\n"
+                                      "    \n"
+                                      "    image: url(:/adminSideBar/icons8-attract-customers-48.png);\n"
                                       "    color: rgb(255, 255, 255);\n"
                                       "    background-color: rgb(35, 35, 35);\n"
                                       "    border: 0px solid;\n"
@@ -199,7 +199,8 @@ class Ui_MainWindow(object):
         self.btn_page_6.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btn_page_6.setStyleSheet("QPushButton {\n"
                                       "    \n"
-                                      "    image: url(:/adminSideBar/icons8-attract-customers-48.png);\n"
+                                      "    \n"
+                                      "    image: url(:/adminSideBar/icons8-service-48.png);\n"
                                       "    color: rgb(255, 255, 255);\n"
                                       "    background-color: rgb(35, 35, 35);\n"
                                       "    border: 0px solid;\n"
@@ -409,290 +410,10 @@ class Ui_MainWindow(object):
         self.admin_table.verticalHeader().setDefaultSectionSize(87)
         self.admin_table.verticalHeader().setSortIndicatorShown(True)
         self.admin_table.verticalHeader().setStretchLastSection(False)
-        self.admin_Categories_label = QtWidgets.QLineEdit(self.page_1)
-        self.admin_Categories_label.setGeometry(QtCore.QRect(20, 73, 131, 22))
-        font = QtGui.QFont()
-        font.setFamily("8514oem")
-        font.setPointSize(16)
-        self.admin_Categories_label.setFont(font)
-        self.admin_Categories_label.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                                  "background-color: rgba(255, 255, 255, 0);")
-        self.admin_Categories_label.setFrame(False)
-        self.admin_Categories_label.setObjectName("admin_Categories_label")
-        self.admin_model_comboBox = QtWidgets.QComboBox(self.page_1)
-        self.admin_model_comboBox.setGeometry(QtCore.QRect(20, 250, 519, 51))
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.admin_model_comboBox.sizePolicy().hasHeightForWidth())
-        self.admin_model_comboBox.setSizePolicy(sizePolicy)
-        self.admin_model_comboBox.setMinimumSize(QtCore.QSize(143, 2))
-        self.admin_model_comboBox.setMaximumSize(
-            QtCore.QSize(16777214, 16777215))
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.admin_model_comboBox.setPalette(palette)
-        font = QtGui.QFont()
-        font.setFamily("8514oem")
-        font.setPointSize(16)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.admin_model_comboBox.setFont(font)
-        self.admin_model_comboBox.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.admin_model_comboBox.setStyleSheet("QComboBox {\n"
-                                                "    border: 1px solid gray;\n"
-                                                "    border-radius: 10px;\n"
-                                                "    padding: 1px 18px 1px 3px;\n"
-                                                "    min-width: 6em;\n"
-                                                "    font: 16pt \"8514oem\";\n"
-                                                "    background-color: rgb(255, 255, 255);\n"
-                                                "    \n"
-                                                "    color: rgb(0, 0, 0);\n"
-                                                "}\n"
-                                                "\n"
-                                                "QComboBox:on { /* shift the text when the popup opens */\n"
-                                                "    padding-top: 3px;\n"
-                                                "    padding-left: 4px;\n"
-                                                "    background: white;\n"
-                                                "    border-radius: 10px;\n"
-                                                "}\n"
-                                                "\n"
-                                                "QComboBox::drop-down {\n"
-                                                "    subcontrol-origin: padding;\n"
-                                                "    subcontrol-position: top right;\n"
-                                                "    width: 15px;\n"
-                                                "    background-color:white;\n"
-                                                "    border-left-width: 1px;\n"
-                                                "    border-left-color: darkgray;\n"
-                                                "    border-left-style: solid; /* just a single line */\n"
-                                                "    border-top-right-radius: 3px; /* same radius as the QComboBox */\n"
-                                                "    border-bottom-right-radius: 3px;\n"
-                                                "    border-radius: 10px;\n"
-                                                "}\n"
-                                                "\n"
-                                                "QComboBox::down-arrow:on { /* shift the arrow when popup is open */\n"
-                                                "    top: 1px;\n"
-                                                "    left: 1px;\n"
-                                                "}\n"
-                                                "QListView\n"
-                                                "{\n"
-                                                "background-color : #334155;\n"
-                                                "color: rgb(255, 255, 255);\n"
-                                                "}")
-        self.admin_model_comboBox.setEditable(False)
-        self.admin_model_comboBox.setFrame(True)
-        self.admin_model_comboBox.setObjectName("admin_model_comboBox")
-        self.admin_model_comboBox.addItem("")
-        self.admin_model_comboBox.addItem("")
-        self.admin_model_comboBox.addItem("")
-        self.admin_model_comboBox.addItem("")
-        self.admin_model_comboBox.addItem("")
-        self.admin_Model_label = QtWidgets.QLineEdit(self.page_1)
-        self.admin_Model_label.setGeometry(QtCore.QRect(20, 220, 131, 22))
-        font = QtGui.QFont()
-        font.setFamily("8514oem")
-        font.setPointSize(16)
-        self.admin_Model_label.setFont(font)
-        self.admin_Model_label.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                             "background-color: rgba(255, 255, 255, 0);")
-        self.admin_Model_label.setFrame(False)
-        self.admin_Model_label.setObjectName("admin_Model_label")
-        self.admin_category_comboBox = QtWidgets.QComboBox(self.page_1)
-        self.admin_category_comboBox.setGeometry(
-            QtCore.QRect(20, 100, 519, 51))
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.admin_category_comboBox.sizePolicy().hasHeightForWidth())
-        self.admin_category_comboBox.setSizePolicy(sizePolicy)
-        self.admin_category_comboBox.setMinimumSize(QtCore.QSize(143, 2))
-        self.admin_category_comboBox.setMaximumSize(
-            QtCore.QSize(16777214, 16777215))
-        palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Window, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
-        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.ButtonText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Base, brush)
-        brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
-        brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Window, brush)
-        self.admin_category_comboBox.setPalette(palette)
-        font = QtGui.QFont()
-        font.setFamily("8514oem")
-        font.setPointSize(16)
-        font.setBold(False)
-        font.setItalic(False)
-        font.setWeight(50)
-        self.admin_category_comboBox.setFont(font)
-        self.admin_category_comboBox.setCursor(
-            QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.admin_category_comboBox.setStyleSheet("QComboBox {\n"
-                                                   "    border: 1px solid gray;\n"
-                                                   "    border-radius: 10px;\n"
-                                                   "    padding: 1px 18px 1px 3px;\n"
-                                                   "    min-width: 6em;\n"
-                                                   "    font: 16pt \"8514oem\";\n"
-                                                   "    background-color: rgb(255, 255, 255);\n"
-                                                   "    \n"
-                                                   "    color: rgb(0, 0, 0);\n"
-                                                   "}\n"
-                                                   "\n"
-                                                   "QComboBox:on { /* shift the text when the popup opens */\n"
-                                                   "    padding-top: 3px;\n"
-                                                   "    padding-left: 4px;\n"
-                                                   "    background: white;\n"
-                                                   "    border-radius: 10px;\n"
-                                                   "}\n"
-                                                   "\n"
-                                                   "QComboBox::drop-down {\n"
-                                                   "    subcontrol-origin: padding;\n"
-                                                   "    subcontrol-position: top right;\n"
-                                                   "    width: 15px;\n"
-                                                   "    background-color:white;\n"
-                                                   "    border-left-width: 1px;\n"
-                                                   "    border-left-color: darkgray;\n"
-                                                   "    border-left-style: solid; /* just a single line */\n"
-                                                   "    border-top-right-radius: 3px; /* same radius as the QComboBox */\n"
-                                                   "    border-bottom-right-radius: 3px;\n"
-                                                   "    border-radius: 10px;\n"
-                                                   "}\n"
-                                                   "\n"
-                                                   "QComboBox::down-arrow:on { /* shift the arrow when popup is open */\n"
-                                                   "    top: 1px;\n"
-                                                   "    left: 1px;\n"
-                                                   "}\n"
-                                                   "QListView\n"
-                                                   "{\n"
-                                                   "background-color : #334155;\n"
-                                                   "color: rgb(255, 255, 255);\n"
-                                                   "}")
-        self.admin_category_comboBox.setEditable(False)
-        self.admin_category_comboBox.setFrame(True)
-        self.admin_category_comboBox.setObjectName("admin_category_comboBox")
-        self.admin_category_comboBox.addItem("")
-        self.admin_category_comboBox.addItem("")
         self.refresh_button_admin = QtWidgets.QPushButton(self.page_1)
-        self.refresh_button_admin.setGeometry(QtCore.QRect(1480, 250, 301, 51))
+        self.refresh_button_admin.setGeometry(QtCore.QRect(1390, 250, 391, 51))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -720,6 +441,69 @@ class Ui_MainWindow(object):
                                                 "    padding-top: 5px;\n"
                                                 "}")
         self.refresh_button_admin.setObjectName("refresh_button_admin")
+        self.view_customers_button = QtWidgets.QPushButton(self.page_1)
+        self.view_customers_button.setGeometry(QtCore.QRect(20, 250, 481, 51))
+        font = QtGui.QFont()
+        font.setPointSize(1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.view_customers_button.setFont(font)
+        self.view_customers_button.setToolTipDuration(0)
+        self.view_customers_button.setStyleSheet("QPushButton {\n"
+                                                 "    border-radius: 10px;\n"
+                                                 "    font: 22px;\n"
+                                                 "    color: rgb(255, 255, 255);\n"
+                                                 "    border: 5px solid;\n"
+                                                 "    border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1#7C3AED);\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "QPushButton:hover {\n"
+                                                 "    border: 5px solid;\n"
+                                                 "    border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3, stop:1 #5B21B6);\n"
+                                                 "}\n"
+                                                 "\n"
+                                                 "QPushButton:pressed {\n"
+                                                 "    border: 5px solid;\n"
+                                                 "    border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3\n"
+                                                 ", stop:1 #5B21B6);\n"
+                                                 "    padding-left: 5px;\n"
+                                                 "    padding-top: 5px;\n"
+                                                 "}")
+        self.view_customers_button.setObjectName("view_customers_button")
+        self.view_items_category_model_button = QtWidgets.QPushButton(
+            self.page_1)
+        self.view_items_category_model_button.setGeometry(
+            QtCore.QRect(20, 170, 481, 51))
+        font = QtGui.QFont()
+        font.setPointSize(1)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.view_items_category_model_button.setFont(font)
+        self.view_items_category_model_button.setToolTipDuration(0)
+        self.view_items_category_model_button.setStyleSheet("QPushButton {\n"
+                                                            "    border-radius: 10px;\n"
+                                                            "    font: 22px;\n"
+                                                            "    color: rgb(255, 255, 255);\n"
+                                                            "    border: 5px solid;\n"
+                                                            "    border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1#7C3AED);\n"
+                                                            "}\n"
+                                                            "\n"
+                                                            "QPushButton:hover {\n"
+                                                            "    border: 5px solid;\n"
+                                                            "    border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3, stop:1 #5B21B6);\n"
+                                                            "}\n"
+                                                            "\n"
+                                                            "QPushButton:pressed {\n"
+                                                            "    border: 5px solid;\n"
+                                                            "    border-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3\n"
+                                                            ", stop:1 #5B21B6);\n"
+                                                            "    padding-left: 5px;\n"
+                                                            "    padding-top: 5px;\n"
+                                                            "}")
+        self.view_items_category_model_button.setObjectName(
+            "view_items_category_model_button")
         self.stackedWidget.addWidget(self.page_1)
         self.page_2 = QtWidgets.QWidget()
         self.page_2.setObjectName("page_2")
@@ -846,7 +630,7 @@ class Ui_MainWindow(object):
         self.submit_query = QtWidgets.QPushButton(self.page_2)
         self.submit_query.setGeometry(QtCore.QRect(1470, 250, 301, 51))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -2018,140 +1802,140 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.page_2)
         self.page_3 = QtWidgets.QWidget()
         self.page_3.setObjectName("page_3")
-        self.welcome_admin_label_2 = QtWidgets.QLabel(self.page_3)
-        self.welcome_admin_label_2.setGeometry(QtCore.QRect(690, 0, 401, 91))
+        self.item_search_label = QtWidgets.QLabel(self.page_3)
+        self.item_search_label.setGeometry(QtCore.QRect(690, 0, 401, 91))
         font = QtGui.QFont()
         font.setFamily("8514oem")
         font.setPointSize(25)
-        self.welcome_admin_label_2.setFont(font)
-        self.welcome_admin_label_2.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                                 "image: url(:/adminSideBar/icons8-product-management-48.png);\n"
-                                                 "padding-right:50px;")
-        self.welcome_admin_label_2.setAlignment(
+        self.item_search_label.setFont(font)
+        self.item_search_label.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                             "image: url(:/adminSideBar/icons8-product-management-48.png);\n"
+                                             "padding-right:50px;")
+        self.item_search_label.setAlignment(
             QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
-        self.welcome_admin_label_2.setObjectName("welcome_admin_label_2")
-        self.item_table_2 = QtWidgets.QTableWidget(self.page_3)
-        self.item_table_2.setGeometry(QtCore.QRect(20, 325, 1761, 561))
-        self.item_table_2.setSizeIncrement(QtCore.QSize(0, 0))
+        self.item_search_label.setObjectName("item_search_label")
+        self.item_table = QtWidgets.QTableWidget(self.page_3)
+        self.item_table.setGeometry(QtCore.QRect(20, 325, 1761, 561))
+        self.item_table.setSizeIncrement(QtCore.QSize(0, 0))
         font = QtGui.QFont()
         font.setFamily("8514oem")
         font.setPointSize(10)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.item_table_2.setFont(font)
-        self.item_table_2.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.item_table_2.setAutoFillBackground(False)
-        self.item_table_2.setStyleSheet("QWidget {\n"
-                                        "    background-color: rgb(255, 255, 255);\n"
-                                        "    alternate-background-color: rgb(241, 245, 249);\n"
-                                        "    font: 10pt \"8514oem\";\n"
-                                        "}\n"
-                                        "QScrollBar:vertical {\n"
-                                        "    border: none;\n"
-                                        "    background: #94A3B8;\n"
-                                        "    width: 14px;\n"
-                                        "    margin: 15px 0 15px 0;\n"
-                                        "    border-radius: 0px;\n"
-                                        " }\n"
-                                        "\n"
-                                        "/*  HANDLE BAR VERTICAL */\n"
-                                        "QScrollBar::handle:vertical {    \n"
-                                        "    background-color: #E5E7EB;\n"
-                                        "    min-height: 30px;\n"
-                                        "    border-radius: 7px;\n"
-                                        "}\n"
-                                        "QScrollBar::handle:vertical:hover{    \n"
-                                        "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1 #7C3AED);\n"
-                                        "}\n"
-                                        "QScrollBar::handle:vertical:pressed {    \n"
-                                        "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4338CA, stop:1 #5B21B6);\n"
-                                        "}\n"
-                                        "\n"
-                                        "/* BTN TOP - SCROLLBAR */\n"
-                                        "QScrollBar::sub-line:vertical {\n"
-                                        "    border: none;\n"
-                                        "    background-color: #94A3B8;\n"
-                                        "    height: 15px;\n"
-                                        "    border-top-left-radius: 7px;\n"
-                                        "    border-top-right-radius: 7px;\n"
-                                        "    subcontrol-position: top;\n"
-                                        "    subcontrol-origin: margin;\n"
-                                        "}\n"
-                                        "QScrollBar::sub-line:vertical:hover {    \n"
-                                        "    background-color: rgb(255, 0, 127);\n"
-                                        "}\n"
-                                        "QScrollBar::sub-line:vertical:pressed {    \n"
-                                        "    background-color: rgb(185, 0, 92);\n"
-                                        "}\n"
-                                        "\n"
-                                        "/* BTN BOTTOM - SCROLLBAR */\n"
-                                        "QScrollBar::add-line:vertical {\n"
-                                        "    border: none;\n"
-                                        "    background-color:#94A3B8;\n"
-                                        "    height: 15px;\n"
-                                        "    border-bottom-left-radius: 7px;\n"
-                                        "    border-bottom-right-radius: 7px;\n"
-                                        "    subcontrol-position: bottom;\n"
-                                        "    subcontrol-origin: margin;\n"
-                                        "}\n"
-                                        "QScrollBar::add-line:vertical:hover {    \n"
-                                        "    background-color: rgb(255, 0, 127);\n"
-                                        "}\n"
-                                        "QScrollBar::add-line:vertical:pressed {    \n"
-                                        "    background-color: rgb(185, 0, 92);\n"
-                                        "}\n"
-                                        "\n"
-                                        "/* RESET ARROW */\n"
-                                        "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
-                                        "    background: none;\n"
-                                        "}\n"
-                                        "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
-                                        "    background: none;\n"
-                                        "}\n"
-                                        "")
-        self.item_table_2.setFrameShape(QtWidgets.QFrame.Box)
-        self.item_table_2.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.item_table_2.setLineWidth(10)
-        self.item_table_2.setSizeAdjustPolicy(
+        self.item_table.setFont(font)
+        self.item_table.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.item_table.setAutoFillBackground(False)
+        self.item_table.setStyleSheet("QWidget {\n"
+                                      "    background-color: rgb(255, 255, 255);\n"
+                                      "    alternate-background-color: rgb(241, 245, 249);\n"
+                                      "    font: 10pt \"8514oem\";\n"
+                                      "}\n"
+                                      "QScrollBar:vertical {\n"
+                                      "    border: none;\n"
+                                      "    background: #94A3B8;\n"
+                                      "    width: 14px;\n"
+                                      "    margin: 15px 0 15px 0;\n"
+                                      "    border-radius: 0px;\n"
+                                      " }\n"
+                                      "\n"
+                                      "/*  HANDLE BAR VERTICAL */\n"
+                                      "QScrollBar::handle:vertical {    \n"
+                                      "    background-color: #E5E7EB;\n"
+                                      "    min-height: 30px;\n"
+                                      "    border-radius: 7px;\n"
+                                      "}\n"
+                                      "QScrollBar::handle:vertical:hover{    \n"
+                                      "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1 #7C3AED);\n"
+                                      "}\n"
+                                      "QScrollBar::handle:vertical:pressed {    \n"
+                                      "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4338CA, stop:1 #5B21B6);\n"
+                                      "}\n"
+                                      "\n"
+                                      "/* BTN TOP - SCROLLBAR */\n"
+                                      "QScrollBar::sub-line:vertical {\n"
+                                      "    border: none;\n"
+                                      "    background-color: #94A3B8;\n"
+                                      "    height: 15px;\n"
+                                      "    border-top-left-radius: 7px;\n"
+                                      "    border-top-right-radius: 7px;\n"
+                                      "    subcontrol-position: top;\n"
+                                      "    subcontrol-origin: margin;\n"
+                                      "}\n"
+                                      "QScrollBar::sub-line:vertical:hover {    \n"
+                                      "    background-color: rgb(255, 0, 127);\n"
+                                      "}\n"
+                                      "QScrollBar::sub-line:vertical:pressed {    \n"
+                                      "    background-color: rgb(185, 0, 92);\n"
+                                      "}\n"
+                                      "\n"
+                                      "/* BTN BOTTOM - SCROLLBAR */\n"
+                                      "QScrollBar::add-line:vertical {\n"
+                                      "    border: none;\n"
+                                      "    background-color:#94A3B8;\n"
+                                      "    height: 15px;\n"
+                                      "    border-bottom-left-radius: 7px;\n"
+                                      "    border-bottom-right-radius: 7px;\n"
+                                      "    subcontrol-position: bottom;\n"
+                                      "    subcontrol-origin: margin;\n"
+                                      "}\n"
+                                      "QScrollBar::add-line:vertical:hover {    \n"
+                                      "    background-color: rgb(255, 0, 127);\n"
+                                      "}\n"
+                                      "QScrollBar::add-line:vertical:pressed {    \n"
+                                      "    background-color: rgb(185, 0, 92);\n"
+                                      "}\n"
+                                      "\n"
+                                      "/* RESET ARROW */\n"
+                                      "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
+                                      "    background: none;\n"
+                                      "}\n"
+                                      "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+                                      "    background: none;\n"
+                                      "}\n"
+                                      "")
+        self.item_table.setFrameShape(QtWidgets.QFrame.Box)
+        self.item_table.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.item_table.setLineWidth(10)
+        self.item_table.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.item_table_2.setAlternatingRowColors(True)
-        self.item_table_2.setSelectionMode(
+        self.item_table.setAlternatingRowColors(True)
+        self.item_table.setSelectionMode(
             QtWidgets.QAbstractItemView.SingleSelection)
-        self.item_table_2.setSelectionBehavior(
+        self.item_table.setSelectionBehavior(
             QtWidgets.QAbstractItemView.SelectRows)
-        self.item_table_2.setIconSize(QtCore.QSize(0, 0))
-        self.item_table_2.setTextElideMode(QtCore.Qt.ElideLeft)
-        self.item_table_2.setRowCount(7)
-        self.item_table_2.setColumnCount(8)
-        self.item_table_2.setObjectName("item_table_2")
+        self.item_table.setIconSize(QtCore.QSize(0, 0))
+        self.item_table.setTextElideMode(QtCore.Qt.ElideLeft)
+        self.item_table.setRowCount(7)
+        self.item_table.setColumnCount(8)
+        self.item_table.setObjectName("item_table")
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setHorizontalHeaderItem(0, item)
+        self.item_table.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setHorizontalHeaderItem(1, item)
+        self.item_table.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setHorizontalHeaderItem(2, item)
+        self.item_table.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setHorizontalHeaderItem(3, item)
+        self.item_table.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setHorizontalHeaderItem(4, item)
+        self.item_table.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setHorizontalHeaderItem(5, item)
+        self.item_table.setHorizontalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setHorizontalHeaderItem(6, item)
+        self.item_table.setHorizontalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setHorizontalHeaderItem(7, item)
+        self.item_table.setHorizontalHeaderItem(7, item)
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setItem(0, 0, item)
+        self.item_table.setItem(0, 0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.item_table_2.setItem(6, 5, item)
-        self.item_table_2.horizontalHeader().setCascadingSectionResizes(False)
-        self.item_table_2.horizontalHeader().setDefaultSectionSize(240)
-        self.item_table_2.horizontalHeader().setMinimumSectionSize(26)
-        self.item_table_2.horizontalHeader().setStretchLastSection(True)
-        self.item_table_2.verticalHeader().setDefaultSectionSize(87)
-        self.item_table_2.verticalHeader().setSortIndicatorShown(True)
-        self.item_table_2.verticalHeader().setStretchLastSection(False)
+        self.item_table.setItem(6, 5, item)
+        self.item_table.horizontalHeader().setCascadingSectionResizes(False)
+        self.item_table.horizontalHeader().setDefaultSectionSize(240)
+        self.item_table.horizontalHeader().setMinimumSectionSize(26)
+        self.item_table.horizontalHeader().setStretchLastSection(True)
+        self.item_table.verticalHeader().setDefaultSectionSize(87)
+        self.item_table.verticalHeader().setSortIndicatorShown(True)
+        self.item_table.verticalHeader().setStretchLastSection(False)
         self.item_id_comboBox = QtWidgets.QComboBox(self.page_3)
         self.item_id_comboBox.setGeometry(QtCore.QRect(20, 250, 519, 51))
         sizePolicy = QtWidgets.QSizePolicy(
@@ -2406,6 +2190,7 @@ class Ui_MainWindow(object):
         self.under_service_comboBox.setObjectName("under_service_comboBox")
         self.under_service_comboBox.addItem("")
         self.under_service_comboBox.addItem("")
+        self.under_service_comboBox.addItem("")
         self.under_service_label = QtWidgets.QLineEdit(self.page_3)
         self.under_service_label.setGeometry(QtCore.QRect(20, 73, 241, 22))
         font = QtGui.QFont()
@@ -2429,7 +2214,7 @@ class Ui_MainWindow(object):
         self.item_search_button = QtWidgets.QPushButton(self.page_3)
         self.item_search_button.setGeometry(QtCore.QRect(1470, 250, 301, 51))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -2553,7 +2338,7 @@ class Ui_MainWindow(object):
         self.request_table.setIconSize(QtCore.QSize(0, 0))
         self.request_table.setTextElideMode(QtCore.Qt.ElideLeft)
         self.request_table.setShowGrid(True)
-        self.request_table.setRowCount(1)
+        self.request_table.setRowCount(10)
         self.request_table.setColumnCount(7)
         self.request_table.setObjectName("request_table")
         item = QtWidgets.QTableWidgetItem()
@@ -2581,7 +2366,7 @@ class Ui_MainWindow(object):
         self.fetch_requests_button = QtWidgets.QPushButton(self.page_4)
         self.fetch_requests_button.setGeometry(QtCore.QRect(20, 150, 301, 51))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -2609,181 +2394,182 @@ class Ui_MainWindow(object):
                                                  "    padding-top: 5px;\n"
                                                  "}")
         self.fetch_requests_button.setObjectName("fetch_requests_button")
-        self.services_label = QtWidgets.QLabel(self.page_4)
-        self.services_label.setGeometry(QtCore.QRect(670, 0, 411, 91))
+        self.all_requests_label = QtWidgets.QLabel(self.page_4)
+        self.all_requests_label.setGeometry(QtCore.QRect(670, 0, 411, 91))
         font = QtGui.QFont()
         font.setFamily("8514oem")
         font.setPointSize(25)
-        self.services_label.setFont(font)
-        self.services_label.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                          "image: url(:/adminSideBar/icons8-service-48.png);\n"
-                                          "padding-right:50px;")
-        self.services_label.setAlignment(
+        self.all_requests_label.setFont(font)
+        self.all_requests_label.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                              "image: url(:/adminSideBar/icons8-attract-customers-48.png);\n"
+                                              "padding-right:50px;")
+        self.all_requests_label.setAlignment(
             QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
-        self.services_label.setObjectName("services_label")
+        self.all_requests_label.setObjectName("all_requests_label")
         self.stackedWidget.addWidget(self.page_4)
         self.page_5 = QtWidgets.QWidget()
         self.page_5.setObjectName("page_5")
-        self.my_requests_label = QtWidgets.QLabel(self.page_5)
-        self.my_requests_label.setGeometry(QtCore.QRect(650, 0, 461, 91))
+        self.my_servicing_label = QtWidgets.QLabel(self.page_5)
+        self.my_servicing_label.setGeometry(QtCore.QRect(650, 0, 461, 91))
         font = QtGui.QFont()
         font.setFamily("8514oem")
         font.setPointSize(25)
-        self.my_requests_label.setFont(font)
-        self.my_requests_label.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                             "image: url(:/adminSideBar/icons8-attract-customers-48.png);\n"
-                                             "padding-right:50px;")
-        self.my_requests_label.setAlignment(
+        self.my_servicing_label.setFont(font)
+        self.my_servicing_label.setStyleSheet("color: rgb(255, 255, 255);\n"
+                                              "image: url(:/adminSideBar/icons8-service-48.png);\n"
+                                              "padding-right:50px;")
+        self.my_servicing_label.setAlignment(
             QtCore.Qt.AlignRight | QtCore.Qt.AlignTrailing | QtCore.Qt.AlignVCenter)
-        self.my_requests_label.setObjectName("my_requests_label")
-        self.requests_table = QtWidgets.QTableWidget(self.page_5)
-        self.requests_table.setGeometry(QtCore.QRect(20, 215, 1761, 671))
-        self.requests_table.setSizeIncrement(QtCore.QSize(0, 0))
+        self.my_servicing_label.setObjectName("my_servicing_label")
+        self.servicing_table = QtWidgets.QTableWidget(self.page_5)
+        self.servicing_table.setGeometry(QtCore.QRect(20, 215, 1761, 671))
+        self.servicing_table.setSizeIncrement(QtCore.QSize(0, 0))
         font = QtGui.QFont()
         font.setFamily("8514oem")
         font.setPointSize(10)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.requests_table.setFont(font)
-        self.requests_table.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.requests_table.setAutoFillBackground(False)
-        self.requests_table.setStyleSheet("QWidget {\n"
-                                          "    background-color: rgb(255, 255, 255);\n"
-                                          "    alternate-background-color: rgb(241, 245, 249);\n"
-                                          "    font: 10pt \"8514oem\";\n"
-                                          "}\n"
-                                          "QScrollBar:vertical {\n"
-                                          "    border: none;\n"
-                                          "    background: #94A3B8;\n"
-                                          "    width: 14px;\n"
-                                          "    margin: 15px 0 15px 0;\n"
-                                          "    border-radius: 0px;\n"
-                                          " }\n"
-                                          "\n"
-                                          "/*  HANDLE BAR VERTICAL */\n"
-                                          "QScrollBar::handle:vertical {    \n"
-                                          "    background-color: #E5E7EB;\n"
-                                          "    min-height: 30px;\n"
-                                          "    border-radius: 7px;\n"
-                                          "}\n"
-                                          "QScrollBar::handle:vertical:hover{    \n"
-                                          "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1 #7C3AED);\n"
-                                          "}\n"
-                                          "QScrollBar::handle:vertical:pressed {    \n"
-                                          "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4338CA, stop:1 #5B21B6);\n"
-                                          "}\n"
-                                          "\n"
-                                          "/* BTN TOP - SCROLLBAR */\n"
-                                          "QScrollBar::sub-line:vertical {\n"
-                                          "    border: none;\n"
-                                          "    background-color: #94A3B8;\n"
-                                          "    height: 15px;\n"
-                                          "    border-top-left-radius: 7px;\n"
-                                          "    border-top-right-radius: 7px;\n"
-                                          "    subcontrol-position: top;\n"
-                                          "    subcontrol-origin: margin;\n"
-                                          "}\n"
-                                          "QScrollBar::sub-line:vertical:hover {    \n"
-                                          "    background-color: rgb(255, 0, 127);\n"
-                                          "}\n"
-                                          "QScrollBar::sub-line:vertical:pressed {    \n"
-                                          "    background-color: rgb(185, 0, 92);\n"
-                                          "}\n"
-                                          "\n"
-                                          "/* BTN BOTTOM - SCROLLBAR */\n"
-                                          "QScrollBar::add-line:vertical {\n"
-                                          "    border: none;\n"
-                                          "    background-color:#94A3B8;\n"
-                                          "    height: 15px;\n"
-                                          "    border-bottom-left-radius: 7px;\n"
-                                          "    border-bottom-right-radius: 7px;\n"
-                                          "    subcontrol-position: bottom;\n"
-                                          "    subcontrol-origin: margin;\n"
-                                          "}\n"
-                                          "QScrollBar::add-line:vertical:hover {    \n"
-                                          "    background-color: rgb(255, 0, 127);\n"
-                                          "}\n"
-                                          "QScrollBar::add-line:vertical:pressed {    \n"
-                                          "    background-color: rgb(185, 0, 92);\n"
-                                          "}\n"
-                                          "\n"
-                                          "/* RESET ARROW */\n"
-                                          "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
-                                          "    background: none;\n"
-                                          "}\n"
-                                          "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
-                                          "    background: none;\n"
-                                          "}\n"
-                                          "")
-        self.requests_table.setFrameShape(QtWidgets.QFrame.Box)
-        self.requests_table.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.requests_table.setLineWidth(10)
-        self.requests_table.setSizeAdjustPolicy(
+        self.servicing_table.setFont(font)
+        self.servicing_table.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.servicing_table.setAutoFillBackground(False)
+        self.servicing_table.setStyleSheet("QWidget {\n"
+                                           "    background-color: rgb(255, 255, 255);\n"
+                                           "    alternate-background-color: rgb(241, 245, 249);\n"
+                                           "    font: 10pt \"8514oem\";\n"
+                                           "}\n"
+                                           "QScrollBar:vertical {\n"
+                                           "    border: none;\n"
+                                           "    background: #94A3B8;\n"
+                                           "    width: 14px;\n"
+                                           "    margin: 15px 0 15px 0;\n"
+                                           "    border-radius: 0px;\n"
+                                           " }\n"
+                                           "\n"
+                                           "/*  HANDLE BAR VERTICAL */\n"
+                                           "QScrollBar::handle:vertical {    \n"
+                                           "    background-color: #E5E7EB;\n"
+                                           "    min-height: 30px;\n"
+                                           "    border-radius: 7px;\n"
+                                           "}\n"
+                                           "QScrollBar::handle:vertical:hover{    \n"
+                                           "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1 #7C3AED);\n"
+                                           "}\n"
+                                           "QScrollBar::handle:vertical:pressed {    \n"
+                                           "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4338CA, stop:1 #5B21B6);\n"
+                                           "}\n"
+                                           "\n"
+                                           "/* BTN TOP - SCROLLBAR */\n"
+                                           "QScrollBar::sub-line:vertical {\n"
+                                           "    border: none;\n"
+                                           "    background-color: #94A3B8;\n"
+                                           "    height: 15px;\n"
+                                           "    border-top-left-radius: 7px;\n"
+                                           "    border-top-right-radius: 7px;\n"
+                                           "    subcontrol-position: top;\n"
+                                           "    subcontrol-origin: margin;\n"
+                                           "}\n"
+                                           "QScrollBar::sub-line:vertical:hover {    \n"
+                                           "    background-color: rgb(255, 0, 127);\n"
+                                           "}\n"
+                                           "QScrollBar::sub-line:vertical:pressed {    \n"
+                                           "    background-color: rgb(185, 0, 92);\n"
+                                           "}\n"
+                                           "\n"
+                                           "/* BTN BOTTOM - SCROLLBAR */\n"
+                                           "QScrollBar::add-line:vertical {\n"
+                                           "    border: none;\n"
+                                           "    background-color:#94A3B8;\n"
+                                           "    height: 15px;\n"
+                                           "    border-bottom-left-radius: 7px;\n"
+                                           "    border-bottom-right-radius: 7px;\n"
+                                           "    subcontrol-position: bottom;\n"
+                                           "    subcontrol-origin: margin;\n"
+                                           "}\n"
+                                           "QScrollBar::add-line:vertical:hover {    \n"
+                                           "    background-color: rgb(255, 0, 127);\n"
+                                           "}\n"
+                                           "QScrollBar::add-line:vertical:pressed {    \n"
+                                           "    background-color: rgb(185, 0, 92);\n"
+                                           "}\n"
+                                           "\n"
+                                           "/* RESET ARROW */\n"
+                                           "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
+                                           "    background: none;\n"
+                                           "}\n"
+                                           "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
+                                           "    background: none;\n"
+                                           "}\n"
+                                           "")
+        self.servicing_table.setFrameShape(QtWidgets.QFrame.Box)
+        self.servicing_table.setFrameShadow(QtWidgets.QFrame.Raised)
+        self.servicing_table.setLineWidth(10)
+        self.servicing_table.setSizeAdjustPolicy(
             QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.requests_table.setAlternatingRowColors(True)
-        self.requests_table.setSelectionMode(
+        self.servicing_table.setAlternatingRowColors(True)
+        self.servicing_table.setSelectionMode(
             QtWidgets.QAbstractItemView.SingleSelection)
-        self.requests_table.setSelectionBehavior(
+        self.servicing_table.setSelectionBehavior(
             QtWidgets.QAbstractItemView.SelectRows)
-        self.requests_table.setIconSize(QtCore.QSize(0, 0))
-        self.requests_table.setTextElideMode(QtCore.Qt.ElideLeft)
-        self.requests_table.setRowCount(1)
-        self.requests_table.setColumnCount(7)
-        self.requests_table.setObjectName("requests_table")
+        self.servicing_table.setIconSize(QtCore.QSize(0, 0))
+        self.servicing_table.setTextElideMode(QtCore.Qt.ElideLeft)
+        self.servicing_table.setRowCount(10)
+        self.servicing_table.setColumnCount(7)
+        self.servicing_table.setObjectName("servicing_table")
         item = QtWidgets.QTableWidgetItem()
-        self.requests_table.setHorizontalHeaderItem(0, item)
+        self.servicing_table.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.requests_table.setHorizontalHeaderItem(1, item)
+        self.servicing_table.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.requests_table.setHorizontalHeaderItem(2, item)
+        self.servicing_table.setHorizontalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.requests_table.setHorizontalHeaderItem(3, item)
+        self.servicing_table.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
-        self.requests_table.setHorizontalHeaderItem(4, item)
+        self.servicing_table.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        self.requests_table.setHorizontalHeaderItem(5, item)
+        self.servicing_table.setHorizontalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
-        self.requests_table.setHorizontalHeaderItem(6, item)
-        self.requests_table.horizontalHeader().setCascadingSectionResizes(False)
-        self.requests_table.horizontalHeader().setDefaultSectionSize(241)
-        self.requests_table.horizontalHeader().setMinimumSectionSize(26)
-        self.requests_table.horizontalHeader().setSortIndicatorShown(True)
-        self.requests_table.horizontalHeader().setStretchLastSection(True)
-        self.requests_table.verticalHeader().setDefaultSectionSize(81)
-        self.requests_table.verticalHeader().setSortIndicatorShown(True)
-        self.requests_table.verticalHeader().setStretchLastSection(False)
-        self.view_requests_button = QtWidgets.QPushButton(self.page_5)
-        self.view_requests_button.setGeometry(QtCore.QRect(20, 130, 481, 51))
+        self.servicing_table.setHorizontalHeaderItem(6, item)
+        self.servicing_table.horizontalHeader().setCascadingSectionResizes(False)
+        self.servicing_table.horizontalHeader().setDefaultSectionSize(238)
+        self.servicing_table.horizontalHeader().setMinimumSectionSize(26)
+        self.servicing_table.horizontalHeader().setSortIndicatorShown(True)
+        self.servicing_table.horizontalHeader().setStretchLastSection(False)
+        self.servicing_table.verticalHeader().setDefaultSectionSize(81)
+        self.servicing_table.verticalHeader().setSortIndicatorShown(True)
+        self.servicing_table.verticalHeader().setStretchLastSection(False)
+        self.refresh_servicing_button = QtWidgets.QPushButton(self.page_5)
+        self.refresh_servicing_button.setGeometry(
+            QtCore.QRect(20, 140, 241, 51))
         font = QtGui.QFont()
-        font.setPointSize(-1)
+        font.setPointSize(1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.view_requests_button.setFont(font)
-        self.view_requests_button.setToolTipDuration(0)
-        self.view_requests_button.setStyleSheet("QPushButton {\n"
-                                                "    border-top-right-radius: 10px;\n"
-                                                "    border-top-left-radius: 10px;\n"
-                                                "    border-bottom-right-radius: 10px;\n"
-                                                "    border-bottom-left-radius: 10px;\n"
-                                                "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1#7C3AED);\n"
-                                                "    font: 22px;\n"
-                                                "    color: rgb(255, 255, 255);\n"
-                                                "}\n"
-                                                "\n"
-                                                "QPushButton:hover {\n"
-                                                "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3\n"
-                                                ", stop:1 #5B21B6);\n"
-                                                "}\n"
-                                                "\n"
-                                                "QPushButton:pressed {\n"
-                                                "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3\n"
-                                                ", stop:1 #5B21B6);\n"
-                                                "    padding-left: 5px;\n"
-                                                "    padding-top: 5px;\n"
-                                                "}")
-        self.view_requests_button.setObjectName("view_requests_button")
+        self.refresh_servicing_button.setFont(font)
+        self.refresh_servicing_button.setToolTipDuration(0)
+        self.refresh_servicing_button.setStyleSheet("QPushButton {\n"
+                                                    "    border-top-right-radius: 10px;\n"
+                                                    "    border-top-left-radius: 10px;\n"
+                                                    "    border-bottom-right-radius: 10px;\n"
+                                                    "    border-bottom-left-radius: 10px;\n"
+                                                    "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(45, 212, 191, 1), stop:1 rgba(6, 182, 212, 1));\n"
+                                                    "    font: 22px;\n"
+                                                    "    color: rgb(255, 255, 255);\n"
+                                                    "}\n"
+                                                    "\n"
+                                                    "QPushButton:hover {\n"
+                                                    "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #0F766E\n"
+                                                    ", stop:1 #0E7490);\n"
+                                                    "}\n"
+                                                    "\n"
+                                                    "QPushButton:pressed {\n"
+                                                    "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #0F766E\n"
+                                                    ", stop:1 #0E7490);\n"
+                                                    "    padding-left: 5px;\n"
+                                                    "    padding-top: 5px;\n"
+                                                    "}")
+        self.refresh_servicing_button.setObjectName("refresh_servicing_button")
         self.stackedWidget.addWidget(self.page_5)
         self.verticalLayout_5.addWidget(self.stackedWidget)
         self.horizontalLayout_2.addWidget(self.frame_pages)
@@ -2805,9 +2591,9 @@ class Ui_MainWindow(object):
         self.btn_page_3.setText(_translate(
             "MainWindow", "                 Items"))
         self.btn_page_5.setText(_translate(
-            "MainWindow", "                 Services"))
+            "MainWindow", "                 Requests"))
         self.btn_page_6.setText(_translate(
-            "MainWindow", "                  Customers"))
+            "MainWindow", "                  Servicing"))
         self.btn_page_4.setText(_translate(
             "MainWindow", "                 Exit"))
         self.welcome_admin_label.setText(
@@ -2819,28 +2605,12 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Number of \"SOLD\" Items"))
         item = self.admin_table.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "Number of \"UNSOLD\" Items"))
-        self.admin_Categories_label.setText(
-            _translate("MainWindow", "Categories"))
-        self.admin_model_comboBox.setCurrentText(
-            _translate("MainWindow", "Light1"))
-        self.admin_model_comboBox.setItemText(
-            0, _translate("MainWindow", "Light1"))
-        self.admin_model_comboBox.setItemText(
-            1, _translate("MainWindow", "Light2"))
-        self.admin_model_comboBox.setItemText(
-            2, _translate("MainWindow", "SmartHome1"))
-        self.admin_model_comboBox.setItemText(
-            3, _translate("MainWindow", "Safe1"))
-        self.admin_model_comboBox.setItemText(
-            4, _translate("MainWindow", "Safe2"))
-        self.admin_Model_label.setText(_translate("MainWindow", "Models"))
-        self.admin_category_comboBox.setCurrentText(
-            _translate("MainWindow", "Locks"))
-        self.admin_category_comboBox.setItemText(
-            0, _translate("MainWindow", "Locks"))
-        self.admin_category_comboBox.setItemText(
-            1, _translate("MainWindow", "Lights"))
-        self.refresh_button_admin.setText(_translate("MainWindow", "Refresh"))
+        self.refresh_button_admin.setText(_translate(
+            "MainWindow", "Display Sold && Unsold Items"))
+        self.view_customers_button.setText(_translate(
+            "MainWindow", "View Customers With Unpaid Fees"))
+        self.view_items_category_model_button.setText(
+            _translate("MainWindow", "Items Sold in Category && Model"))
         self.product_table.setSortingEnabled(True)
         item = self.product_table.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Categories"))
@@ -2927,34 +2697,35 @@ class Ui_MainWindow(object):
         self.warranty_comboBox.setItemText(1, _translate("MainWindow", "8"))
         self.warranty_comboBox.setItemText(2, _translate("MainWindow", "10"))
         self.warranty_comboBox.setItemText(3, _translate("MainWindow", "12"))
-        self.welcome_admin_label_2.setText(
-            _translate("MainWindow", "Item Search"))
-        self.item_table_2.setSortingEnabled(True)
-        item = self.item_table_2.horizontalHeaderItem(0)
+        self.item_search_label.setText(_translate("MainWindow", "Item Search"))
+        self.item_table.setSortingEnabled(True)
+        item = self.item_table.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Item ID"))
-        item = self.item_table_2.horizontalHeaderItem(1)
+        item = self.item_table.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Production Year"))
-        item = self.item_table_2.horizontalHeaderItem(2)
+        item = self.item_table.horizontalHeaderItem(2)
         item.setText(_translate("MainWindow", "Power Supply"))
-        item = self.item_table_2.horizontalHeaderItem(3)
+        item = self.item_table.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Color"))
-        item = self.item_table_2.horizontalHeaderItem(4)
+        item = self.item_table.horizontalHeaderItem(4)
         item.setText(_translate("MainWindow", "Factory"))
-        item = self.item_table_2.horizontalHeaderItem(5)
+        item = self.item_table.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Purchase Status"))
-        item = self.item_table_2.horizontalHeaderItem(6)
+        item = self.item_table.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Category"))
-        item = self.item_table_2.horizontalHeaderItem(7)
+        item = self.item_table.horizontalHeaderItem(7)
         item.setText(_translate("MainWindow", "Model"))
-        __sortingEnabled = self.item_table_2.isSortingEnabled()
-        self.item_table_2.setSortingEnabled(False)
-        self.item_table_2.setSortingEnabled(__sortingEnabled)
+        __sortingEnabled = self.item_table.isSortingEnabled()
+        self.item_table.setSortingEnabled(False)
+        self.item_table.setSortingEnabled(__sortingEnabled)
         self.under_service_comboBox.setCurrentText(
             _translate("MainWindow", "Yes"))
         self.under_service_comboBox.setItemText(
             0, _translate("MainWindow", "Yes"))
         self.under_service_comboBox.setItemText(
             1, _translate("MainWindow", "No"))
+        self.under_service_comboBox.setItemText(
+            2, _translate("MainWindow", "Yes and No"))
         self.under_service_label.setText(
             _translate("MainWindow", "Under Service?"))
         self.item_id_label.setText(_translate("MainWindow", "Item ID"))
@@ -2976,23 +2747,22 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Repair Item"))
         self.fetch_requests_button.setText(
             _translate("MainWindow", "Fetch Requests"))
-        self.services_label.setText(_translate("MainWindow", "Services"))
-        self.my_requests_label.setText(
-            _translate("MainWindow", "Customer Search"))
-        self.requests_table.setSortingEnabled(True)
-        item = self.requests_table.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "Customer ID"))
-        item = self.requests_table.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "Password"))
-        item = self.requests_table.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Name"))
-        item = self.requests_table.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Gender"))
-        item = self.requests_table.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Phone Number"))
-        item = self.requests_table.horizontalHeaderItem(5)
-        item.setText(_translate("MainWindow", "Address"))
-        item = self.requests_table.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "Email"))
-        self.view_requests_button.setText(_translate(
-            "MainWindow", "View Customers With Unpaid Fees"))
+        self.all_requests_label.setText(_translate("MainWindow", "Requests"))
+        self.my_servicing_label.setText(_translate("MainWindow", "Servicing"))
+        self.servicing_table.setSortingEnabled(True)
+        item = self.servicing_table.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Item ID"))
+        item = self.servicing_table.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Admin ID"))
+        item = self.servicing_table.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Service ID"))
+        item = self.servicing_table.horizontalHeaderItem(3)
+        item.setText(_translate("MainWindow", "Service Status"))
+        item = self.servicing_table.horizontalHeaderItem(4)
+        item.setText(_translate("MainWindow", "Approve"))
+        item = self.servicing_table.horizontalHeaderItem(5)
+        item.setText(_translate("MainWindow", "Start Service"))
+        item = self.servicing_table.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "Complete Service"))
+        self.refresh_servicing_button.setText(
+            _translate("MainWindow", "Refresh"))

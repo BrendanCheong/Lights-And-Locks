@@ -143,8 +143,19 @@ class MainWindow(QMainWindow):
         if index.isValid():
             column_index = index.column()
             row_index = index.row()
-            print(self.ui.item_table.selectionModel(
-            ).currentIndex().sibling(row_index, column_index).data())
+            entire_row = [
+                self.ui.item_table.item(row_index, 3).text(),
+                self.ui.item_table.item(row_index, 2).text(),
+                self.ui.item_table.item(row_index, 3).text(),
+                self.ui.item_table.item(row_index, 4).text(),
+                self.ui.item_table.item(row_index, 5).text(),
+                self.ui.item_table.item(row_index, 6).text(),
+                self.ui.item_table.item(row_index, 7).text(),
+                self.ui.item_table.item(row_index, 8).text(),
+                self.ui.item_table.item(row_index, 9).text(),
+                self.ui.item_table.item(row_index, 10).text()
+            ]
+            print(entire_row)
 
 
 class Get_Products_Thread(QThread):

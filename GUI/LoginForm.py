@@ -373,7 +373,11 @@ class Ui_LoginForm(object):
             self.CustomerLoginForm.close()
             self.msg.close()
             dict1 = urllib.parse.quote(json.dumps(data))
-            os.system(f"cd GUI/MainUI && python main.py {dict1}")
+
+            if os.system(f"cd GUI/MainUI && python main.py {dict1}") != 0:
+                os.system(f"cd MainUI && python main.py {dict1}")
+            else:
+                os.system(f"cd GUI/MainUI && python main.py {dict1}")
 
     def open_register_form(self, PROPS):
         """ Make sure that the RegisterForm.py setupUI form has PROPS

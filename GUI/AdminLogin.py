@@ -20,8 +20,7 @@ class Ui_AdminLogin(object):
         # Add Transparent Background, Only show the Widget and Not the GUI Frame
         LoginForm.setWindowFlags(QtCore.Qt.FramelessWindowHint)
         LoginForm.setAttribute(QtCore.Qt.WA_TranslucentBackground)
-        self.LoginForm = LoginForm
-        print(self.LoginForm)
+        self.AdminLoginForm = LoginForm
 
         sizePolicy = QtWidgets.QSizePolicy(
             QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
@@ -313,11 +312,15 @@ class Ui_AdminLogin(object):
             # Close the Login Form and Open the Main UI menu & pass the data
             # uses system to redirect to MainUI file to open main.py
             print(data)
-            r = requests.get("http://localhost:5000/api/Initialise")
-            self.LoginForm.close()
+            # r = requests.get("http://localhost:5000/api/Initialise")
+            self.AdminLoginForm.close()
             self.msg.close()
             dict1 = urllib.parse.quote(json.dumps(data))
-            os.system(f"cd GUI/AdminUI && python main.py {dict1}")
+
+            if os.system(f"cd GUI/AdminUI && python main.py {dict1}") != 0:
+                os.system(f"cd AdminUI && python main.py {dict1}")
+            else:
+                os.system(f"cd GUI/AdminUI && python main.py {dict1}")
 
     def open_login_form(self):
         from LoginForm import Ui_LoginForm as LoginFormCustomer
