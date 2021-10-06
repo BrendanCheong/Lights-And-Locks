@@ -1,9 +1,9 @@
 from app import app
 from db_config import *
-from flask import jsonify, flash, request
+from flask import jsonify, request
 
 
-@app.route("/api/Customer/purchases", methods=["POST"])
+@app.route("/api/Customer/get/purchases", methods=["POST"])
 def view_purchases():
     # find customer's pruchases based on their unique customer ID
     conn = mysql.connection

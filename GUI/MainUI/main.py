@@ -190,7 +190,7 @@ class Get_Purchases_Thread(QThread):
 
         try:
             r = requests.post(
-                "http://localhost:5000/api/Customer/purchases", json=PAYLOAD)
+                "http://localhost:5000/api/Customer/get/purchases", json=PAYLOAD)
             # output the data after finished executing the script
             response = r.json()
             print(response["success"][0])

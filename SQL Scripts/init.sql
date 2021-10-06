@@ -93,15 +93,17 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `OSHES`.`Request`
 -- -----------------------------------------------------
--- DROP TABLE IF EXISTS `OSHES`.`Request` ;
+DROP TABLE IF EXISTS `OSHES`.`Request` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Request` (
   `Request ID` INT NOT NULL AUTO_INCREMENT,
   `Request Date` DATE NOT NULL,
+  `Payment Date` DATE NULL,
+  `Service Fee` INT NULL,
   `Request Status` VARCHAR(45) NOT NULL,
   `Customer ID` VARCHAR(255) NOT NULL,
-  `Admin ID` VARCHAR(255),
+  `Admin ID` VARCHAR(255) NULL,
   `Item ID` CHAR(4) NOT NULL UNIQUE,
   PRIMARY KEY (`Request ID`),
   UNIQUE INDEX `Request ID_UNIQUE` (`Request ID` ASC),
@@ -130,7 +132,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `OSHES`.`Service`
 -- -----------------------------------------------------
--- DROP TABLE IF EXISTS `OSHES`.`Service` ;
+DROP TABLE IF EXISTS `OSHES`.`Service` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Service` (
@@ -159,7 +161,7 @@ SHOW WARNINGS;
 -- -----------------------------------------------------
 -- Table `OSHES`.`Purchase`
 -- -----------------------------------------------------
--- DROP TABLE IF EXISTS `OSHES`.`Purchase` ;
+DROP TABLE IF EXISTS `OSHES`.`Purchase` ;
 
 SHOW WARNINGS;
 CREATE TABLE IF NOT EXISTS `OSHES`.`Purchase` (
