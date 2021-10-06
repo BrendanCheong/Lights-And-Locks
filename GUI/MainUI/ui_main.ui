@@ -3775,16 +3775,16 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                <bool>true</bool>
               </property>
               <property name="rowCount">
-               <number>1</number>
+               <number>9</number>
               </property>
               <property name="columnCount">
-               <number>6</number>
+               <number>8</number>
               </property>
               <attribute name="horizontalHeaderCascadingSectionResizes">
                <bool>false</bool>
               </attribute>
               <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>282</number>
+               <number>211</number>
               </attribute>
               <attribute name="horizontalHeaderMinimumSectionSize">
                <number>26</number>
@@ -3804,6 +3804,14 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <attribute name="verticalHeaderStretchLastSection">
                <bool>false</bool>
               </attribute>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
+              <row/>
               <row/>
               <column>
                <property name="text">
@@ -3833,6 +3841,16 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <column>
                <property name="text">
                 <string>Pay Service Fee</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Service Fee</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Payment Date</string>
                </property>
               </column>
              </widget>
