@@ -53,7 +53,87 @@ def view_purchases():
         cursor.close()
 
 
-@ app.errorhandler(404)
+@app.route("/api/Customer/search/products", methods=["POST"])
+def purchase_item():
+    # Search for a product based on a number of queries selected from the advanced search
+    # note that Category is FIXED while all other fields are ambiguous
+    # returns the inventory level for said item
+    conn = mysql.connection
+    cursor = conn.cursor()
+    try:
+        resp = request.json
+        category = resp["Category"]
+        model = resp["Model"]
+        price = resp["Price"]
+        color = resp["Color"]
+        factory = resp["Factory"]
+        production_year = resp["Production Year"]
+        power_supply = resp["Power Supply"]
+        warranty = resp["Warranty"]
+        statement = (
+            "SELECT `Category`, `Model`, `Warranty`, `Price`, COUNT(*) AS `Inventory Level`, `Item ID` ",
+            "FROM Product LEFT JOIN Item USING (`Product ID`) ",
+            f"""WHERE Category = "{category}" """,
+            f"""AND Model = "{model}" """ if model != "All" else "",
+            f"AND Price = {price} " if price != "All" else "",
+            f"""AND color = "{color}" """ if color != "All" else "",
+            f"""AND factory = "{factory}" """ if factory != "All" else "",
+            f"""AND `Production Year` = "{production_year}" """ if production_year != "All" else "",
+            f"""AND `Power Supply` = "{power_supply}" """ if power_supply != "All" else "",
+            f"""AND Warranty = {warranty} """ if warranty != "All" else "",
+            """AND `Purchase Status` = "Unsold" """
+            "ORDER BY `Product ID`, `Item ID`;"
+        )
+        sql = ""
+        for text in statement:
+            print(text)
+            sql += text
+        cursor.execute(sql)
+        conn.commit()
+        rows = cursor.fetchall()
+        resp = jsonify(success=rows)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(str(e))
+        return invalid(str(e))
+    finally:
+        cursor.close()
+
+
+@app.route("/api/Customer/add/purchases", methods=["POST"])
+def add_purchase():
+    # add to the purchase table based on item Id and Customer Id
+    # then update the item status to Sold
+    conn = mysql.connection
+    cursor = conn.cursor()
+    try:
+        resp = request.json
+        customer_id = resp["Customer ID"]
+        item_id = resp["Item ID"]
+        sql1 = f"""-- sql
+        INSERT INTO `Purchase` (`Item ID`, `Purchase Date`, `Customer ID`)
+        VALUES("{item_id}", curdate(), "{customer_id}");
+        """
+        sql2 = f"""-- sql
+        UPDATE `Item`
+        SET `Purchase Status` = "Sold"
+        WHERE `Item ID` = "{item_id}";
+        """
+        cursor.execute(sql1)
+        cursor.execute(sql2)
+        conn.commit()
+        resp = jsonify(success="Successfully Purchased Item!")
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(str(e))
+        return invalid(str(e))
+    finally:
+        cursor.close()
+
+
+@app.errorhandler(404)
 def not_found(error):
     message = {
         'status': 404,

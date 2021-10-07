@@ -683,6 +683,7 @@ class Ui_MainWindow(object):
         self.model_comboBox.addItem("")
         self.model_comboBox.addItem("")
         self.model_comboBox.addItem("")
+        self.model_comboBox.addItem("")
         self.price_comboBox = QtWidgets.QComboBox(self.page_1)
         self.price_comboBox.setGeometry(QtCore.QRect(20, 240, 519, 51))
         sizePolicy = QtWidgets.QSizePolicy(
@@ -814,6 +815,7 @@ class Ui_MainWindow(object):
         self.price_comboBox.addItem("")
         self.price_comboBox.addItem("")
         self.price_comboBox.addItem("")
+        self.price_comboBox.addItem("")
         self.factory_comboBox = QtWidgets.QComboBox(self.page_1)
         self.factory_comboBox.setGeometry(QtCore.QRect(630, 140, 519, 51))
         sizePolicy = QtWidgets.QSizePolicy(
@@ -939,6 +941,7 @@ class Ui_MainWindow(object):
         self.factory_comboBox.setEditable(False)
         self.factory_comboBox.setFrame(True)
         self.factory_comboBox.setObjectName("factory_comboBox")
+        self.factory_comboBox.addItem("")
         self.factory_comboBox.addItem("")
         self.factory_comboBox.addItem("")
         self.factory_comboBox.addItem("")
@@ -1092,6 +1095,7 @@ class Ui_MainWindow(object):
         self.colour_comboBox.addItem("")
         self.colour_comboBox.addItem("")
         self.colour_comboBox.addItem("")
+        self.colour_comboBox.addItem("")
         self.Colour_label = QtWidgets.QLineEdit(self.page_1)
         self.Colour_label.setGeometry(QtCore.QRect(630, 10, 131, 22))
         font = QtGui.QFont()
@@ -1229,6 +1233,7 @@ class Ui_MainWindow(object):
         self.production_year_comboBox.setEditable(False)
         self.production_year_comboBox.setFrame(True)
         self.production_year_comboBox.setObjectName("production_year_comboBox")
+        self.production_year_comboBox.addItem("")
         self.production_year_comboBox.addItem("")
         self.production_year_comboBox.addItem("")
         self.production_year_comboBox.addItem("")
@@ -1373,6 +1378,7 @@ class Ui_MainWindow(object):
         self.power_supply_comboBox.setObjectName("power_supply_comboBox")
         self.power_supply_comboBox.addItem("")
         self.power_supply_comboBox.addItem("")
+        self.power_supply_comboBox.addItem("")
         self.Warranty_label = QtWidgets.QLineEdit(self.page_1)
         self.Warranty_label.setGeometry(QtCore.QRect(1250, 113, 131, 22))
         font = QtGui.QFont()
@@ -1512,6 +1518,7 @@ class Ui_MainWindow(object):
         self.warranty_comboBox.addItem("")
         self.warranty_comboBox.addItem("")
         self.warranty_comboBox.addItem("")
+        self.warranty_comboBox.addItem("")
         self.gradient_backdrop.raise_()
         self.product_table.raise_()
         self.submit_query.raise_()
@@ -1613,6 +1620,62 @@ class Ui_MainWindow(object):
                                       "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
                                       "    background: none;\n"
                                       "}\n"
+                                      "\n"
+                                      "/* HORIZONTAL BAR*/\n"
+                                      "QScrollBar:horizontal {\n"
+                                      "       border: none;\n"
+                                      "    background: #94A3B8;\n"
+                                      "    width: 14px;\n"
+                                      "    margin: 15px 0 15px 0;\n"
+                                      "    border-radius: 0px;\n"
+                                      "}\n"
+                                      "QScrollBar::handle:horizontal {\n"
+                                      "        background-color: #E5E7EB;\n"
+                                      "    min-height: 30px;\n"
+                                      "    border-radius: 7px;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QScrollBar::handle:horizontal:hover{    \n"
+                                      "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1 #7C3AED);\n"
+                                      "}\n"
+                                      "QScrollBar::handle:horizontal:pressed {    \n"
+                                      "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4338CA, stop:1 #5B21B6);\n"
+                                      "}\n"
+                                      "\n"
+                                      "QScrollBar::add-line:horizontal {\n"
+                                      "        border: none;\n"
+                                      "    background-color:#94A3B8;\n"
+                                      "    height: 15px;\n"
+                                      "    border-bottom-left-radius: 7px;\n"
+                                      "    border-bottom-right-radius: 7px;\n"
+                                      "    subcontrol-position: bottom;\n"
+                                      "    subcontrol-origin: margin;\n"
+                                      "}\n"
+                                      "QScrollBar::sub-line:horizontal {\n"
+                                      "        border: none;\n"
+                                      "    background-color: #94A3B8;\n"
+                                      "    height: 15px;\n"
+                                      "    border-top-left-radius: 7px;\n"
+                                      "    border-top-right-radius: 7px;\n"
+                                      "    subcontrol-position: top;\n"
+                                      "    subcontrol-origin: margin;\n"
+                                      "}\n"
+                                      "\n"
+                                      "QScrollBar::sub-line:horizontal:hover {    \n"
+                                      "    background-color: rgb(255, 0, 127);\n"
+                                      "}\n"
+                                      "QScrollBar::sub-line:horizontal:pressed {    \n"
+                                      "    background-color: rgb(185, 0, 92);\n"
+                                      "}\n"
+                                      "\n"
+                                      "QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal\n"
+                                      "{\n"
+                                      "    background: none;\n"
+                                      "}\n"
+                                      "QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal\n"
+                                      "{\n"
+                                      "    background: none;\n"
+                                      "}\n"
                                       "")
         self.item_table.setFrameShape(QtWidgets.QFrame.Box)
         self.item_table.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -1626,7 +1689,7 @@ class Ui_MainWindow(object):
             QtWidgets.QAbstractItemView.SelectRows)
         self.item_table.setIconSize(QtCore.QSize(0, 0))
         self.item_table.setTextElideMode(QtCore.Qt.ElideLeft)
-        self.item_table.setRowCount(1)
+        self.item_table.setRowCount(10)
         self.item_table.setColumnCount(11)
         self.item_table.setObjectName("item_table")
         item = QtWidgets.QTableWidgetItem()
@@ -1798,6 +1861,62 @@ class Ui_MainWindow(object):
                                           "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
                                           "    background: none;\n"
                                           "}\n"
+                                          "\n"
+                                          "/* HORIZONTAL BAR*/\n"
+                                          "QScrollBar:horizontal {\n"
+                                          "       border: none;\n"
+                                          "    background: #94A3B8;\n"
+                                          "    width: 14px;\n"
+                                          "    margin: 15px 0 15px 0;\n"
+                                          "    border-radius: 0px;\n"
+                                          "}\n"
+                                          "QScrollBar::handle:horizontal {\n"
+                                          "        background-color: #E5E7EB;\n"
+                                          "    min-height: 30px;\n"
+                                          "    border-radius: 7px;\n"
+                                          "}\n"
+                                          "\n"
+                                          "QScrollBar::handle:horizontal:hover{    \n"
+                                          "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1 #7C3AED);\n"
+                                          "}\n"
+                                          "QScrollBar::handle:horizontal:pressed {    \n"
+                                          "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4338CA, stop:1 #5B21B6);\n"
+                                          "}\n"
+                                          "\n"
+                                          "QScrollBar::add-line:horizontal {\n"
+                                          "        border: none;\n"
+                                          "    background-color:#94A3B8;\n"
+                                          "    height: 15px;\n"
+                                          "    border-bottom-left-radius: 7px;\n"
+                                          "    border-bottom-right-radius: 7px;\n"
+                                          "    subcontrol-position: bottom;\n"
+                                          "    subcontrol-origin: margin;\n"
+                                          "}\n"
+                                          "QScrollBar::sub-line:horizontal {\n"
+                                          "        border: none;\n"
+                                          "    background-color: #94A3B8;\n"
+                                          "    height: 15px;\n"
+                                          "    border-top-left-radius: 7px;\n"
+                                          "    border-top-right-radius: 7px;\n"
+                                          "    subcontrol-position: top;\n"
+                                          "    subcontrol-origin: margin;\n"
+                                          "}\n"
+                                          "\n"
+                                          "QScrollBar::sub-line:horizontal:hover {    \n"
+                                          "    background-color: rgb(255, 0, 127);\n"
+                                          "}\n"
+                                          "QScrollBar::sub-line:horizontal:pressed {    \n"
+                                          "    background-color: rgb(185, 0, 92);\n"
+                                          "}\n"
+                                          "\n"
+                                          "QScrollBar::up-arrow:horizontal, QScrollBar::down-arrow:horizontal\n"
+                                          "{\n"
+                                          "    background: none;\n"
+                                          "}\n"
+                                          "QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal\n"
+                                          "{\n"
+                                          "    background: none;\n"
+                                          "}\n"
                                           "")
         self.requests_table.setFrameShape(QtWidgets.QFrame.Box)
         self.requests_table.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -1811,8 +1930,8 @@ class Ui_MainWindow(object):
             QtWidgets.QAbstractItemView.SelectRows)
         self.requests_table.setIconSize(QtCore.QSize(0, 0))
         self.requests_table.setTextElideMode(QtCore.Qt.ElideLeft)
-        self.requests_table.setRowCount(1)
-        self.requests_table.setColumnCount(6)
+        self.requests_table.setRowCount(9)
+        self.requests_table.setColumnCount(8)
         self.requests_table.setObjectName("requests_table")
         item = QtWidgets.QTableWidgetItem()
         self.requests_table.setHorizontalHeaderItem(0, item)
@@ -1826,8 +1945,12 @@ class Ui_MainWindow(object):
         self.requests_table.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
         self.requests_table.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.requests_table.setHorizontalHeaderItem(6, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.requests_table.setHorizontalHeaderItem(7, item)
         self.requests_table.horizontalHeader().setCascadingSectionResizes(False)
-        self.requests_table.horizontalHeader().setDefaultSectionSize(282)
+        self.requests_table.horizontalHeader().setDefaultSectionSize(210)
         self.requests_table.horizontalHeader().setMinimumSectionSize(26)
         self.requests_table.horizontalHeader().setSortIndicatorShown(True)
         self.requests_table.horizontalHeader().setStretchLastSection(False)
@@ -1913,64 +2036,73 @@ class Ui_MainWindow(object):
             1, _translate("MainWindow", "Lights"))
         self.Model_label.setText(_translate("MainWindow", "Models"))
         self.Price_label.setText(_translate("MainWindow", "Price"))
-        self.model_comboBox.setCurrentText(_translate("MainWindow", "Light1"))
-        self.model_comboBox.setItemText(0, _translate("MainWindow", "Light1"))
-        self.model_comboBox.setItemText(1, _translate("MainWindow", "Light2"))
+        self.model_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.model_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.model_comboBox.setItemText(1, _translate("MainWindow", "Light1"))
+        self.model_comboBox.setItemText(2, _translate("MainWindow", "Light2"))
         self.model_comboBox.setItemText(
-            2, _translate("MainWindow", "SmartHome1"))
-        self.model_comboBox.setItemText(3, _translate("MainWindow", "Safe1"))
-        self.model_comboBox.setItemText(4, _translate("MainWindow", "Safe2"))
-        self.price_comboBox.setCurrentText(_translate("MainWindow", "$50"))
-        self.price_comboBox.setItemText(0, _translate("MainWindow", "$50"))
-        self.price_comboBox.setItemText(1, _translate("MainWindow", "$60"))
-        self.price_comboBox.setItemText(2, _translate("MainWindow", "$100"))
-        self.price_comboBox.setItemText(3, _translate("MainWindow", "$120"))
-        self.price_comboBox.setItemText(4, _translate("MainWindow", "$125"))
-        self.price_comboBox.setItemText(5, _translate("MainWindow", "$200"))
-        self.factory_comboBox.setCurrentText(_translate("MainWindow", "China"))
-        self.factory_comboBox.setItemText(0, _translate("MainWindow", "China"))
+            3, _translate("MainWindow", "SmartHome1"))
+        self.model_comboBox.setItemText(4, _translate("MainWindow", "Safe1"))
+        self.model_comboBox.setItemText(5, _translate("MainWindow", "Safe2"))
+        self.price_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.price_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.price_comboBox.setItemText(1, _translate("MainWindow", "$50"))
+        self.price_comboBox.setItemText(2, _translate("MainWindow", "$60"))
+        self.price_comboBox.setItemText(3, _translate("MainWindow", "$100"))
+        self.price_comboBox.setItemText(4, _translate("MainWindow", "$120"))
+        self.price_comboBox.setItemText(5, _translate("MainWindow", "$125"))
+        self.price_comboBox.setItemText(6, _translate("MainWindow", "$200"))
+        self.factory_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.factory_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.factory_comboBox.setItemText(1, _translate("MainWindow", "China"))
         self.factory_comboBox.setItemText(
-            1, _translate("MainWindow", "Malaysia"))
+            2, _translate("MainWindow", "Malaysia"))
         self.factory_comboBox.setItemText(
-            2, _translate("MainWindow", "Philippines"))
+            3, _translate("MainWindow", "Philippines"))
         self.Factory_label.setText(_translate("MainWindow", "Factory"))
         self.production_year_label.setText(
             _translate("MainWindow", "Production year"))
-        self.colour_comboBox.setCurrentText(_translate("MainWindow", "Blue"))
-        self.colour_comboBox.setItemText(0, _translate("MainWindow", "Blue"))
-        self.colour_comboBox.setItemText(1, _translate("MainWindow", "Black"))
-        self.colour_comboBox.setItemText(2, _translate("MainWindow", "Green"))
-        self.colour_comboBox.setItemText(3, _translate("MainWindow", "Yellow"))
-        self.colour_comboBox.setItemText(4, _translate("MainWindow", "White"))
+        self.colour_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.colour_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.colour_comboBox.setItemText(1, _translate("MainWindow", "Blue"))
+        self.colour_comboBox.setItemText(2, _translate("MainWindow", "Black"))
+        self.colour_comboBox.setItemText(3, _translate("MainWindow", "Green"))
+        self.colour_comboBox.setItemText(4, _translate("MainWindow", "Yellow"))
+        self.colour_comboBox.setItemText(5, _translate("MainWindow", "White"))
         self.Colour_label.setText(_translate("MainWindow", "Colour"))
         self.production_year_comboBox.setCurrentText(
-            _translate("MainWindow", "2014"))
+            _translate("MainWindow", "All"))
         self.production_year_comboBox.setItemText(
-            0, _translate("MainWindow", "2014"))
+            0, _translate("MainWindow", "All"))
         self.production_year_comboBox.setItemText(
-            1, _translate("MainWindow", "2015"))
+            1, _translate("MainWindow", "2014"))
         self.production_year_comboBox.setItemText(
-            2, _translate("MainWindow", "2016"))
+            2, _translate("MainWindow", "2015"))
         self.production_year_comboBox.setItemText(
-            3, _translate("MainWindow", "2017"))
+            3, _translate("MainWindow", "2016"))
         self.production_year_comboBox.setItemText(
-            4, _translate("MainWindow", "2019"))
+            4, _translate("MainWindow", "2017"))
         self.production_year_comboBox.setItemText(
-            5, _translate("MainWindow", "2020"))
+            5, _translate("MainWindow", "2019"))
+        self.production_year_comboBox.setItemText(
+            6, _translate("MainWindow", "2020"))
         self.Power_supply_label.setText(
             _translate("MainWindow", "Power Supply"))
         self.power_supply_comboBox.setCurrentText(
-            _translate("MainWindow", "Battery"))
+            _translate("MainWindow", "All"))
         self.power_supply_comboBox.setItemText(
-            0, _translate("MainWindow", "Battery"))
+            0, _translate("MainWindow", "All"))
         self.power_supply_comboBox.setItemText(
-            1, _translate("MainWindow", "USB"))
+            1, _translate("MainWindow", "Battery"))
+        self.power_supply_comboBox.setItemText(
+            2, _translate("MainWindow", "USB"))
         self.Warranty_label.setText(_translate("MainWindow", "Warranty"))
-        self.warranty_comboBox.setCurrentText(_translate("MainWindow", "6"))
-        self.warranty_comboBox.setItemText(0, _translate("MainWindow", "6"))
-        self.warranty_comboBox.setItemText(1, _translate("MainWindow", "8"))
-        self.warranty_comboBox.setItemText(2, _translate("MainWindow", "10"))
-        self.warranty_comboBox.setItemText(3, _translate("MainWindow", "12"))
+        self.warranty_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.warranty_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.warranty_comboBox.setItemText(1, _translate("MainWindow", "6"))
+        self.warranty_comboBox.setItemText(2, _translate("MainWindow", "8"))
+        self.warranty_comboBox.setItemText(3, _translate("MainWindow", "10"))
+        self.warranty_comboBox.setItemText(4, _translate("MainWindow", "12"))
         self.item_table.setSortingEnabled(True)
         item = self.item_table.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Item ID"))
@@ -2015,5 +2147,9 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Cancel"))
         item = self.requests_table.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Pay Service Fee"))
+        item = self.requests_table.horizontalHeaderItem(6)
+        item.setText(_translate("MainWindow", "Service Fee"))
+        item = self.requests_table.horizontalHeaderItem(7)
+        item.setText(_translate("MainWindow", "Payment Date"))
         self.view_requests_button.setText(
             _translate("MainWindow", "View Requests"))
