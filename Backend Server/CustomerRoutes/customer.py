@@ -54,7 +54,7 @@ def view_purchases():
 
 
 @app.route("/api/Customer/search/products", methods=["POST"])
-def purchase_item():
+def search_product_customer():
     # Search for a product based on a number of queries selected from the advanced search
     # note that Category is FIXED while all other fields are ambiguous
     # returns the inventory level for said item
@@ -128,7 +128,7 @@ def add_purchase():
         return resp
     except Exception as e:
         print(str(e))
-        return invalid(str(e))
+        return invalid("Item Already Purchased! >:(")
     finally:
         cursor.close()
 

@@ -45,6 +45,11 @@ class MainWindow(QMainWindow):
             lambda: UIFunctions.exit_mainwindow(self)
         )
 
+        # Change ComboBox for Category and Model
+        self.ui.category_comboBox.currentTextChanged.connect(
+            lambda: UIFunctions.change_category_model_comboBox(self)
+        )
+
         """ For Tables"""
         # product tables
         self.ui.submit_query.clicked.connect(self.get_products_api)
@@ -60,35 +65,72 @@ class MainWindow(QMainWindow):
         self.show()
         ## ==> END ##
 
-############################################################################
+###################### Get All Products API ############################
     def get_products_api(self):
         _translate = QtCore.QCoreApplication.translate
         self.ui.submit_query.setText(_translate("MainWindow", "Loading..."))
-        self.worker = Get_Products_Thread()
+        content = {
+            "Category": self.ui.category_comboBox.currentText(),
+            "Model": self.ui.model_comboBox.currentText(),
+            "Price": self.ui.price_comboBox.currentText().replace("$", ""),
+            "Color": self.ui.colour_comboBox.currentText(),
+            "Factory": self.ui.factory_comboBox.currentText(),
+            "Production Year": self.ui.production_year_comboBox.currentText(),
+            "Power Supply": self.ui.power_supply_comboBox.currentText(),
+            "Warranty": self.ui.warranty_comboBox.currentText()
+        }
+        self.worker = Get_Products_Thread(content)
         self.worker.start()  # start the parallel function
         # execute function once api done with no data
-        self.worker.finished.connect(self.fetch_table_data_response)
+        self.worker.finished.connect(
+            lambda: UIFunctions.fetch_table_data_response(self))
         # pass Signal data into render_tables function
-        self.worker.api_data.connect(self.render_tables)
+        self.worker.api_data.connect(self.render_product_table)
 
-    def render_tables(self, value: dict):
+    def render_product_table(self, value: dict):
         # NOTE: check if the value: dict has "success response"
-        print(value)
+        if ("success" in value):
+            UIFunctions.messageBox(
+                self, "Success", "Product Search", "Products Searched Successfully")
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Product Search", value["error"])
+        product_array = value["success"][0]
+        table_row = 0
+        self.ui.product_table.setRowCount(len(product_array))
+        print(product_array)
+        self.btn_purchase_now = QtWidgets.QPushButton("Purchase Now!")
+        self.btn_purchase_now.clicked.connect(
+            lambda: self.handle_purchase_now(product_array[-1])
+        )
 
-    def fetch_table_data_response(self):
-        _translate = QtCore.QCoreApplication.translate
-        QtWidgets.QMessageBox.information(self, "Done", "API Request Complete")
+        self.ui.product_table.setItem(
+            table_row, 0, QtWidgets.QTableWidgetItem(str(product_array[0])))
+        self.ui.product_table.setItem(
+            table_row, 1, QtWidgets.QTableWidgetItem(product_array[1])
+        )
+        self.ui.product_table.setItem(
+            table_row, 2, QtWidgets.QTableWidgetItem(str(product_array[2]))
+        )
+        self.ui.product_table.setItem(
+            table_row, 3, QtWidgets.QTableWidgetItem(
+                "$ " + str(product_array[3]))
+        )
+        self.ui.product_table.setItem(
+            table_row, 4, QtWidgets.QTableWidgetItem(str(product_array[4]))
+        )
+        self.ui.product_table.setCellWidget(
+            table_row, 5, self.btn_purchase_now
+        )
 
-        """Enable Buttons"""
-        self.ui.submit_query.setEnabled(True)
-        self.ui.fetch_orders_button.setEnabled(True)
+    def handle_purchase_now(self, item_id: str):
+        # item_id is in CHAR(4)
+        print(item_id)
 
-        """Change Button Text"""
-        self.ui.submit_query.setText(_translate("MainWindow", "Submit"))
-        self.ui.fetch_orders_button.setText(
-            _translate("MainWindow", "Fetch Purchases"))
 
-############################################################################
+####################### Get Purchases API ##############################
+
+
     def get_purchases_api(self):
         _translate = QtCore.QCoreApplication.translate
         self.ui.fetch_orders_button.setText(
@@ -97,7 +139,8 @@ class MainWindow(QMainWindow):
         self.worker = Get_Purchases_Thread(self.customer_info)
         self.worker.start()
 
-        self.worker.finished.connect(self.fetch_table_data_response)
+        self.worker.finished.connect(
+            lambda: UIFunctions.fetch_table_data_response(self))
         self.worker.api_data.connect(self.render_purchase_table)
 
     def render_purchase_table(self, value: dict):
@@ -135,6 +178,11 @@ class MainWindow(QMainWindow):
                 self.ui.item_table.setItem(
                     table_row, 10, QtWidgets.QTableWidgetItem(row[-1]))
                 table_row += 1
+            UIFunctions.messageBox(
+                self, "Success", "Get Purchases", "Found All Purchases")
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Product Search", value["error"])
 
     def handle_purchase_request_clicked(self):
         button = QtWidgets.qApp.focusWidget()
@@ -162,15 +210,31 @@ class Get_Products_Thread(QThread):
     # package the data into a signal, signal takes in object/ dictionary
     api_data = pyqtSignal(object)
 
+    # create constructor for signal to pass in arguments
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        # contains product info like category, model, price, etc...
+        self.info = info
+
     def run(self):
-        data = dict()
-        info = 0
-        for i in range(3):
-            info += i
-            time.sleep(1)
-        data["numbers"] = info
+        PAYLOAD = {
+            "Category": self.info["Category"],
+            "Model": self.info["Model"],
+            "Price": self.info["Price"],
+            "Color": self.info["Color"],
+            "Factory": self.info["Factory"],
+            "Production Year": self.info["Production Year"],
+            "Power Supply": self.info["Power Supply"],
+            "Warranty": self.info["Warranty"]
+        }
+        try:
+            r = requests.post(
+                "http://localhost:5000/api/Customer/search/products", json=PAYLOAD)
+            response = r.json()
+            self.api_data.emit(response)
+        except Exception as e:
+            print(str(e))
         # output the data after finished executing the script
-        self.api_data.emit(data)
 
 
 class Get_Purchases_Thread(QThread):
@@ -196,7 +260,7 @@ class Get_Purchases_Thread(QThread):
             print(response["success"][0])
             self.api_data.emit(response)
         except Exception as e:
-            print(e)
+            print(str(e))
 
 
 if __name__ == "__main__":

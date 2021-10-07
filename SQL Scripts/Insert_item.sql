@@ -25,7 +25,7 @@ ON `Item`.`Product ID` = `Product`.`Product ID`;
 SELECT `Category`, `Model`, `Warranty`, `Price`, COUNT(*) AS `Inventory Level`, `Item ID`
 FROM Product LEFT JOIN Item USING (`Product ID`)
 WHERE Category = "Lights"
-	AND Model = "Light1"
+-- 	AND Model = "Light1"
 --     AND Price = "50"
 --     AND Color = "Green"
 --     AND Factory = "Malaysia"
