@@ -73,20 +73,19 @@ def search_product_customer():
         statement = (
             "SELECT `Category`, `Model`, `Warranty`, `Price`, COUNT(*) AS `Inventory Level`, `Item ID` ",
             "FROM Product LEFT JOIN Item USING (`Product ID`) ",
-            f"""WHERE Category = "{category}" """,
+            """WHERE `Purchase Status` = "Unsold" """,
             f"""AND Model = "{model}" """ if model != "All" else "",
-            f"AND Price = {price} " if price != "All" else "",
+            f"""AND Price = {price} """ if price != "All" else "",
             f"""AND color = "{color}" """ if color != "All" else "",
             f"""AND factory = "{factory}" """ if factory != "All" else "",
             f"""AND `Production Year` = "{production_year}" """ if production_year != "All" else "",
             f"""AND `Power Supply` = "{power_supply}" """ if power_supply != "All" else "",
             f"""AND Warranty = {warranty} """ if warranty != "All" else "",
-            """AND `Purchase Status` = "Unsold" """
+            f"""AND Category = "{category}" """ if category != "All" else "",
             "ORDER BY `Product ID`, `Item ID`;"
         )
         sql = ""
         for text in statement:
-            print(text)
             sql += text
         cursor.execute(sql)
         conn.commit()

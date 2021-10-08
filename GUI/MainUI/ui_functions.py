@@ -79,6 +79,12 @@ class UIFunctions(MainWindow):
 
         x = msg.exec_()
 
+    def decrease_inventory_by_one(self):
+        current_inventory_level = self.ui.product_table.item(0, 4).text()
+        if (int(current_inventory_level) > 0):
+            self.ui.product_table.setItem(0, 4, QtWidgets.QTableWidgetItem(
+                str(int(current_inventory_level) - 1)))
+
     def exit_mainwindow(self):
         self.close()
         os.system("cd .. && python LoginForm.py")
