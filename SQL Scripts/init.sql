@@ -139,19 +139,19 @@ CREATE TABLE IF NOT EXISTS `OSHES`.`Service` (
   `Service ID` INT NOT NULL AUTO_INCREMENT,
   `Service Status` VARCHAR(45) NOT NULL,
   `Admin ID` VARCHAR(255) NOT NULL,
-  `Item ID` CHAR(4) NOT NULL,
+  `Request ID` INT NOT NULL,
   PRIMARY KEY (`Service ID`),
   UNIQUE INDEX `Service ID_UNIQUE` (`Service ID` ASC),
   INDEX `fk_Service_Administrator1_idx` (`Admin ID` ASC),
-  INDEX `fk_Service_Item1_idx` (`Item ID` ASC),
+  INDEX `fk_Service_Request1_idx` (`Request ID` ASC),
   CONSTRAINT `fk_Service_Administrator1`
     FOREIGN KEY (`Admin ID`)
     REFERENCES `OSHES`.`Administrator` (`Admin ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Service_Item1`
-    FOREIGN KEY (`Item ID`)
-    REFERENCES `OSHES`.`Item` (`Item ID`)
+  CONSTRAINT `fk_Service_Request1`
+    FOREIGN KEY (`Request ID`)
+    REFERENCES `OSHES`.`Request` (`Request ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

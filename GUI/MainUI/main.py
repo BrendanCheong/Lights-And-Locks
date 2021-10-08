@@ -3,6 +3,7 @@ import time
 import json
 import urllib.parse
 import requests
+from datetime import datetime
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -12,6 +13,10 @@ from ui_main import Ui_MainWindow
 
 # IMPORT FUNCTIONS
 from ui_functions import *
+
+# TODO: add Error Handling for all the threads, to connect to MessageBox
+# TODO: add thr Request fetching thread
+# TODO: Change the design of the product table!
 
 
 class MainWindow(QMainWindow):
@@ -97,6 +102,7 @@ class MainWindow(QMainWindow):
                 self, "Error", "Product Search", value["error"])
         product_array = value["success"][0]
         table_row = 0
+        none_found = "No Products Found"
         self.ui.product_table.setRowCount(len(product_array))
         print(product_array)
         self.btn_purchase_now = QtWidgets.QPushButton("Purchase Now!")
@@ -105,13 +111,14 @@ class MainWindow(QMainWindow):
         )
 
         self.ui.product_table.setItem(
-            table_row, 0, QtWidgets.QTableWidgetItem(str(product_array[0])))
+            table_row, 0, QtWidgets.QTableWidgetItem(str(product_array[0]))) if product_array[0] is not None else self.ui.product_table.setItem(
+            table_row, 0, QtWidgets.QTableWidgetItem(none_found))
         self.ui.product_table.setItem(
-            table_row, 1, QtWidgets.QTableWidgetItem(product_array[1])
-        )
+            table_row, 1, QtWidgets.QTableWidgetItem(str(product_array[1])))
+
         self.ui.product_table.setItem(
-            table_row, 2, QtWidgets.QTableWidgetItem(str(product_array[2]))
-        )
+            table_row, 2, QtWidgets.QTableWidgetItem(str(product_array[2])))
+
         self.ui.product_table.setItem(
             table_row, 3, QtWidgets.QTableWidgetItem(
                 "$ " + str(product_array[3]))
@@ -119,13 +126,32 @@ class MainWindow(QMainWindow):
         self.ui.product_table.setItem(
             table_row, 4, QtWidgets.QTableWidgetItem(str(product_array[4]))
         )
-        self.ui.product_table.setCellWidget(
-            table_row, 5, self.btn_purchase_now
-        )
+
+        if product_array[0] is not None:
+            self.ui.product_table.setCellWidget(
+                table_row, 5, self.btn_purchase_now)
+        else:
+            self.ui.product_table.setItem(
+                table_row, 5, QtWidgets.QTableWidgetItem("Out Of Stock"))
 
     def handle_purchase_now(self, item_id: str):
         # item_id is in CHAR(4)
-        print(item_id)
+        current_inventory_level = int(self.ui.product_table.item(0, 4).text())
+        self.ui.product_table.setCellWidget(
+            0, 5, QtWidgets.QPushButton("Loading ..."))
+        if current_inventory_level > 0:
+            print(item_id)
+            self.worker = Purchase_Product_Thread({
+                "Customer ID": self.customer_info["Customer ID"],
+                "Item ID": item_id
+            })
+            self.worker.start()
+            # refresh table after purchase
+            self.worker.finished.connect(self.get_products_api)
+            self.worker.finished.connect(lambda: UIFunctions.messageBox(
+                self, "Success", "Purchasing Item", "Item Purchased Successfully!"))
+        else:
+            item_id = 0
 
 
 ####################### Get Purchases API ##############################
@@ -192,18 +218,30 @@ class MainWindow(QMainWindow):
             column_index = index.column()
             row_index = index.row()
             entire_row = [
-                self.ui.item_table.item(row_index, 3).text(),
-                self.ui.item_table.item(row_index, 2).text(),
-                self.ui.item_table.item(row_index, 3).text(),
+                self.ui.item_table.item(row_index, 0).text(),
                 self.ui.item_table.item(row_index, 4).text(),
-                self.ui.item_table.item(row_index, 5).text(),
-                self.ui.item_table.item(row_index, 6).text(),
-                self.ui.item_table.item(row_index, 7).text(),
-                self.ui.item_table.item(row_index, 8).text(),
-                self.ui.item_table.item(row_index, 9).text(),
-                self.ui.item_table.item(row_index, 10).text()
             ]
-            print(entire_row)
+            date = datetime.strptime(entire_row[-1], '%a, %d %b %Y %X GMT')
+            print(str(date))
+
+            data = {
+                "Customer ID": self.customer_info["Customer ID"],
+                "Item ID": entire_row[0],
+                "Warranty End": str(date).replace(" 00:00:00", "")
+            }
+            self.worker = Request_Item(data)
+            self.worker.start()
+            self.worker.send_data.connect(self.request_message_box)
+            self.ui.item_table.setCellWidget(
+                row_index, column_index, QtWidgets.QPushButton('Item Requested'))
+
+    def request_message_box(self, response: dict):
+        if ("success" in response):
+            UIFunctions.messageBox(
+                self, "Success", "Request Added", "Request Successfully Added")
+        elif ('error' in response):
+            UIFunctions.messageBox(
+                self, "Error", "Request Failed!", response["error"])
 
 
 class Get_Products_Thread(QThread):
@@ -261,6 +299,51 @@ class Get_Purchases_Thread(QThread):
             self.api_data.emit(response)
         except Exception as e:
             print(str(e))
+
+
+class Purchase_Product_Thread(QThread):
+
+    api_data = pyqtSignal(object)
+
+    # create constructor for signal to pass in arguments
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        self.info = info  # contains customer ID and Name
+
+    def run(self):
+        PAYLOAD = {
+            "Customer ID": self.info["Customer ID"],
+            "Item ID": self.info["Item ID"]
+        }
+        try:
+            r = requests.post(
+                "http://localhost:5000/api/Customer/add/purchases", json=PAYLOAD)
+            response = r.json()
+            print(response["success"])
+            self.api_data.emit(response)
+        except Exception as e:
+            print(str(e))
+
+
+class Request_Item(QThread):
+
+    send_data = pyqtSignal(object)
+
+    # create constructor for signal to pass in arguments
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        self.info = info  # contains customer ID and Name
+
+    def run(self):
+        PAYLOAD = {
+            "Customer ID": self.info["Customer ID"],
+            "Item ID": self.info["Item ID"],
+            "Warranty End": self.info["Warranty End"]
+        }
+        r = requests.post(  # handle all problems through a message box? so we always send it. But what if we immediately connect to a messagebox?
+            "http://localhost:5000/api/Customer/add/request", json=PAYLOAD)
+        response = r.json()
+        self.send_data.emit(response)
 
 
 if __name__ == "__main__":

@@ -32,7 +32,7 @@ def add_request():
         return resp
     except Exception as e:
         print(str(e))
-        return invalid("Duplicate Item ID added to Request Table")
+        return invalid("That Item has already been requested!")
     finally:
         cursor.close()
 

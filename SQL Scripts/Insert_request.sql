@@ -9,7 +9,7 @@ ELSE "Submitted and Waiting for Payment"
 END,
 "Brendan",
 NULL,
-"1096"); -- selected item ID
+"1001"); -- selected item ID
 
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
 VALUES (curdate(), 

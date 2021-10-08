@@ -1081,11 +1081,16 @@ color: rgb(255, 255, 255);
                <bool>false</bool>
               </property>
               <property name="currentText">
-               <string>Locks</string>
+               <string>All</string>
               </property>
               <property name="frame">
                <bool>true</bool>
               </property>
+              <item>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </item>
               <item>
                <property name="text">
                 <string>Locks</string>
