@@ -1913,7 +1913,7 @@ class Ui_MainWindow(object):
         self.fetch_orders_button.setText(_translate("MainWindow", "Fetch Purchases"))
         self.my_purchases_label.setText(_translate("MainWindow", "My Purchases"))
         self.my_requests_label.setText(_translate("MainWindow", "My Requests"))
-        self.requests_table.setSortingEnabled(True)
+        self.requests_table.setSortingEnabled(False)
         item = self.requests_table.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Item ID"))
         item = self.requests_table.horizontalHeaderItem(1)

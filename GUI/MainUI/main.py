@@ -3,7 +3,7 @@ import time
 import json
 import urllib.parse
 import requests
-from datetime import datetime
+from datetime import datetime, date
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
@@ -61,6 +61,9 @@ class MainWindow(QMainWindow):
 
         # purchases tables
         self.ui.fetch_orders_button.clicked.connect(self.get_purchases_api)
+
+        # requests tables
+        self.ui.view_requests_button.clicked.connect(self.get_all_requests_api)
 
         """ For Tables"""
         print(customer_info)
@@ -243,6 +246,167 @@ class MainWindow(QMainWindow):
             UIFunctions.messageBox(
                 self, "Error", "Request Failed!", response["error"])
 
+############################# View All Requests ###############################
+    def get_all_requests_api(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.ui.view_requests_button.setText(
+            _translate("MainWindow", "Loading..."))
+        self.ui.view_requests_button.setEnabled(False)
+        data = {
+            "Customer ID": self.customer_info["Customer ID"]
+        }
+        self.worker = Fetch_Request(data)
+        self.worker.start()
+        self.worker.finished.connect(
+            lambda: UIFunctions.fetch_table_data_response(self))
+        self.worker.api_data.connect(self.render_requests_table)
+
+    def render_requests_table(self, value: dict):
+        if ("success" in value):
+            arrays = value["success"]
+
+            table_row = 0
+            self.ui.requests_table.setRowCount(len(arrays))
+            for row in arrays:
+                self.btn_cancel = QtWidgets.QPushButton('Cancel')
+                self.btn_pay_service_fee = QtWidgets.QPushButton('Pay Fee!')
+
+                # connect buttons
+                self.btn_pay_service_fee.clicked.connect(
+                    self.pay_service_fee_clicked)
+
+                self.btn_cancel.clicked.connect(self.cancel_request_clicked)
+
+                self.ui.requests_table.setItem(
+                    table_row, 0, QtWidgets.QTableWidgetItem(row[0]))
+                self.ui.requests_table.setItem(
+                    table_row, 1, QtWidgets.QTableWidgetItem(row[1]))
+                self.ui.requests_table.setItem(
+                    table_row, 2, QtWidgets.QTableWidgetItem(row[2]))
+                self.ui.requests_table.setItem(
+                    table_row, 3, QtWidgets.QTableWidgetItem(row[3]))
+                self.ui.requests_table.setCellWidget(
+                    table_row, 4, self.btn_cancel)
+                self.ui.requests_table.setCellWidget(
+                    table_row, 5, self.btn_pay_service_fee)
+                self.ui.requests_table.setItem(
+                    table_row, 6, QtWidgets.QTableWidgetItem("No Fee" if row[4] is None else "{:.2f}".format(float(row[4]))))
+                self.ui.requests_table.setItem(
+                    table_row, 7, QtWidgets.QTableWidgetItem(row[-1]))
+                table_row += 1
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "View Requests", value["error"])
+############################ Pay Service Fee If Can ###########################
+
+    def pay_service_fee_clicked(self):
+        button = QtWidgets.qApp.focusWidget()
+        index = self.ui.requests_table.indexAt(button.pos())
+        if index.isValid():
+            column_index = index.column()
+            row_index = index.row()
+            item_id = self.ui.requests_table.item(row_index, 0).text()
+            current_status = self.ui.requests_table.item(row_index, 3).text()
+            if current_status == "Canceled":
+                UIFunctions.messageBox(
+                    self, "Error", "Service Fee Error", "You can't pay for an item with a request that's canceled")
+            elif current_status == "In Progress" or current_status == "Approved":
+                UIFunctions.messageBox(
+                    self, "Error", "Service Fee Error", "You already paid for this Request!")
+            elif current_status == "Submitted":
+                UIFunctions.messageBox(
+                    self, "Error", "Service Fee Error", "You don't have to pay for items under warranty")
+            elif current_status == "Completed":
+                UIFunctions.messageBox(
+                    self, "Error", "Service Fee Error", "Request has already been serviced. There's nothing to pay fool")
+            else:
+                self.ui.requests_table.setCellWidget(
+                    row_index, column_index, QtWidgets.QPushButton('Paying...'))
+                self.worker = Pay_Service_Fee_Thread({
+                    "Customer ID": self.customer_info["Customer ID"],
+                    "Item ID": item_id,
+                    "Row": row_index,
+                    "Column": column_index
+                })
+                self.worker.start()
+                self.worker.api_data.connect(self.service_fee_message_box)
+                self.worker.api_data.connect(self.service_fee_change_table)
+
+    def service_fee_change_table(self, response: dict):
+        if ("success" in response):
+            service_fee = "{:.2f}".format(float(response["success"]))
+            row_index = response["Row"]
+            column_index = response["Column"]
+            today = date.today()
+            curr_date = str(today.strftime('%A, %B %d %Y'))
+            self.ui.requests_table.setItem(
+                row_index, 6, QtWidgets.QTableWidgetItem(service_fee))
+            self.ui.requests_table.setCellWidget(
+                row_index, column_index, QtWidgets.QPushButton("Pay Fee!"))
+            self.ui.requests_table.setItem(
+                row_index, 3, QtWidgets.QTableWidgetItem("In Progress"))
+            self.ui.requests_table.setItem(
+                row_index, 7, QtWidgets.QTableWidgetItem(curr_date))
+
+    def service_fee_message_box(self, response: dict):
+        if ("success" in response):
+            UIFunctions.messageBox(
+                self, "Success", "Service Fee", "Service Fee Successfully Paid For!")
+        elif ('error' in response):
+            UIFunctions.messageBox(
+                self, "Error", "Request Failed!", response["error"])
+
+############################# Cancel Request ############################################
+    def cancel_request_clicked(self):
+        button = QtWidgets.qApp.focusWidget()
+        index = self.ui.requests_table.indexAt(button.pos())
+        if index.isValid():
+            column_index = index.column()
+            row_index = index.row()
+            item_id = self.ui.requests_table.item(row_index, 0).text()
+            current_status = self.ui.requests_table.item(row_index, 3).text()
+            if current_status == "Approved":
+                UIFunctions.messageBox(
+                    self, "Error", "Canceling Error", "You can't cancel an Approved Request!")
+            elif current_status == "Canceled":
+                UIFunctions.messageBox(
+                    self, "Error", "Canceling Error", "You already canceled that request!")
+            elif current_status == "Completed":
+                UIFunctions.messageBox(
+                    self, "Error", "Canceling Error", "You can't cancel a completed request")
+            else:
+                self.ui.requests_table.setCellWidget(
+                    row_index, column_index, QtWidgets.QPushButton('Canceling...'))
+                self.worker = Cancel_Request_Thread({
+                    "Customer ID": self.customer_info["Customer ID"],
+                    "Request Status": "Canceled",
+                    "Item ID": item_id,
+                    "Row": row_index,
+                    "Column": column_index
+                })
+                self.worker.start()
+                # connect worker to functions
+                self.worker.api_data.connect(self.cancel_request_change_table)
+                self.worker.api_data.connect(self.canceling_message_box)
+
+    def cancel_request_change_table(self, response: dict):
+        if ("success" in response):
+            row_index = response["Row"]
+            column_index = response["Column"]
+            self.ui.requests_table.setCellWidget(
+                row_index, column_index, QtWidgets.QPushButton("Cancel"))
+            self.ui.requests_table.setItem(
+                row_index, 3, QtWidgets.QTableWidgetItem("Canceled"))
+
+    def canceling_message_box(self, response: dict):
+        if ("success" in response):
+            UIFunctions.messageBox(
+                self, "Success", "Cancel Request", "Request Successfully Canceled!")
+        elif ('error' in response):
+            UIFunctions.messageBox(
+                self, "Error", "Cancel Failed!", response["error"])
+############################# END #######################################################
+
 
 class Get_Products_Thread(QThread):
     # package the data into a signal, signal takes in object/ dictionary
@@ -344,6 +508,65 @@ class Request_Item(QThread):
             "http://localhost:5000/api/Customer/add/request", json=PAYLOAD)
         response = r.json()
         self.send_data.emit(response)
+
+
+class Fetch_Request(QThread):
+
+    api_data = pyqtSignal(object)
+
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        self.info = info  # contains customer ID and Name
+
+    def run(self):
+        PAYLOAD = {
+            "Customer ID": self.info["Customer ID"]
+        }
+        r = requests.post(
+            "http://localhost:5000/api/Customer/get/request", json=PAYLOAD)
+        response = r.json()
+        self.api_data.emit(response)
+
+
+class Pay_Service_Fee_Thread(QThread):
+    api_data = pyqtSignal(object)
+
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        self.info = info  # contains customer ID and Name
+
+    def run(self):
+        PAYLOAD = {
+            "Customer ID": self.info["Customer ID"],
+            "Item ID": self.info["Item ID"]
+        }
+        r = requests.patch(
+            "http://localhost:5000/api/Customer/update/request/payment", json=PAYLOAD)
+        response = r.json()
+        response["Row"] = self.info["Row"]
+        response["Column"] = self.info["Column"]
+        self.api_data.emit(response)
+
+
+class Cancel_Request_Thread(QThread):
+    api_data = pyqtSignal(object)
+
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        self.info = info  # contains customer ID and Name
+
+    def run(self):
+        PAYLOAD = {
+            "Customer ID": self.info["Customer ID"],
+            "Item ID": self.info["Item ID"],
+            "Request Status": self.info["Request Status"]
+        }
+        r = requests.patch(
+            "http://localhost:5000/api/Customer/update/request", json=PAYLOAD)
+        response = r.json()
+        response["Row"] = self.info["Row"]
+        response["Column"] = self.info["Column"]
+        self.api_data.emit(response)
 
 
 if __name__ == "__main__":
