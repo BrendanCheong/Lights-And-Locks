@@ -15,8 +15,6 @@ from ui_main import Ui_MainWindow
 from ui_functions import *
 
 # TODO: add Error Handling for all the threads, to connect to MessageBox
-# TODO: add thr Request fetching thread
-# TODO: Change the design of the product table!
 
 
 class MainWindow(QMainWindow):
@@ -54,6 +52,8 @@ class MainWindow(QMainWindow):
         self.ui.category_comboBox.currentTextChanged.connect(
             lambda: UIFunctions.change_category_model_comboBox(self)
         )
+
+        # Purchase Now Button
 
         """ For Tables"""
         # product tables
@@ -96,7 +96,7 @@ class MainWindow(QMainWindow):
         self.worker.api_data.connect(self.render_product_table)
 
     def render_product_table(self, value: dict):
-        # NOTE: check if the value: dict has "success response"
+        _translate = QtCore.QCoreApplication.translate
         if ("success" in value):
             UIFunctions.messageBox(
                 self, "Success", "Product Search", "Products Searched Successfully")
@@ -104,44 +104,54 @@ class MainWindow(QMainWindow):
             UIFunctions.messageBox(
                 self, "Error", "Product Search", value["error"])
         product_array = value["success"][0]
-        table_row = 0
         none_found = "No Products Found"
-        self.ui.product_table.setRowCount(len(product_array))
-        print(product_array)
-        self.btn_purchase_now = QtWidgets.QPushButton("Purchase Now!")
-        self.btn_purchase_now.clicked.connect(
+        category_type = str(product_array[0])
+        self.ui.price_amount_label.setText(_translate(
+            "MainWindow", "$" + str(product_array[3]) if product_array[3] is not None else "$--"))
+        self.ui.category_amount_label.setText(_translate(
+            "MainWindow", category_type) if product_array[0] is not None else none_found)
+        self.ui.warranty_amount_label.setText(_translate("MainWindow", str(
+            product_array[2]) + " Months" if product_array[2] is not None else "--"))
+        self.ui.model_amount_label.setText(_translate("MainWindow", str(
+            product_array[1]) if product_array[1] is not None else "--"))
+        self.ui.inventory_amount_label.setText(_translate("MainWindow", str(
+            product_array[4]) if product_array[4] is not None else none_found))
+
+        if (category_type == "Locks"):
+            self.ui.category_div.setStyleSheet("""
+            QWidget { 
+                background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+                image: url(:/Item Chooser/padlock.png);
+                border-radius: 20px;
+            }
+            """)
+        elif (category_type == "Lights"):
+            self.ui.category_div.setStyleSheet("""
+            QWidget { 
+                background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+                image: url(:/Item Chooser/light-bulb.png);
+                border-radius: 20px;
+            }
+            """)
+        else:
+            self.ui.category_div.setStyleSheet("""
+            QWidget { 
+                background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+                image: url(:/Item Chooser/box.png);
+                border-radius: 20px;
+            }
+            """)
+
+        self.ui.purchase_now_button.clicked.connect(
             lambda: self.handle_purchase_now(product_array[-1])
         )
 
-        self.ui.product_table.setItem(
-            table_row, 0, QtWidgets.QTableWidgetItem(str(product_array[0]))) if product_array[0] is not None else self.ui.product_table.setItem(
-            table_row, 0, QtWidgets.QTableWidgetItem(none_found))
-        self.ui.product_table.setItem(
-            table_row, 1, QtWidgets.QTableWidgetItem(str(product_array[1])))
-
-        self.ui.product_table.setItem(
-            table_row, 2, QtWidgets.QTableWidgetItem(str(product_array[2])))
-
-        self.ui.product_table.setItem(
-            table_row, 3, QtWidgets.QTableWidgetItem(
-                "$ " + str(product_array[3]))
-        )
-        self.ui.product_table.setItem(
-            table_row, 4, QtWidgets.QTableWidgetItem(str(product_array[4]))
-        )
-
-        if product_array[0] is not None:
-            self.ui.product_table.setCellWidget(
-                table_row, 5, self.btn_purchase_now)
-        else:
-            self.ui.product_table.setItem(
-                table_row, 5, QtWidgets.QTableWidgetItem("Out Of Stock"))
-
     def handle_purchase_now(self, item_id: str):
         # item_id is in CHAR(4)
-        current_inventory_level = int(self.ui.product_table.item(0, 4).text())
-        self.ui.product_table.setCellWidget(
-            0, 5, QtWidgets.QPushButton("Loading ..."))
+        _translate = QtCore.QCoreApplication.translate
+        self.ui.purchase_now_button.setText(
+            _translate("MainWindow", "Purchasing..."))
+        current_inventory_level = int(self.ui.inventory_amount_label.text())
         if current_inventory_level > 0:
             print(item_id)
             self.worker = Purchase_Product_Thread({
@@ -150,15 +160,18 @@ class MainWindow(QMainWindow):
             })
             self.worker.start()
             # refresh table after purchase
-            self.worker.finished.connect(self.get_products_api)
+            self.worker.finished.connect(
+                self.get_products_api)  # refresh the table
             self.worker.finished.connect(lambda: UIFunctions.messageBox(
                 self, "Success", "Purchasing Item", "Item Purchased Successfully!"))
         else:
-            item_id = 0
+            UIFunctions.messageBox(
+                self, "Error", "Purchasing Error", "Product Out Of Stock")
+        UIFunctions.fetch_table_data_response(self)
+        return
 
 
 ####################### Get Purchases API ##############################
-
 
     def get_purchases_api(self):
         _translate = QtCore.QCoreApplication.translate

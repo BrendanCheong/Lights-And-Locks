@@ -45,6 +45,8 @@ class UIFunctions(MainWindow):
             _translate("MainWindow", "Fetch Purchases"))
         self.ui.view_requests_button.setText(
             _translate("MainWindow", "View Requests"))
+        self.ui.purchase_now_button.setText(
+            _translate("MainWindow", "Purchase Now"))
 
     def change_category_model_comboBox(self):
         category_comboBox_text = self.ui.category_comboBox.currentText()

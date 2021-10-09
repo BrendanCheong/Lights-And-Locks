@@ -2,6 +2,11 @@
   <qresource prefix="menuBurger">
     <file>icons8-menu-48.png</file>
   </qresource>
+  <qresource prefix="Item Chooser">
+    <file>light-bulb.png</file>
+    <file>padlock.png</file>
+    <file>box.png</file>
+  </qresource>
   <qresource prefix="SideBar">
     <file>icons8-exit-48.png</file>
     <file>icons8-computer-support-48.png</file>
