@@ -37,11 +37,14 @@ class UIFunctions(MainWindow):
         """Enable Buttons"""
         self.ui.submit_query.setEnabled(True)
         self.ui.fetch_orders_button.setEnabled(True)
+        self.ui.view_requests_button.setEnabled(True)
 
         """Change Button Text"""
         self.ui.submit_query.setText(_translate("MainWindow", "Submit"))
         self.ui.fetch_orders_button.setText(
             _translate("MainWindow", "Fetch Purchases"))
+        self.ui.view_requests_button.setText(
+            _translate("MainWindow", "View Requests"))
 
     def change_category_model_comboBox(self):
         category_comboBox_text = self.ui.category_comboBox.currentText()

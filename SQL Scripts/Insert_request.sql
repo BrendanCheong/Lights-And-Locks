@@ -1,6 +1,6 @@
 USE `OSHES`;
 
--- insert Request that isunder warranty
+-- insert Request that is under warranty
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
 VALUES (DATE("2015-12-17"), 
 CASE WHEN '2015-12-17' <= DATE_ADD((SELECT `Purchase Date` FROM `Purchase` WHERE `Item ID` = "1096"), INTERVAL 10 MONTH) -- I need to add the purchase date here based on item ID
@@ -10,6 +10,17 @@ END,
 "Brendan",
 NULL,
 "1001"); -- selected item ID
+
+-- insert query that is not under warranty
+INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
+VALUES ('2022-12-22', 
+CASE WHEN '2022-12-22' <= '2022-12-15' -- I compare request date to warranty date
+THEN "Submitted"
+ELSE "Submitted and Waiting for Payment"
+END,
+"Brendan",
+"admin",
+"1001");
 
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
 VALUES (curdate(), 
