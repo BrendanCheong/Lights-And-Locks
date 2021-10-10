@@ -251,6 +251,7 @@ class MainWindow(QMainWindow):
             _translate("MainWindow", "Initialising..."))
         self.ui.initialise_database_button.setEnabled(False)
         self.worker = Initialise_Database_Thread()
+        self.worker.start()
         self.worker.api_data.connect(self.initialise_error_handling)
 
     def initialise_error_handling(self, value: dict):
