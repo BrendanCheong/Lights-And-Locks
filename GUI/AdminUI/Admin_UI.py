@@ -413,7 +413,7 @@ class Ui_MainWindow(object):
         self.refresh_button_admin = QtWidgets.QPushButton(self.page_1)
         self.refresh_button_admin.setGeometry(QtCore.QRect(1390, 250, 391, 51))
         font = QtGui.QFont()
-        font.setPointSize(1)
+        font.setPointSize(-1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -444,7 +444,7 @@ class Ui_MainWindow(object):
         self.view_customers_button = QtWidgets.QPushButton(self.page_1)
         self.view_customers_button.setGeometry(QtCore.QRect(20, 250, 481, 51))
         font = QtGui.QFont()
-        font.setPointSize(1)
+        font.setPointSize(-1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -476,7 +476,7 @@ class Ui_MainWindow(object):
         self.view_items_category_model_button.setGeometry(
             QtCore.QRect(20, 170, 481, 51))
         font = QtGui.QFont()
-        font.setPointSize(1)
+        font.setPointSize(-1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -504,133 +504,46 @@ class Ui_MainWindow(object):
                                                             "}")
         self.view_items_category_model_button.setObjectName(
             "view_items_category_model_button")
-        self.stackedWidget.addWidget(self.page_1)
-        self.page_2 = QtWidgets.QWidget()
-        self.page_2.setObjectName("page_2")
-        self.product_table = QtWidgets.QTableWidget(self.page_2)
-        self.product_table.setGeometry(QtCore.QRect(20, 325, 1761, 561))
-        self.product_table.setSizeIncrement(QtCore.QSize(0, 0))
+        self.initialise_database_button = QtWidgets.QPushButton(self.page_1)
+        self.initialise_database_button.setGeometry(
+            QtCore.QRect(1390, 180, 391, 51))
         font = QtGui.QFont()
-        font.setFamily("8514oem")
-        font.setPointSize(10)
+        font.setPointSize(-1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
-        self.product_table.setFont(font)
-        self.product_table.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.product_table.setAutoFillBackground(False)
-        self.product_table.setStyleSheet("QWidget {\n"
-                                         "    background-color: rgb(255, 255, 255);\n"
-                                         "    alternate-background-color: rgb(241, 245, 249);\n"
-                                         "    font: 10pt \"8514oem\";\n"
-                                         "}\n"
-                                         "QScrollBar:vertical {\n"
-                                         "    border: none;\n"
-                                         "    background: #94A3B8;\n"
-                                         "    width: 14px;\n"
-                                         "    margin: 15px 0 15px 0;\n"
-                                         "    border-radius: 0px;\n"
-                                         " }\n"
-                                         "\n"
-                                         "/*  HANDLE BAR VERTICAL */\n"
-                                         "QScrollBar::handle:vertical {    \n"
-                                         "    background-color: #E5E7EB;\n"
-                                         "    min-height: 30px;\n"
-                                         "    border-radius: 7px;\n"
-                                         "}\n"
-                                         "QScrollBar::handle:vertical:hover{    \n"
-                                         "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1 #7C3AED);\n"
-                                         "}\n"
-                                         "QScrollBar::handle:vertical:pressed {    \n"
-                                         "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4338CA, stop:1 #5B21B6);\n"
-                                         "}\n"
-                                         "\n"
-                                         "/* BTN TOP - SCROLLBAR */\n"
-                                         "QScrollBar::sub-line:vertical {\n"
-                                         "    border: none;\n"
-                                         "    background-color: #94A3B8;\n"
-                                         "    height: 15px;\n"
-                                         "    border-top-left-radius: 7px;\n"
-                                         "    border-top-right-radius: 7px;\n"
-                                         "    subcontrol-position: top;\n"
-                                         "    subcontrol-origin: margin;\n"
-                                         "}\n"
-                                         "QScrollBar::sub-line:vertical:hover {    \n"
-                                         "    background-color: rgb(255, 0, 127);\n"
-                                         "}\n"
-                                         "QScrollBar::sub-line:vertical:pressed {    \n"
-                                         "    background-color: rgb(185, 0, 92);\n"
-                                         "}\n"
-                                         "\n"
-                                         "/* BTN BOTTOM - SCROLLBAR */\n"
-                                         "QScrollBar::add-line:vertical {\n"
-                                         "    border: none;\n"
-                                         "    background-color:#94A3B8;\n"
-                                         "    height: 15px;\n"
-                                         "    border-bottom-left-radius: 7px;\n"
-                                         "    border-bottom-right-radius: 7px;\n"
-                                         "    subcontrol-position: bottom;\n"
-                                         "    subcontrol-origin: margin;\n"
-                                         "}\n"
-                                         "QScrollBar::add-line:vertical:hover {    \n"
-                                         "    background-color: rgb(255, 0, 127);\n"
-                                         "}\n"
-                                         "QScrollBar::add-line:vertical:pressed {    \n"
-                                         "    background-color: rgb(185, 0, 92);\n"
-                                         "}\n"
-                                         "\n"
-                                         "/* RESET ARROW */\n"
-                                         "QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {\n"
-                                         "    background: none;\n"
-                                         "}\n"
-                                         "QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {\n"
-                                         "    background: none;\n"
-                                         "}\n"
-                                         "")
-        self.product_table.setFrameShape(QtWidgets.QFrame.Box)
-        self.product_table.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.product_table.setLineWidth(10)
-        self.product_table.setSizeAdjustPolicy(
-            QtWidgets.QAbstractScrollArea.AdjustToContents)
-        self.product_table.setAlternatingRowColors(True)
-        self.product_table.setSelectionMode(
-            QtWidgets.QAbstractItemView.SingleSelection)
-        self.product_table.setSelectionBehavior(
-            QtWidgets.QAbstractItemView.SelectRows)
-        self.product_table.setIconSize(QtCore.QSize(0, 0))
-        self.product_table.setTextElideMode(QtCore.Qt.ElideLeft)
-        self.product_table.setRowCount(7)
-        self.product_table.setColumnCount(7)
-        self.product_table.setObjectName("product_table")
-        item = QtWidgets.QTableWidgetItem()
-        self.product_table.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.product_table.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.product_table.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.product_table.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.product_table.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.product_table.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.product_table.setHorizontalHeaderItem(6, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.product_table.setItem(0, 0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.product_table.setItem(6, 5, item)
-        self.product_table.horizontalHeader().setCascadingSectionResizes(False)
-        self.product_table.horizontalHeader().setDefaultSectionSize(240)
-        self.product_table.horizontalHeader().setMinimumSectionSize(26)
-        self.product_table.horizontalHeader().setStretchLastSection(True)
-        self.product_table.verticalHeader().setDefaultSectionSize(87)
-        self.product_table.verticalHeader().setSortIndicatorShown(True)
-        self.product_table.verticalHeader().setStretchLastSection(False)
+        self.initialise_database_button.setFont(font)
+        self.initialise_database_button.setToolTipDuration(0)
+        self.initialise_database_button.setStyleSheet("QPushButton {\n"
+                                                      "    border-top-right-radius: 10px;\n"
+                                                      "    border-top-left-radius: 10px;\n"
+                                                      "    border-bottom-right-radius: 10px;\n"
+                                                      "    border-bottom-left-radius: 10px;\n"
+                                                      "    background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1#7C3AED);\n"
+                                                      "    font: 22px;\n"
+                                                      "    color: rgb(255, 255, 255);\n"
+                                                      "}\n"
+                                                      "\n"
+                                                      "QPushButton:hover {\n"
+                                                      "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3\n"
+                                                      ", stop:1 #5B21B6);\n"
+                                                      "}\n"
+                                                      "\n"
+                                                      "QPushButton:pressed {\n"
+                                                      "    background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3\n"
+                                                      ", stop:1 #5B21B6);\n"
+                                                      "    padding-left: 5px;\n"
+                                                      "    padding-top: 5px;\n"
+                                                      "}")
+        self.initialise_database_button.setObjectName(
+            "initialise_database_button")
+        self.stackedWidget.addWidget(self.page_1)
+        self.page_2 = QtWidgets.QWidget()
+        self.page_2.setObjectName("page_2")
         self.submit_query = QtWidgets.QPushButton(self.page_2)
         self.submit_query.setGeometry(QtCore.QRect(1470, 250, 301, 51))
         font = QtGui.QFont()
-        font.setPointSize(1)
+        font.setPointSize(-1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -795,6 +708,7 @@ class Ui_MainWindow(object):
         self.category_comboBox.setObjectName("category_comboBox")
         self.category_comboBox.addItem("")
         self.category_comboBox.addItem("")
+        self.category_comboBox.addItem("")
         self.gradient_backdrop = QtWidgets.QLabel(self.page_2)
         self.gradient_backdrop.setGeometry(QtCore.QRect(10, 0, 1781, 311))
         self.gradient_backdrop.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #0D9488, stop:1 #0E7490);\n"
@@ -951,6 +865,7 @@ class Ui_MainWindow(object):
         self.model_comboBox.addItem("")
         self.model_comboBox.addItem("")
         self.model_comboBox.addItem("")
+        self.model_comboBox.addItem("")
         self.price_comboBox = QtWidgets.QComboBox(self.page_2)
         self.price_comboBox.setGeometry(QtCore.QRect(20, 240, 519, 51))
         sizePolicy = QtWidgets.QSizePolicy(
@@ -1082,6 +997,7 @@ class Ui_MainWindow(object):
         self.price_comboBox.addItem("")
         self.price_comboBox.addItem("")
         self.price_comboBox.addItem("")
+        self.price_comboBox.addItem("")
         self.factory_comboBox = QtWidgets.QComboBox(self.page_2)
         self.factory_comboBox.setGeometry(QtCore.QRect(630, 140, 519, 51))
         sizePolicy = QtWidgets.QSizePolicy(
@@ -1207,6 +1123,7 @@ class Ui_MainWindow(object):
         self.factory_comboBox.setEditable(False)
         self.factory_comboBox.setFrame(True)
         self.factory_comboBox.setObjectName("factory_comboBox")
+        self.factory_comboBox.addItem("")
         self.factory_comboBox.addItem("")
         self.factory_comboBox.addItem("")
         self.factory_comboBox.addItem("")
@@ -1360,6 +1277,7 @@ class Ui_MainWindow(object):
         self.colour_comboBox.addItem("")
         self.colour_comboBox.addItem("")
         self.colour_comboBox.addItem("")
+        self.colour_comboBox.addItem("")
         self.Colour_label = QtWidgets.QLineEdit(self.page_2)
         self.Colour_label.setGeometry(QtCore.QRect(630, 10, 131, 22))
         font = QtGui.QFont()
@@ -1497,6 +1415,7 @@ class Ui_MainWindow(object):
         self.production_year_comboBox.setEditable(False)
         self.production_year_comboBox.setFrame(True)
         self.production_year_comboBox.setObjectName("production_year_comboBox")
+        self.production_year_comboBox.addItem("")
         self.production_year_comboBox.addItem("")
         self.production_year_comboBox.addItem("")
         self.production_year_comboBox.addItem("")
@@ -1641,6 +1560,7 @@ class Ui_MainWindow(object):
         self.power_supply_comboBox.setObjectName("power_supply_comboBox")
         self.power_supply_comboBox.addItem("")
         self.power_supply_comboBox.addItem("")
+        self.power_supply_comboBox.addItem("")
         self.Warranty_label = QtWidgets.QLineEdit(self.page_2)
         self.Warranty_label.setGeometry(QtCore.QRect(1250, 113, 131, 22))
         font = QtGui.QFont()
@@ -1780,8 +1700,83 @@ class Ui_MainWindow(object):
         self.warranty_comboBox.addItem("")
         self.warranty_comboBox.addItem("")
         self.warranty_comboBox.addItem("")
+        self.warranty_comboBox.addItem("")
+        self.category_div = QtWidgets.QLabel(self.page_2)
+        self.category_div.setGeometry(QtCore.QRect(10, 340, 421, 541))
+        self.category_div.setStyleSheet("QWidget { \n"
+                                        "background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);\n"
+                                        "/**image: url(:/Item Chooser/box.png);*/\n"
+                                        "/**image: url(:/Item Chooser/padlock.png);*/\n"
+                                        "    image: url(:/Choose_Item_div/box.png);\n"
+                                        "border-radius: 20px;\n"
+                                        "}")
+        self.category_div.setText("")
+        self.category_div.setObjectName("category_div")
+        self.price_div = QtWidgets.QLabel(self.page_2)
+        self.price_div.setGeometry(QtCore.QRect(460, 340, 971, 101))
+        self.price_div.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);\n"
+                                     "border-radius: 20px;")
+        self.price_div.setText("")
+        self.price_div.setObjectName("price_div")
+        self.warranty_div = QtWidgets.QLabel(self.page_2)
+        self.warranty_div.setGeometry(QtCore.QRect(460, 480, 971, 101))
+        self.warranty_div.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);\n"
+                                        "border-radius: 20px;")
+        self.warranty_div.setText("")
+        self.warranty_div.setObjectName("warranty_div")
+        self.model_div = QtWidgets.QLabel(self.page_2)
+        self.model_div.setGeometry(QtCore.QRect(460, 620, 971, 101))
+        self.model_div.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);\n"
+                                     "border-radius: 20px;")
+        self.model_div.setText("")
+        self.model_div.setObjectName("model_div")
+        self.cost_div = QtWidgets.QLabel(self.page_2)
+        self.cost_div.setGeometry(QtCore.QRect(460, 760, 971, 101))
+        self.cost_div.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);\n"
+                                    "border-radius: 20px;")
+        self.cost_div.setText("")
+        self.cost_div.setObjectName("cost_div")
+        self.inventory_div = QtWidgets.QLabel(self.page_2)
+        self.inventory_div.setGeometry(QtCore.QRect(1460, 340, 301, 241))
+        self.inventory_div.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #F59E0B, stop:1#E11D48);\n"
+                                         "border-radius: 20px;")
+        self.inventory_div.setText("")
+        self.inventory_div.setObjectName("inventory_div")
+        self.sold_items_div = QtWidgets.QLabel(self.page_2)
+        self.sold_items_div.setGeometry(QtCore.QRect(1460, 620, 301, 241))
+        self.sold_items_div.setStyleSheet("background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #F59E0B, stop:1#E11D48);\n"
+                                          "border-radius: 20px;")
+        self.sold_items_div.setText("")
+        self.sold_items_div.setObjectName("sold_items_div")
+        self.category_amount_label = QtWidgets.QLabel(self.page_2)
+        self.category_amount_label.setGeometry(QtCore.QRect(20, 770, 401, 81))
+        font = QtGui.QFont()
+        font.setFamily("Segoe UI")
+        font.setPointSize(18)
+        font.setBold(False)
+        font.setItalic(True)
+        font.setWeight(9)
+        self.category_amount_label.setFont(font)
+        self.category_amount_label.setStyleSheet("background-color: transparent;\n"
+                                                 "color: rgb(255, 255, 255);\n"
+                                                 "font: 75 italic 18pt \"Segoe UI\";")
+        self.category_amount_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.category_amount_label.setObjectName("category_amount_label")
+        self.choose_an_item_label = QtWidgets.QLabel(self.page_2)
+        self.choose_an_item_label.setGeometry(QtCore.QRect(20, 360, 411, 81))
+        font = QtGui.QFont()
+        font.setFamily("Yu Gothic UI")
+        font.setPointSize(20)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.choose_an_item_label.setFont(font)
+        self.choose_an_item_label.setStyleSheet("background-color: transparent;\n"
+                                                "color: rgb(255, 255, 255);\n"
+                                                "font: 20pt \"Yu Gothic UI\";")
+        self.choose_an_item_label.setAlignment(QtCore.Qt.AlignCenter)
+        self.choose_an_item_label.setObjectName("choose_an_item_label")
         self.gradient_backdrop.raise_()
-        self.product_table.raise_()
         self.submit_query.raise_()
         self.Categories_label.raise_()
         self.category_comboBox.raise_()
@@ -1799,6 +1794,15 @@ class Ui_MainWindow(object):
         self.power_supply_comboBox.raise_()
         self.Warranty_label.raise_()
         self.warranty_comboBox.raise_()
+        self.category_div.raise_()
+        self.price_div.raise_()
+        self.warranty_div.raise_()
+        self.model_div.raise_()
+        self.cost_div.raise_()
+        self.inventory_div.raise_()
+        self.sold_items_div.raise_()
+        self.category_amount_label.raise_()
+        self.choose_an_item_label.raise_()
         self.stackedWidget.addWidget(self.page_2)
         self.page_3 = QtWidgets.QWidget()
         self.page_3.setObjectName("page_3")
@@ -2214,7 +2218,7 @@ class Ui_MainWindow(object):
         self.item_search_button = QtWidgets.QPushButton(self.page_3)
         self.item_search_button.setGeometry(QtCore.QRect(1470, 250, 301, 51))
         font = QtGui.QFont()
-        font.setPointSize(1)
+        font.setPointSize(-1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -2339,7 +2343,7 @@ class Ui_MainWindow(object):
         self.request_table.setTextElideMode(QtCore.Qt.ElideLeft)
         self.request_table.setShowGrid(True)
         self.request_table.setRowCount(10)
-        self.request_table.setColumnCount(7)
+        self.request_table.setColumnCount(6)
         self.request_table.setObjectName("request_table")
         item = QtWidgets.QTableWidgetItem()
         self.request_table.setHorizontalHeaderItem(0, item)
@@ -2353,10 +2357,8 @@ class Ui_MainWindow(object):
         self.request_table.setHorizontalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
         self.request_table.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.request_table.setHorizontalHeaderItem(6, item)
         self.request_table.horizontalHeader().setCascadingSectionResizes(False)
-        self.request_table.horizontalHeader().setDefaultSectionSize(242)
+        self.request_table.horizontalHeader().setDefaultSectionSize(278)
         self.request_table.horizontalHeader().setMinimumSectionSize(26)
         self.request_table.horizontalHeader().setSortIndicatorShown(True)
         self.request_table.horizontalHeader().setStretchLastSection(True)
@@ -2366,7 +2368,7 @@ class Ui_MainWindow(object):
         self.fetch_requests_button = QtWidgets.QPushButton(self.page_4)
         self.fetch_requests_button.setGeometry(QtCore.QRect(20, 150, 301, 51))
         font = QtGui.QFont()
-        font.setPointSize(1)
+        font.setPointSize(-1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -2514,7 +2516,7 @@ class Ui_MainWindow(object):
         self.servicing_table.setIconSize(QtCore.QSize(0, 0))
         self.servicing_table.setTextElideMode(QtCore.Qt.ElideLeft)
         self.servicing_table.setRowCount(10)
-        self.servicing_table.setColumnCount(7)
+        self.servicing_table.setColumnCount(5)
         self.servicing_table.setObjectName("servicing_table")
         item = QtWidgets.QTableWidgetItem()
         self.servicing_table.setHorizontalHeaderItem(0, item)
@@ -2526,15 +2528,11 @@ class Ui_MainWindow(object):
         self.servicing_table.setHorizontalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
         self.servicing_table.setHorizontalHeaderItem(4, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.servicing_table.setHorizontalHeaderItem(5, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.servicing_table.setHorizontalHeaderItem(6, item)
         self.servicing_table.horizontalHeader().setCascadingSectionResizes(False)
-        self.servicing_table.horizontalHeader().setDefaultSectionSize(238)
+        self.servicing_table.horizontalHeader().setDefaultSectionSize(334)
         self.servicing_table.horizontalHeader().setMinimumSectionSize(26)
         self.servicing_table.horizontalHeader().setSortIndicatorShown(True)
-        self.servicing_table.horizontalHeader().setStretchLastSection(False)
+        self.servicing_table.horizontalHeader().setStretchLastSection(True)
         self.servicing_table.verticalHeader().setDefaultSectionSize(81)
         self.servicing_table.verticalHeader().setSortIndicatorShown(True)
         self.servicing_table.verticalHeader().setStretchLastSection(False)
@@ -2542,7 +2540,7 @@ class Ui_MainWindow(object):
         self.refresh_servicing_button.setGeometry(
             QtCore.QRect(20, 140, 241, 51))
         font = QtGui.QFont()
-        font.setPointSize(1)
+        font.setPointSize(-1)
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(50)
@@ -2600,7 +2598,7 @@ class Ui_MainWindow(object):
             _translate("MainWindow", "Welcome Admin! "))
         self.admin_table.setSortingEnabled(True)
         item = self.admin_table.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "Item ID"))
+        item.setText(_translate("MainWindow", "IID"))
         item = self.admin_table.horizontalHeaderItem(1)
         item.setText(_translate("MainWindow", "Number of \"SOLD\" Items"))
         item = self.admin_table.horizontalHeaderItem(2)
@@ -2611,92 +2609,88 @@ class Ui_MainWindow(object):
             "MainWindow", "View Customers With Unpaid Fees"))
         self.view_items_category_model_button.setText(
             _translate("MainWindow", "Items Sold in Category && Model"))
-        self.product_table.setSortingEnabled(True)
-        item = self.product_table.horizontalHeaderItem(0)
-        item.setText(_translate("MainWindow", "Categories"))
-        item = self.product_table.horizontalHeaderItem(1)
-        item.setText(_translate("MainWindow", "Model"))
-        item = self.product_table.horizontalHeaderItem(2)
-        item.setText(_translate("MainWindow", "Warranty"))
-        item = self.product_table.horizontalHeaderItem(3)
-        item.setText(_translate("MainWindow", "Price"))
-        item = self.product_table.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Inverntory Level"))
-        item = self.product_table.horizontalHeaderItem(5)
-        item.setText(_translate("MainWindow", "Number of Items Sold"))
-        item = self.product_table.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "Cost"))
-        __sortingEnabled = self.product_table.isSortingEnabled()
-        self.product_table.setSortingEnabled(False)
-        self.product_table.setSortingEnabled(__sortingEnabled)
+        self.initialise_database_button.setText(
+            _translate("MainWindow", "Initialise Database!"))
         self.submit_query.setText(_translate("MainWindow", "Submit"))
         self.Categories_label.setText(_translate("MainWindow", "Categories"))
-        self.category_comboBox.setCurrentText(
-            _translate("MainWindow", "Locks"))
+        self.category_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.category_comboBox.setItemText(0, _translate("MainWindow", "All"))
         self.category_comboBox.setItemText(
-            0, _translate("MainWindow", "Locks"))
+            1, _translate("MainWindow", "Locks"))
         self.category_comboBox.setItemText(
-            1, _translate("MainWindow", "Lights"))
+            2, _translate("MainWindow", "Lights"))
         self.Model_label.setText(_translate("MainWindow", "Models"))
         self.Price_label.setText(_translate("MainWindow", "Price"))
-        self.model_comboBox.setCurrentText(_translate("MainWindow", "Light1"))
-        self.model_comboBox.setItemText(0, _translate("MainWindow", "Light1"))
-        self.model_comboBox.setItemText(1, _translate("MainWindow", "Light2"))
+        self.model_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.model_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.model_comboBox.setItemText(1, _translate("MainWindow", "Light1"))
+        self.model_comboBox.setItemText(2, _translate("MainWindow", "Light2"))
         self.model_comboBox.setItemText(
-            2, _translate("MainWindow", "SmartHome1"))
-        self.model_comboBox.setItemText(3, _translate("MainWindow", "Safe1"))
-        self.model_comboBox.setItemText(4, _translate("MainWindow", "Safe2"))
-        self.price_comboBox.setCurrentText(_translate("MainWindow", "$50"))
-        self.price_comboBox.setItemText(0, _translate("MainWindow", "$50"))
-        self.price_comboBox.setItemText(1, _translate("MainWindow", "$60"))
-        self.price_comboBox.setItemText(2, _translate("MainWindow", "$100"))
-        self.price_comboBox.setItemText(3, _translate("MainWindow", "$120"))
-        self.price_comboBox.setItemText(4, _translate("MainWindow", "$125"))
-        self.price_comboBox.setItemText(5, _translate("MainWindow", "$200"))
-        self.factory_comboBox.setCurrentText(_translate("MainWindow", "China"))
-        self.factory_comboBox.setItemText(0, _translate("MainWindow", "China"))
+            3, _translate("MainWindow", "SmartHome1"))
+        self.model_comboBox.setItemText(4, _translate("MainWindow", "Safe1"))
+        self.model_comboBox.setItemText(5, _translate("MainWindow", "Safe2"))
+        self.price_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.price_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.price_comboBox.setItemText(1, _translate("MainWindow", "$50"))
+        self.price_comboBox.setItemText(2, _translate("MainWindow", "$60"))
+        self.price_comboBox.setItemText(3, _translate("MainWindow", "$100"))
+        self.price_comboBox.setItemText(4, _translate("MainWindow", "$120"))
+        self.price_comboBox.setItemText(5, _translate("MainWindow", "$125"))
+        self.price_comboBox.setItemText(6, _translate("MainWindow", "$200"))
+        self.factory_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.factory_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.factory_comboBox.setItemText(1, _translate("MainWindow", "China"))
         self.factory_comboBox.setItemText(
-            1, _translate("MainWindow", "Malaysia"))
+            2, _translate("MainWindow", "Malaysia"))
         self.factory_comboBox.setItemText(
-            2, _translate("MainWindow", "Philippines"))
+            3, _translate("MainWindow", "Philippines"))
         self.Factory_label.setText(_translate("MainWindow", "Factory"))
         self.production_year_label.setText(
             _translate("MainWindow", "Production year"))
-        self.colour_comboBox.setCurrentText(_translate("MainWindow", "Blue"))
-        self.colour_comboBox.setItemText(0, _translate("MainWindow", "Blue"))
-        self.colour_comboBox.setItemText(1, _translate("MainWindow", "Black"))
-        self.colour_comboBox.setItemText(2, _translate("MainWindow", "Green"))
-        self.colour_comboBox.setItemText(3, _translate("MainWindow", "Yellow"))
-        self.colour_comboBox.setItemText(4, _translate("MainWindow", "White"))
+        self.colour_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.colour_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.colour_comboBox.setItemText(1, _translate("MainWindow", "Blue"))
+        self.colour_comboBox.setItemText(2, _translate("MainWindow", "Black"))
+        self.colour_comboBox.setItemText(3, _translate("MainWindow", "Green"))
+        self.colour_comboBox.setItemText(4, _translate("MainWindow", "Yellow"))
+        self.colour_comboBox.setItemText(5, _translate("MainWindow", "White"))
         self.Colour_label.setText(_translate("MainWindow", "Colour"))
         self.production_year_comboBox.setCurrentText(
-            _translate("MainWindow", "2014"))
+            _translate("MainWindow", "All"))
         self.production_year_comboBox.setItemText(
-            0, _translate("MainWindow", "2014"))
+            0, _translate("MainWindow", "All"))
         self.production_year_comboBox.setItemText(
-            1, _translate("MainWindow", "2015"))
+            1, _translate("MainWindow", "2014"))
         self.production_year_comboBox.setItemText(
-            2, _translate("MainWindow", "2016"))
+            2, _translate("MainWindow", "2015"))
         self.production_year_comboBox.setItemText(
-            3, _translate("MainWindow", "2017"))
+            3, _translate("MainWindow", "2016"))
         self.production_year_comboBox.setItemText(
-            4, _translate("MainWindow", "2019"))
+            4, _translate("MainWindow", "2017"))
         self.production_year_comboBox.setItemText(
-            5, _translate("MainWindow", "2020"))
+            5, _translate("MainWindow", "2019"))
+        self.production_year_comboBox.setItemText(
+            6, _translate("MainWindow", "2020"))
         self.Power_supply_label.setText(
             _translate("MainWindow", "Power Supply"))
         self.power_supply_comboBox.setCurrentText(
-            _translate("MainWindow", "Battery"))
+            _translate("MainWindow", "All"))
         self.power_supply_comboBox.setItemText(
-            0, _translate("MainWindow", "Battery"))
+            0, _translate("MainWindow", "All"))
         self.power_supply_comboBox.setItemText(
-            1, _translate("MainWindow", "USB"))
+            1, _translate("MainWindow", "Battery"))
+        self.power_supply_comboBox.setItemText(
+            2, _translate("MainWindow", "USB"))
         self.Warranty_label.setText(_translate("MainWindow", "Warranty"))
-        self.warranty_comboBox.setCurrentText(_translate("MainWindow", "6"))
-        self.warranty_comboBox.setItemText(0, _translate("MainWindow", "6"))
-        self.warranty_comboBox.setItemText(1, _translate("MainWindow", "8"))
-        self.warranty_comboBox.setItemText(2, _translate("MainWindow", "10"))
-        self.warranty_comboBox.setItemText(3, _translate("MainWindow", "12"))
+        self.warranty_comboBox.setCurrentText(_translate("MainWindow", "All"))
+        self.warranty_comboBox.setItemText(0, _translate("MainWindow", "All"))
+        self.warranty_comboBox.setItemText(1, _translate("MainWindow", "6"))
+        self.warranty_comboBox.setItemText(2, _translate("MainWindow", "8"))
+        self.warranty_comboBox.setItemText(3, _translate("MainWindow", "10"))
+        self.warranty_comboBox.setItemText(4, _translate("MainWindow", "12"))
+        self.category_amount_label.setText(_translate("MainWindow", "All"))
+        self.choose_an_item_label.setText(
+            _translate("MainWindow", "Choose An Item!"))
         self.item_search_label.setText(_translate("MainWindow", "Item Search"))
         self.item_table.setSortingEnabled(True)
         item = self.item_table.horizontalHeaderItem(0)
@@ -2743,8 +2737,6 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Request Date"))
         item = self.request_table.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Approve Request"))
-        item = self.request_table.horizontalHeaderItem(6)
-        item.setText(_translate("MainWindow", "Repair Item"))
         self.fetch_requests_button.setText(
             _translate("MainWindow", "Fetch Requests"))
         self.all_requests_label.setText(_translate("MainWindow", "Requests"))
@@ -2759,10 +2751,6 @@ class Ui_MainWindow(object):
         item = self.servicing_table.horizontalHeaderItem(3)
         item.setText(_translate("MainWindow", "Service Status"))
         item = self.servicing_table.horizontalHeaderItem(4)
-        item.setText(_translate("MainWindow", "Approve"))
-        item = self.servicing_table.horizontalHeaderItem(5)
-        item.setText(_translate("MainWindow", "Start Service"))
-        item = self.servicing_table.horizontalHeaderItem(6)
         item.setText(_translate("MainWindow", "Complete Service"))
         self.refresh_servicing_button.setText(
             _translate("MainWindow", "Refresh"))

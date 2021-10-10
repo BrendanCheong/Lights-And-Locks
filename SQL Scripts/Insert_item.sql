@@ -59,3 +59,23 @@ WHERE Category = "Lights"
 --  AND Warranty = 10
     AND `Purchase Status` = "Unsold"
 ORDER BY `Product ID`, `Item ID`;
+
+-- find the number of sold by category and amount
+SELECT p1.Category, p1.Model, COUNT(`Item ID`) AS "Number of Sold Item"
+FROM OSHES.Item
+LEFT JOIN OSHES.Product p1 ON OSHES.Item.`Product ID` = p1.`Product ID`
+WHERE OSHES.Item.`Purchase Status` = "Sold"
+GROUP BY p1.Category, p1.Model
+ORDER BY 1;
+
+-- find the number of sold and unsold items by Product id
+SELECT `Sold`.`Product ID` AS `IID`, `Sold Items`, `Unsold Items`
+FROM (SELECT `Product ID`, COUNT(*) AS `Sold Items` 
+		FROM `Item` 
+		WHERE `Purchase Status` = "Sold" 
+		GROUP BY `Product ID`) AS `Sold`
+INNER JOIN (SELECT `Product ID`, COUNT(*) AS `Unsold Items` 
+			FROM `Item` 
+			WHERE `Purchase Status` = "Unsold" 
+			GROUP BY `Product ID`) AS `Unsold`
+ON `Sold`.`Product ID` = `Unsold`.`Product ID`;

@@ -12,6 +12,12 @@ from Admin_UI import Ui_MainWindow
 # IMPORT FUNCTIONS
 from ui_functions import *
 
+# TODO: Remove the db initialisation from Admin Login and Put it in Admin UI as a button instead
+# TODO: Change the initialisation SQL script, to only drop every table EXCEPT customer and admin table!
+# TODO: Create an Items Sold Category & Model Function
+# TODO: Create a View Customers with Unpaid Fees Function
+# TODO: Create a Display Sold & Unsold Items Function
+
 
 class MainWindow(QMainWindow):
     def __init__(self, hell):

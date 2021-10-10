@@ -2,6 +2,11 @@
   <qresource prefix="menuBurger">
     <file>icons8-menu-48.png</file>
   </qresource>
+  <qresource prefix="Choose_Item_div">
+    <file>box.png</file>
+    <file>light-bulb.png</file>
+    <file>padlock.png</file>
+  </qresource>
   <qresource prefix="adminSideBar">
     <file>icons8-attract-customers-48.png</file>
     <file>icons8-home-48.png</file>
