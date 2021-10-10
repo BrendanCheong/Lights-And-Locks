@@ -3797,7 +3797,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="font">
                <font>
                 <family>Yu Gothic UI</family>
-                <pointsize>20</pointsize>
+                <pointsize>14</pointsize>
                 <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
@@ -3806,7 +3806,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="styleSheet">
                <string notr="true">background-color: transparent;
 color: rgb(255, 255, 255);
-font: 20pt &quot;Yu Gothic UI&quot;;</string>
+font: 14pt &quot;Yu Gothic UI&quot;;</string>
               </property>
               <property name="text">
                <string>Inventory Level</string>
@@ -3827,7 +3827,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="font">
                <font>
                 <family>Yu Gothic UI</family>
-                <pointsize>18</pointsize>
+                <pointsize>14</pointsize>
                 <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
@@ -3836,7 +3836,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="styleSheet">
                <string notr="true">background-color: transparent;
 color: rgb(255, 255, 255);
-font: 18pt &quot;Yu Gothic UI&quot;;</string>
+font: 14pt &quot;Yu Gothic UI&quot;;</string>
               </property>
               <property name="text">
                <string>Sold Items Amount</string>
@@ -3857,7 +3857,7 @@ font: 18pt &quot;Yu Gothic UI&quot;;</string>
               <property name="font">
                <font>
                 <family>Yu Gothic UI</family>
-                <pointsize>20</pointsize>
+                <pointsize>14</pointsize>
                 <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
@@ -3866,7 +3866,7 @@ font: 18pt &quot;Yu Gothic UI&quot;;</string>
               <property name="styleSheet">
                <string notr="true">background-color: transparent;
 color: rgb(255, 255, 255);
-font: 20pt &quot;Yu Gothic UI&quot;;</string>
+font: 14pt &quot;Yu Gothic UI&quot;;</string>
               </property>
               <property name="text">
                <string>Price</string>
@@ -3887,7 +3887,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="font">
                <font>
                 <family>Yu Gothic UI</family>
-                <pointsize>20</pointsize>
+                <pointsize>14</pointsize>
                 <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
@@ -3896,7 +3896,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="styleSheet">
                <string notr="true">background-color: transparent;
 color: rgb(255, 255, 255);
-font: 20pt &quot;Yu Gothic UI&quot;;</string>
+font: 14pt &quot;Yu Gothic UI&quot;;</string>
               </property>
               <property name="text">
                <string>Warranty</string>
@@ -3917,7 +3917,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="font">
                <font>
                 <family>Yu Gothic UI</family>
-                <pointsize>20</pointsize>
+                <pointsize>14</pointsize>
                 <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
@@ -3926,7 +3926,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="styleSheet">
                <string notr="true">background-color: transparent;
 color: rgb(255, 255, 255);
-font: 20pt &quot;Yu Gothic UI&quot;;</string>
+font: 14pt &quot;Yu Gothic UI&quot;;</string>
               </property>
               <property name="text">
                <string>Model</string>
@@ -3947,7 +3947,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="font">
                <font>
                 <family>Yu Gothic UI</family>
-                <pointsize>20</pointsize>
+                <pointsize>14</pointsize>
                 <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
@@ -3956,7 +3956,7 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
               <property name="styleSheet">
                <string notr="true">background-color: transparent;
 color: rgb(255, 255, 255);
-font: 20pt &quot;Yu Gothic UI&quot;;</string>
+font: 14pt &quot;Yu Gothic UI&quot;;</string>
               </property>
               <property name="text">
                <string>Cost</string>
@@ -4097,7 +4097,7 @@ font: italic 16pt &quot;Yu Gothic UI&quot;;</string>
               <property name="font">
                <font>
                 <family>Yu Gothic UI</family>
-                <pointsize>18</pointsize>
+                <pointsize>16</pointsize>
                 <weight>50</weight>
                 <italic>true</italic>
                 <bold>false</bold>
@@ -4106,7 +4106,7 @@ font: italic 16pt &quot;Yu Gothic UI&quot;;</string>
               <property name="styleSheet">
                <string notr="true">background-color: transparent;
 color: rgb(255, 255, 255);
-font: italic 18pt &quot;Yu Gothic UI&quot;;</string>
+font: italic 16pt &quot;Yu Gothic UI&quot;;</string>
               </property>
               <property name="text">
                <string>--</string>
@@ -4127,7 +4127,7 @@ font: italic 18pt &quot;Yu Gothic UI&quot;;</string>
               <property name="font">
                <font>
                 <family>Yu Gothic UI</family>
-                <pointsize>18</pointsize>
+                <pointsize>16</pointsize>
                 <weight>50</weight>
                 <italic>true</italic>
                 <bold>false</bold>
@@ -4136,7 +4136,7 @@ font: italic 18pt &quot;Yu Gothic UI&quot;;</string>
               <property name="styleSheet">
                <string notr="true">background-color: transparent;
 color: rgb(255, 255, 255);
-font: italic 18pt &quot;Yu Gothic UI&quot;;</string>
+font: italic 16pt &quot;Yu Gothic UI&quot;;</string>
               </property>
               <property name="text">
                <string>--</string>
