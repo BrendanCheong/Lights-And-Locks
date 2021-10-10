@@ -60,7 +60,7 @@ WHERE Category = "Lights"
     AND `Purchase Status` = "Unsold"
 ORDER BY `Product ID`, `Item ID`;
 
--- find the number of sold by category and amount
+-- find the number of items sold by category and model
 SELECT p1.Category, p1.Model, COUNT(`Item ID`) AS "Number of Sold Item"
 FROM OSHES.Item
 LEFT JOIN OSHES.Product p1 ON OSHES.Item.`Product ID` = p1.`Product ID`
