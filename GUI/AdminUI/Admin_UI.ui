@@ -818,7 +818,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <row/>
               <column>
                <property name="text">
-                <string>Item ID</string>
+                <string>IID</string>
                </property>
               </column>
               <column>
@@ -971,221 +971,55 @@ QPushButton:pressed {
                <string>Items Sold in Category &amp;&amp; Model</string>
               </property>
              </widget>
-            </widget>
-            <widget class="QWidget" name="page_2">
-             <widget class="QTableWidget" name="product_table">
+             <widget class="QPushButton" name="initialise_database_button">
               <property name="geometry">
                <rect>
-                <x>20</x>
-                <y>325</y>
-                <width>1761</width>
-                <height>561</height>
+                <x>1390</x>
+                <y>180</y>
+                <width>391</width>
+                <height>51</height>
                </rect>
-              </property>
-              <property name="sizeIncrement">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
               </property>
               <property name="font">
                <font>
-                <family>8514oem</family>
-                <pointsize>10</pointsize>
+                <pointsize>-1</pointsize>
                 <weight>50</weight>
                 <italic>false</italic>
                 <bold>false</bold>
                </font>
               </property>
-              <property name="layoutDirection">
-               <enum>Qt::LeftToRight</enum>
-              </property>
-              <property name="autoFillBackground">
-               <bool>false</bool>
+              <property name="toolTipDuration">
+               <number>0</number>
               </property>
               <property name="styleSheet">
-               <string notr="true">QWidget {
-	background-color: rgb(255, 255, 255);
-	alternate-background-color: rgb(241, 245, 249);
-	font: 10pt &quot;8514oem&quot;;
-}
-QScrollBar:vertical {
-	border: none;
-    background: #94A3B8;
-    width: 14px;
-    margin: 15px 0 15px 0;
-	border-radius: 0px;
- }
-
-/*  HANDLE BAR VERTICAL */
-QScrollBar::handle:vertical {	
-	background-color: #E5E7EB;
-	min-height: 30px;
-	border-radius: 7px;
-}
-QScrollBar::handle:vertical:hover{	
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1 #7C3AED);
-}
-QScrollBar::handle:vertical:pressed {	
-	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #4338CA, stop:1 #5B21B6);
+               <string notr="true">QPushButton {
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	background-color:  qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #6366F1, stop:1#7C3AED);
+	font: 22px;
+	color: rgb(255, 255, 255);
 }
 
-/* BTN TOP - SCROLLBAR */
-QScrollBar::sub-line:vertical {
-	border: none;
-	background-color: #94A3B8;
-	height: 15px;
-	border-top-left-radius: 7px;
-	border-top-right-radius: 7px;
-	subcontrol-position: top;
-	subcontrol-origin: margin;
-}
-QScrollBar::sub-line:vertical:hover {	
-	background-color: rgb(255, 0, 127);
-}
-QScrollBar::sub-line:vertical:pressed {	
-	background-color: rgb(185, 0, 92);
+QPushButton:hover {
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3
+, stop:1 #5B21B6);
 }
 
-/* BTN BOTTOM - SCROLLBAR */
-QScrollBar::add-line:vertical {
-	border: none;
-	background-color:#94A3B8;
-	height: 15px;
-	border-bottom-left-radius: 7px;
-	border-bottom-right-radius: 7px;
-	subcontrol-position: bottom;
-	subcontrol-origin: margin;
-}
-QScrollBar::add-line:vertical:hover {	
-	background-color: rgb(255, 0, 127);
-}
-QScrollBar::add-line:vertical:pressed {	
-	background-color: rgb(185, 0, 92);
-}
-
-/* RESET ARROW */
-QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
-	background: none;
-}
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-	background: none;
-}
-</string>
+QPushButton:pressed {
+	background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #3730A3
+, stop:1 #5B21B6);
+	padding-left: 5px;
+	padding-top: 5px;
+}</string>
               </property>
-              <property name="frameShape">
-               <enum>QFrame::Box</enum>
+              <property name="text">
+               <string>Initialise Database!</string>
               </property>
-              <property name="frameShadow">
-               <enum>QFrame::Raised</enum>
-              </property>
-              <property name="lineWidth">
-               <number>10</number>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QAbstractScrollArea::AdjustToContents</enum>
-              </property>
-              <property name="alternatingRowColors">
-               <bool>true</bool>
-              </property>
-              <property name="selectionMode">
-               <enum>QAbstractItemView::SingleSelection</enum>
-              </property>
-              <property name="selectionBehavior">
-               <enum>QAbstractItemView::SelectRows</enum>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="textElideMode">
-               <enum>Qt::ElideLeft</enum>
-              </property>
-              <property name="sortingEnabled">
-               <bool>true</bool>
-              </property>
-              <property name="rowCount">
-               <number>7</number>
-              </property>
-              <property name="columnCount">
-               <number>7</number>
-              </property>
-              <attribute name="horizontalHeaderCascadingSectionResizes">
-               <bool>false</bool>
-              </attribute>
-              <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>240</number>
-              </attribute>
-              <attribute name="horizontalHeaderMinimumSectionSize">
-               <number>26</number>
-              </attribute>
-              <attribute name="horizontalHeaderStretchLastSection">
-               <bool>true</bool>
-              </attribute>
-              <attribute name="verticalHeaderDefaultSectionSize">
-               <number>87</number>
-              </attribute>
-              <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-               <bool>true</bool>
-              </attribute>
-              <attribute name="verticalHeaderStretchLastSection">
-               <bool>false</bool>
-              </attribute>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <row/>
-              <column>
-               <property name="text">
-                <string>Categories</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Model</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Warranty</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Price</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Inverntory Level</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Number of Items Sold</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Cost</string>
-               </property>
-              </column>
-              <item row="0" column="0">
-               <property name="text">
-                <string/>
-               </property>
-              </item>
-              <item row="6" column="5">
-               <property name="text">
-                <string/>
-               </property>
-              </item>
              </widget>
+            </widget>
+            <widget class="QWidget" name="page_2">
              <widget class="QPushButton" name="submit_query">
               <property name="geometry">
                <rect>
@@ -1516,11 +1350,16 @@ color: rgb(255, 255, 255);
                <bool>false</bool>
               </property>
               <property name="currentText">
-               <string>Locks</string>
+               <string>All</string>
               </property>
               <property name="frame">
                <bool>true</bool>
               </property>
+              <item>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </item>
               <item>
                <property name="text">
                 <string>Locks</string>
@@ -1858,11 +1697,16 @@ color: rgb(255, 255, 255);
                <bool>false</bool>
               </property>
               <property name="currentText">
-               <string>Light1</string>
+               <string>All</string>
               </property>
               <property name="frame">
                <bool>true</bool>
               </property>
+              <item>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </item>
               <item>
                <property name="text">
                 <string>Light1</string>
@@ -2146,11 +1990,16 @@ color: rgb(255, 255, 255);
                <bool>false</bool>
               </property>
               <property name="currentText">
-               <string>$50</string>
+               <string>All</string>
               </property>
               <property name="frame">
                <bool>true</bool>
               </property>
+              <item>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </item>
               <item>
                <property name="text">
                 <string>$50</string>
@@ -2439,11 +2288,16 @@ color: rgb(255, 255, 255);
                <bool>false</bool>
               </property>
               <property name="currentText">
-               <string>China</string>
+               <string>All</string>
               </property>
               <property name="frame">
                <bool>true</bool>
               </property>
+              <item>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </item>
               <item>
                <property name="text">
                 <string>China</string>
@@ -2769,11 +2623,16 @@ color: rgb(255, 255, 255);
                <bool>false</bool>
               </property>
               <property name="currentText">
-               <string>Blue</string>
+               <string>All</string>
               </property>
               <property name="frame">
                <bool>true</bool>
               </property>
+              <item>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </item>
               <item>
                <property name="text">
                 <string>Blue</string>
@@ -3083,11 +2942,16 @@ color: rgb(255, 255, 255);
                <bool>false</bool>
               </property>
               <property name="currentText">
-               <string>2014</string>
+               <string>All</string>
               </property>
               <property name="frame">
                <bool>true</bool>
               </property>
+              <item>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </item>
               <item>
                <property name="text">
                 <string>2014</string>
@@ -3402,11 +3266,16 @@ color: rgb(255, 255, 255);
                <bool>false</bool>
               </property>
               <property name="currentText">
-               <string>Battery</string>
+               <string>All</string>
               </property>
               <property name="frame">
                <bool>true</bool>
               </property>
+              <item>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </item>
               <item>
                <property name="text">
                 <string>Battery</string>
@@ -3701,11 +3570,16 @@ color: rgb(255, 255, 255);
                <bool>false</bool>
               </property>
               <property name="currentText">
-               <string>6</string>
+               <string>All</string>
               </property>
               <property name="frame">
                <bool>true</bool>
               </property>
+              <item>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </item>
               <item>
                <property name="text">
                 <string>6</string>
@@ -3727,8 +3601,191 @@ color: rgb(255, 255, 255);
                </property>
               </item>
              </widget>
+             <widget class="QLabel" name="category_div">
+              <property name="geometry">
+               <rect>
+                <x>10</x>
+                <y>340</y>
+                <width>421</width>
+                <height>541</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QWidget { 
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+/**image: url(:/Item Chooser/box.png);*/
+/**image: url(:/Item Chooser/padlock.png);*/
+	image: url(:/Choose_Item_div/box.png);
+border-radius: 20px;
+}</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QLabel" name="price_div">
+              <property name="geometry">
+               <rect>
+                <x>460</x>
+                <y>340</y>
+                <width>971</width>
+                <height>101</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+border-radius: 20px;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QLabel" name="warranty_div">
+              <property name="geometry">
+               <rect>
+                <x>460</x>
+                <y>480</y>
+                <width>971</width>
+                <height>101</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+border-radius: 20px;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QLabel" name="model_div">
+              <property name="geometry">
+               <rect>
+                <x>460</x>
+                <y>620</y>
+                <width>971</width>
+                <height>101</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+border-radius: 20px;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QLabel" name="cost_div">
+              <property name="geometry">
+               <rect>
+                <x>460</x>
+                <y>760</y>
+                <width>971</width>
+                <height>101</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+border-radius: 20px;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QLabel" name="inventory_div">
+              <property name="geometry">
+               <rect>
+                <x>1460</x>
+                <y>340</y>
+                <width>301</width>
+                <height>241</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #F59E0B, stop:1#E11D48);
+border-radius: 20px;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QLabel" name="sold_items_div">
+              <property name="geometry">
+               <rect>
+                <x>1460</x>
+                <y>620</y>
+                <width>301</width>
+                <height>241</height>
+               </rect>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 #F59E0B, stop:1#E11D48);
+border-radius: 20px;</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+             <widget class="QLabel" name="category_amount_label">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>770</y>
+                <width>401</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Segoe UI</family>
+                <pointsize>18</pointsize>
+                <weight>9</weight>
+                <italic>true</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: 75 italic 18pt &quot;Segoe UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>All</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="choose_an_item_label">
+              <property name="geometry">
+               <rect>
+                <x>20</x>
+                <y>360</y>
+                <width>411</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>20</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: 20pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Choose An Item!</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
              <zorder>gradient_backdrop</zorder>
-             <zorder>product_table</zorder>
              <zorder>submit_query</zorder>
              <zorder>Categories_label</zorder>
              <zorder>category_comboBox</zorder>
@@ -3746,6 +3803,15 @@ color: rgb(255, 255, 255);
              <zorder>power_supply_comboBox</zorder>
              <zorder>Warranty_label</zorder>
              <zorder>warranty_comboBox</zorder>
+             <zorder>category_div</zorder>
+             <zorder>price_div</zorder>
+             <zorder>warranty_div</zorder>
+             <zorder>model_div</zorder>
+             <zorder>cost_div</zorder>
+             <zorder>inventory_div</zorder>
+             <zorder>sold_items_div</zorder>
+             <zorder>category_amount_label</zorder>
+             <zorder>choose_an_item_label</zorder>
             </widget>
             <widget class="QWidget" name="page_3">
              <widget class="QLabel" name="item_search_label">
@@ -4775,13 +4841,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                <number>10</number>
               </property>
               <property name="columnCount">
-               <number>7</number>
+               <number>6</number>
               </property>
               <attribute name="horizontalHeaderCascadingSectionResizes">
                <bool>false</bool>
               </attribute>
               <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>242</number>
+               <number>278</number>
               </attribute>
               <attribute name="horizontalHeaderMinimumSectionSize">
                <number>26</number>
@@ -4839,11 +4905,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <column>
                <property name="text">
                 <string>Approve Request</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Repair Item</string>
                </property>
               </column>
              </widget>
@@ -5087,13 +5148,13 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                <number>10</number>
               </property>
               <property name="columnCount">
-               <number>7</number>
+               <number>5</number>
               </property>
               <attribute name="horizontalHeaderCascadingSectionResizes">
                <bool>false</bool>
               </attribute>
               <attribute name="horizontalHeaderDefaultSectionSize">
-               <number>238</number>
+               <number>334</number>
               </attribute>
               <attribute name="horizontalHeaderMinimumSectionSize">
                <number>26</number>
@@ -5102,7 +5163,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
                <bool>true</bool>
               </attribute>
               <attribute name="horizontalHeaderStretchLastSection">
-               <bool>false</bool>
+               <bool>true</bool>
               </attribute>
               <attribute name="verticalHeaderDefaultSectionSize">
                <number>81</number>
@@ -5141,16 +5202,6 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
               <column>
                <property name="text">
                 <string>Service Status</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Approve</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Start Service</string>
                </property>
               </column>
               <column>
