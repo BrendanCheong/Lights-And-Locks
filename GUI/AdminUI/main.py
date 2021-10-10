@@ -13,11 +13,9 @@ from Admin_UI import Ui_MainWindow
 # IMPORT FUNCTIONS
 from ui_functions import *
 
-# TODO: Remove the db initialisation from Admin Login and Put it in Admin UI as a button instead
-# TODO: Change the initialisation SQL script, to only drop every table EXCEPT customer and admin table!
-# TODO: Create an Items Sold Category & Model Function
-# TODO: Create a View Customers with Unpaid Fees Function
-# TODO: Create a Display Sold & Unsold Items Function
+# TODO: Add Specific Item ID searching for item table
+# TODO: Add Function and Render UI to handle items under servicing or not
+# TODO: Complete the Admin Product Search Table
 
 
 class MainWindow(QMainWindow):
@@ -61,6 +59,8 @@ class MainWindow(QMainWindow):
         )
 
         """ For the Page Buttons"""
+
+        """Page 1"""
         # Render Admin Table
         self.ui.refresh_button_admin.clicked.connect(
             self.get_sold_unsold_items_api)
@@ -71,6 +71,11 @@ class MainWindow(QMainWindow):
         self.ui.view_customers_button.clicked.connect(
             self.view_customers_unpaid_fee_api)
 
+        # Initialise Database
+        self.ui.initialise_database_button.clicked.connect(
+            self.initialise_database_api)
+
+        """Page 2"""
         # Render Product Table
         self.ui.submit_query.clicked.connect(
             lambda: UIFunctions.get_products_api(self)
@@ -78,7 +83,7 @@ class MainWindow(QMainWindow):
 
         """ End Of Page Buttons"""
 
-        print(admin_info)
+        print(self.admin_info)
 
         # SHOW ==> MAIN WINDOW
         ########################################################################
@@ -240,6 +245,24 @@ class MainWindow(QMainWindow):
             UIFunctions.messageBox(
                 self, "Error", "Unpaid Customer Fees", value["error"])
 
+    def initialise_database_api(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.ui.initialise_database_button.setText(
+            _translate("MainWindow", "Initialising..."))
+        self.ui.initialise_database_button.setEnabled(False)
+        self.worker = Initialise_Database_Thread()
+        self.worker.api_data.connect(self.initialise_error_handling)
+
+    def initialise_error_handling(self, value: dict):
+        if ("success" in value):
+            UIFunctions.messageBox(
+                self, "Success", "Initialisation Success", "Initialisation Complete, Product and Items Restocked!")  # only Admin and Customers remain
+            UIFunctions.finished_loading_text(self)
+            return
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Initialise Database Error", value["error"])
+
 ######################### Page 2, Products Page ##########################################
 
     def get_products_api(self):
@@ -308,6 +331,16 @@ class Customer_Unpaid_Fee_Thread(QThread):
     def run(self):
         r = requests.get(
             "http://localhost:5000/api/Admin/view/customers_unpaid")
+        response = r.json()
+        self.api_data.emit(response)
+
+
+class Initialise_Database_Thread(QThread):
+
+    api_data = pyqtSignal(object)
+
+    def run(self):
+        r = requests.get("http://localhost:5000/api/Initialise")
         response = r.json()
         self.api_data.emit(response)
 

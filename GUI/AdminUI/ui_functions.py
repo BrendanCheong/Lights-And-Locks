@@ -62,6 +62,7 @@ class UIFunctions(MainWindow):
         self.ui.refresh_button_admin.setEnabled(True)
         self.ui.view_items_category_model_button.setEnabled(True)
         self.ui.view_customers_button.setEnabled(True)
+        self.ui.initialise_database_button.setEnabled(True)
 
         """Change Loading Text"""
         self.ui.refresh_button_admin.setText(_translate(
@@ -70,6 +71,8 @@ class UIFunctions(MainWindow):
             _translate("MainWindow", "Items Sold in Category && Model"))
         self.ui.view_customers_button.setText(_translate(
             "MainWindow", "View Customers With Unpaid Fees"))
+        self.ui.initialise_database_button.setText(
+            _translate("MainWindow", "Initialise Database!"))
 
     def exit_mainwindow(self):
         self.close()
