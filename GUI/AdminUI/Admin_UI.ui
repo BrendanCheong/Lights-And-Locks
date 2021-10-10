@@ -3613,9 +3613,9 @@ color: rgb(255, 255, 255);
               <property name="styleSheet">
                <string notr="true">QWidget { 
 background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
-/**image: url(:/Item Chooser/box.png);*/
-/**image: url(:/Item Chooser/padlock.png);*/
-	image: url(:/Choose_Item_div/box.png);
+/**image: url(:/Choose_Item_div/light-bulb.png);*/
+/**image: url(:/Choose_Item_div/padlock.png);*/
+image: url(:/Choose_Item_div/box.png);
 border-radius: 20px;
 }</string>
               </property>
@@ -3785,6 +3785,366 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
                <set>Qt::AlignCenter</set>
               </property>
              </widget>
+             <widget class="QLabel" name="inventory_level_label">
+              <property name="geometry">
+               <rect>
+                <x>1460</x>
+                <y>350</y>
+                <width>301</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>20</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: 20pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Inventory Level</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="sold_items_label">
+              <property name="geometry">
+               <rect>
+                <x>1460</x>
+                <y>620</y>
+                <width>301</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>18</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: 18pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Sold Items Amount</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="price_label">
+              <property name="geometry">
+               <rect>
+                <x>470</x>
+                <y>350</y>
+                <width>241</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>20</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: 20pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Price</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="warranty_label">
+              <property name="geometry">
+               <rect>
+                <x>470</x>
+                <y>490</y>
+                <width>241</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>20</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: 20pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Warranty</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="model_label">
+              <property name="geometry">
+               <rect>
+                <x>470</x>
+                <y>630</y>
+                <width>241</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>20</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: 20pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Model</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="cost_label">
+              <property name="geometry">
+               <rect>
+                <x>470</x>
+                <y>770</y>
+                <width>241</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>20</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: 20pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>Cost</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="price_amount_label">
+              <property name="geometry">
+               <rect>
+                <x>1180</x>
+                <y>350</y>
+                <width>241</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>16</pointsize>
+                <weight>50</weight>
+                <italic>true</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: italic 16pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>$ --</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="warranty_amount_label">
+              <property name="geometry">
+               <rect>
+                <x>1180</x>
+                <y>490</y>
+                <width>241</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>16</pointsize>
+                <weight>50</weight>
+                <italic>true</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: italic 16pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>--</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="model_amount_label">
+              <property name="geometry">
+               <rect>
+                <x>1180</x>
+                <y>630</y>
+                <width>241</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>16</pointsize>
+                <weight>50</weight>
+                <italic>true</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: italic 16pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>--</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="cost_amount_label">
+              <property name="geometry">
+               <rect>
+                <x>1170</x>
+                <y>770</y>
+                <width>241</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>16</pointsize>
+                <weight>50</weight>
+                <italic>true</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: italic 16pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>$ --</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="inventory_amount_label">
+              <property name="geometry">
+               <rect>
+                <x>1460</x>
+                <y>490</y>
+                <width>301</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>18</pointsize>
+                <weight>50</weight>
+                <italic>true</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: italic 18pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>--</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+             <widget class="QLabel" name="sold_items_amount_label">
+              <property name="geometry">
+               <rect>
+                <x>1460</x>
+                <y>770</y>
+                <width>301</width>
+                <height>81</height>
+               </rect>
+              </property>
+              <property name="font">
+               <font>
+                <family>Yu Gothic UI</family>
+                <pointsize>18</pointsize>
+                <weight>50</weight>
+                <italic>true</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: transparent;
+color: rgb(255, 255, 255);
+font: italic 18pt &quot;Yu Gothic UI&quot;;</string>
+              </property>
+              <property name="text">
+               <string>--</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
              <zorder>gradient_backdrop</zorder>
              <zorder>submit_query</zorder>
              <zorder>Categories_label</zorder>
@@ -3812,6 +4172,18 @@ font: 20pt &quot;Yu Gothic UI&quot;;</string>
              <zorder>sold_items_div</zorder>
              <zorder>category_amount_label</zorder>
              <zorder>choose_an_item_label</zorder>
+             <zorder>inventory_level_label</zorder>
+             <zorder>sold_items_label</zorder>
+             <zorder>price_label</zorder>
+             <zorder>warranty_label</zorder>
+             <zorder>model_label</zorder>
+             <zorder>cost_label</zorder>
+             <zorder>price_amount_label</zorder>
+             <zorder>warranty_amount_label</zorder>
+             <zorder>model_amount_label</zorder>
+             <zorder>cost_amount_label</zorder>
+             <zorder>inventory_amount_label</zorder>
+             <zorder>sold_items_amount_label</zorder>
             </widget>
             <widget class="QWidget" name="page_3">
              <widget class="QLabel" name="item_search_label">

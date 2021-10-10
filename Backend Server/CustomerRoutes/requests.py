@@ -48,11 +48,10 @@ def get_all_request():
         customer_id = resp["Customer ID"]
         sql1 = f"""-- sql
         UPDATE `Request` SET `Request Status` =
-        CASE WHEN `Request Status` = "Submitted and Waiting for Payment" AND curdate() >= DATE_ADD(`Request Date`, INTERVAL 10 DAY)
+        CASE WHEN `Request Status` = "Submitted and Waiting for Payment" AND curdate() > DATE_ADD(`Request Date`, INTERVAL 10 DAY)
         THEN "Canceled"
         ELSE `Request Status`
         END
-        WHERE `Customer ID` = "{customer_id}";
         """
         sql2 = f"""-- sql
         SELECT `Item ID`, `Admin ID`, `Request Date`, `Request Status`, `Service Fee`, `Payment Date`

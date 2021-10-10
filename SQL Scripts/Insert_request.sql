@@ -11,16 +11,22 @@ END,
 NULL,
 "1001"); -- selected item ID
 
+#########################################################
 -- insert query that is not under warranty
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
-VALUES ('2022-12-22', 
-CASE WHEN '2022-12-22' <= '2022-12-15' -- I compare request date to warranty date
-THEN "Submitted"
-ELSE "Submitted and Waiting for Payment"
-END,
-"Brendan",
+VALUES ('2020-12-22', 
+"Submitted and Waiting for Payment",
+"Zuko",
 "admin",
-"1001");
+"1002");
+-- query not unver warranty that won't get canceled
+INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
+VALUES ('2022-12-22', 
+"Submitted and Waiting for Payment",
+"Zuko",
+"admin",
+"1003");
+#########################################################
 
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
 VALUES (curdate(), 
@@ -73,12 +79,11 @@ WHERE `Item ID` = "1092";
 
 -- auto cancel after 10 days if not paid properly
 UPDATE `Request` SET `Request Status` =
-CASE WHEN `Request Status` = "Submitted and Waiting for Payment" AND curdate() >= DATE_ADD(`Request Date`, INTERVAL 10 DAY)
+CASE WHEN `Request Status` = "Submitted and Waiting for Payment" AND curdate() > DATE_ADD(`Request Date`, INTERVAL 10 DAY)
 THEN "Canceled"
-ELSE (SELECT `Request Status` FROM (SELECT * FROM `Request` AS `Peanut`) AS `Wanker` WHERE `Customer ID` = "Brendan")
-END
-WHERE `Customer ID` = "Brendan";
+ELSE `Request Status`
+END;
 
 -- auto update the Request Status to "Canceled" if not paid in 10 days
 SELECT * FROM `Request`;
-DELETE FROM `OSHES`.`Request` WHERE `Customer ID` = "Brendan";
+DELETE FROM `OSHES`.`Request`;

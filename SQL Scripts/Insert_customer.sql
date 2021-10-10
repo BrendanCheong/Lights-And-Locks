@@ -18,7 +18,7 @@ WHERE `Email` = "brendancej82@gmail.com";
 
 -- view customers with Unpaid Fees
 -- remember to auto cancel customers with unpaid service fees before running this
-SELECT c1.`Customer ID`, c1.`Name`, c1.`Gender`, c1.`PhoneNumber`, c1.`Email`, c1.`Address`, r1.`Service Fee`
+SELECT c1.`Customer ID`, c1.`Name`, c1.`Gender`, c1.`PhoneNumber`, c1.`Email`, c1.`Address`
 FROM OSHES.Customer c1 
 INNER JOIN OSHES.Request r1 ON c1.`Customer ID` = r1.`Customer ID`
 WHERE r1.`Request Status` = "Submitted and Waiting for payment"
