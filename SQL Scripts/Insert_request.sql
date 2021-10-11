@@ -19,7 +19,7 @@ VALUES ('2020-12-22',
 "Zuko",
 "admin",
 "1002");
--- query not unver warranty that won't get canceled
+-- query not under warranty that won't get canceled
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
 VALUES ('2022-12-22', 
 "Submitted and Waiting for Payment",
