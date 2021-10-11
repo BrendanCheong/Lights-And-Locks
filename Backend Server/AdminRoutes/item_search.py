@@ -54,6 +54,68 @@ def view_all_items():
         cursor.close()
 
 
+@app.route("/api/Admin/search/products", methods=["POST"])
+def view_all_products():
+    conn = mysql.connection
+    cursor = conn.cursor()
+    try:
+        resp = request.json
+        category = resp["Category"]
+        model = resp["Model"]
+        price = resp["Price"]
+        color = resp["Color"]
+        factory = resp["Factory"]
+        production_year = resp["Production Year"]
+        power_supply = resp["Power Supply"]
+        warranty = resp["Warranty"]
+        statement2 = (
+            "(SELECT COUNT(*) AS `Sold Items` ",
+            "FROM Product LEFT JOIN Item USING (`Product ID`) ",
+            """WHERE `Purchase Status` = "Sold" """,
+            f"""AND Model = "{model}" """ if model != "All" else "",
+            f"""AND Price = {price} """ if price != "All" else "",
+            f"""AND color = "{color}" """ if color != "All" else "",
+            f"""AND factory = "{factory}" """ if factory != "All" else "",
+            f"""AND `Production Year` = "{production_year}" """ if production_year != "All" else "",
+            f"""AND `Power Supply` = "{power_supply}" """ if power_supply != "All" else "",
+            f"""AND Warranty = {warranty} """ if warranty != "All" else "",
+            f"""AND Category = "{category}" """ if category != "All" else "",
+            "ORDER BY `Product ID`, `Item ID`) AS `Sold Items` "
+        )
+        sql2 = ""
+        for text in statement2:
+            sql2 += text
+        statement1 = (
+            "SELECT `Category`, `Price`, `Warranty`, `Model`, `Cost`, COUNT(*) AS `Inventory Level`, ",
+            f"""{sql2}""",
+            "FROM Product LEFT JOIN Item USING (`Product ID`) ",
+            """WHERE `Purchase Status` = "Unsold" """,
+            f"""AND Model = "{model}" """ if model != "All" else "",
+            f"""AND Price = {price} """ if price != "All" else "",
+            f"""AND color = "{color}" """ if color != "All" else "",
+            f"""AND factory = "{factory}" """ if factory != "All" else "",
+            f"""AND `Production Year` = "{production_year}" """ if production_year != "All" else "",
+            f"""AND `Power Supply` = "{power_supply}" """ if power_supply != "All" else "",
+            f"""AND Warranty = {warranty} """ if warranty != "All" else "",
+            f"""AND Category = "{category}" """ if category != "All" else "",
+            "ORDER BY `Product ID`, `Item ID`;"
+        )
+        sql = ""
+        for text in statement1:
+            sql += text
+        cursor.execute(sql)
+        conn.commit()
+        rows = cursor.fetchall()
+        resp = jsonify(success=rows)
+        resp.status_code = 200
+        return resp
+    except Exception as e:
+        print(str(e))
+        return invalid(str(e))
+    finally:
+        cursor.close()
+
+
 @app.errorhandler(404)
 def not_found(error):
     message = {

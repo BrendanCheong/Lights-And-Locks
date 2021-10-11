@@ -34,7 +34,7 @@ WHERE Category = "Lights"
 ORDER BY `Product ID`, `Item ID`;
 
 -- find items as above, make modular, but also return cost and number of Sold items
-SELECT `Cost`, COUNT(*) AS `Inventory Level`, (SELECT COUNT(*) AS `Sold Items` 
+SELECT `Category`, `Price`, `Warranty`, `Model`, `Cost`, COUNT(*) AS `Inventory Level`, (SELECT COUNT(*) AS `Sold Items` 
 												FROM Product LEFT JOIN Item USING (`Product ID`)
 												WHERE Category = "Lights"
 													AND `Purchase Status` = "Sold" -- idea?
@@ -45,9 +45,7 @@ SELECT `Cost`, COUNT(*) AS `Inventory Level`, (SELECT COUNT(*) AS `Sold Items`
 												--  AND `Production Year` = "2015"
 												--  AND `Power Supply` = "USB"
 												--  AND Warranty = 10
-													ORDER BY `Product ID`, `Item ID`) AS `Sold Items`, 
-                                                    `Item ID`
-
+													ORDER BY `Product ID`, `Item ID`) AS `Sold Items`
 FROM Product LEFT JOIN Item USING (`Product ID`)
 WHERE Category = "Lights"
 	AND Model = "Light1"

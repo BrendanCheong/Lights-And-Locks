@@ -59,6 +59,10 @@ class UIFunctions(MainWindow):
             self.ui.model_comboBox.clear()
             self.ui.model_comboBox.addItems(
                 ["All", "SmartHome1", "Light1", "Light2"])
+        else:
+            self.ui.model_comboBox.clear()
+            self.ui.model_comboBox.addItems(
+                ["All", "Light1", "Light2", "SmartHome1", "Safe1", "Safe2"])
 
     def messageBox(self, status: str, title: str, message: str):
         msg = QtWidgets.QMessageBox()

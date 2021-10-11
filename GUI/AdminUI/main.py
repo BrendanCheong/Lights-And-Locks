@@ -53,6 +53,11 @@ class MainWindow(QMainWindow):
         self.ui.btn_page_6.clicked.connect(
             lambda: self.ui.stackedWidget.setCurrentWidget(self.ui.page_5))
 
+        # Change ComboBox for Category and Model
+        self.ui.category_comboBox.currentTextChanged.connect(
+            lambda: UIFunctions.change_category_model_comboBox(self)
+        )
+
         # Exit Button
         self.ui.btn_page_4.clicked.connect(
             lambda: UIFunctions.exit_mainwindow(self)
@@ -77,9 +82,7 @@ class MainWindow(QMainWindow):
 
         """Page 2"""
         # Render Product Table
-        self.ui.submit_query.clicked.connect(
-            lambda: UIFunctions.get_products_api(self)
-        )
+        self.ui.submit_query.clicked.connect(self.get_products_api)  # help la
 
         """Page 3"""
         self.ui.item_search_button.clicked.connect(
@@ -273,20 +276,75 @@ class MainWindow(QMainWindow):
     def get_products_api(self):
         _translate = QtCore.QCoreApplication.translate
         self.ui.submit_query.setText(_translate("MainWindow", "Loading..."))
-        self.worker = Get_Products_Thread()
-        self.worker.start()  # start the parallel function
-        # execute function once api done with no data
-        self.worker.finished.connect(self.event_worker_finished)
-        # pass Signal data into render_tables function
-        self.worker.api_data.connect(self.render_tables)
+        content = {
+            "Category": self.ui.category_comboBox.currentText(),
+            "Model": self.ui.model_comboBox.currentText(),
+            "Price": self.ui.price_comboBox.currentText().replace("$", ""),
+            "Color": self.ui.colour_comboBox.currentText(),
+            "Factory": self.ui.factory_comboBox.currentText(),
+            "Production Year": self.ui.production_year_comboBox.currentText(),
+            "Power Supply": self.ui.power_supply_comboBox.currentText(),
+            "Warranty": self.ui.warranty_comboBox.currentText()
+        }
+        self.worker = Get_Products_Thread(content)
+        self.worker.start()
+        self.worker.finished.connect(
+            lambda: UIFunctions.finished_loading_text(self))
+        self.worker.api_data.connect(self.render_product_table_admin)
 
-    def render_tables(self, value):
-        print(value)
-
-    def event_worker_finished(self):
-        QtWidgets.QMessageBox.information(self, "Done", "API Request Complete")
+    def render_product_table_admin(self, value: dict):
         _translate = QtCore.QCoreApplication.translate
-        self.ui.submit_query.setText(_translate("MainWindow", "Submit"))
+        if ("success" in value):
+            product_array = value["success"][0]
+            none_found = "No Products Found"
+            category_type = str(product_array[0])
+
+            """ Render Table Contents from API """
+            print(product_array)
+            self.ui.category_amount_label.setText(_translate(
+                "MainWindow", category_type if product_array[0] is not None else "--"))
+            self.ui.price_amount_label.setText(_translate("MainWindow", "$ " + str(
+                product_array[1]) if product_array[1] is not None else "$ --"))
+            self.ui.warranty_amount_label.setText(_translate("MainWindow", str(
+                product_array[2]) + " Months" if product_array[2] is not None else "--"))
+            self.ui.model_amount_label.setText(_translate("MainWindow", str(
+                product_array[3]) if product_array[3] is not None else "--"))
+            self.ui.cost_amount_label.setText(_translate("MainWindow", "$ " + str(
+                product_array[4]) if product_array[4] is not None else "$ --"))
+            self.ui.inventory_amount_label.setText(_translate("MainWindow", str(
+                product_array[-2]) if product_array[-2] is not None else none_found))
+            self.ui.sold_items_amount_label.setText(_translate("MainWindow", str(
+                product_array[-1]) if product_array[-1] != 0 else none_found))
+
+            if (category_type == "Locks"):
+                self.ui.category_div.setStyleSheet("""
+                QWidget { 
+                    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+                    image: url(:/Choose_Item_div/padlock.png);
+                    border-radius: 20px;
+                }
+                """)
+            elif (category_type == "Lights"):
+                self.ui.category_div.setStyleSheet("""
+                QWidget { 
+                    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+                    image: url(:/Choose_Item_div/light-bulb.png);
+                    border-radius: 20px;
+                }
+                """)
+            else:
+                self.ui.category_div.setStyleSheet("""
+                QWidget { 
+                    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0  #6D28D9 , stop:1 #4F46E5);
+                    image: url(:/Choose_Item_div/box.png);
+                    border-radius: 20px;
+                }
+                """)
+            UIFunctions.messageBox(
+                self, "Success", "Product Search", "Product Search Successful")
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Product Search", value["error"])
 
 ########################## Page 3, Item Search Page ########################################
 
@@ -356,17 +414,27 @@ class Get_Products_Thread(QThread):
     # package the data into a signal, signal takes in object/ dictionary
     api_data = pyqtSignal(object)
 
+    # create constructor for signal to pass in arguments
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        # contains product info like category, model, price, etc...
+        self.info = info
+
     def run(self):
-        data = dict()
-        info = 0
-        for i in range(3):
-            info += i
-            time.sleep(1)
-            print(i)
-        data["numbers"] = info
-        print("hello")
-        # output the data after finished executing the script
-        self.api_data.emit(data)
+        PAYLOAD = {
+            "Category": self.info["Category"],
+            "Model": self.info["Model"],
+            "Price": self.info["Price"],
+            "Color": self.info["Color"],
+            "Factory": self.info["Factory"],
+            "Production Year": self.info["Production Year"],
+            "Power Supply": self.info["Power Supply"],
+            "Warranty": self.info["Warranty"]
+        }
+        r = requests.post(
+            "http://localhost:5000/api/Admin/search/products", json=PAYLOAD)
+        response = r.json()
+        self.api_data.emit(response)
 
 
 class Get_Sold_Unsold_Items_Thread(QThread):

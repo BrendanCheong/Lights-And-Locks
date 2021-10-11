@@ -109,7 +109,7 @@ class MainWindow(QMainWindow):
         self.ui.price_amount_label.setText(_translate(
             "MainWindow", "$" + str(product_array[3]) if product_array[3] is not None else "$--"))
         self.ui.category_amount_label.setText(_translate(
-            "MainWindow", category_type) if product_array[0] is not None else none_found)
+            "MainWindow", category_type if product_array[0] is not None else "--"))
         self.ui.warranty_amount_label.setText(_translate("MainWindow", str(
             product_array[2]) + " Months" if product_array[2] is not None else "--"))
         self.ui.model_amount_label.setText(_translate("MainWindow", str(

@@ -59,6 +59,7 @@ class UIFunctions(MainWindow):
         _translate = QtCore.QCoreApplication.translate
 
         """Enable Buttons"""
+        self.ui.submit_query.setEnabled(True)
         self.ui.refresh_button_admin.setEnabled(True)
         self.ui.view_items_category_model_button.setEnabled(True)
         self.ui.view_customers_button.setEnabled(True)
@@ -76,6 +77,24 @@ class UIFunctions(MainWindow):
             _translate("MainWindow", "Initialise Database!"))
         self.ui.item_search_button.setText(
             _translate("MainWindow", "Search"))
+        self.ui.submit_query.setText(
+            _translate("MainWindow", "Submit"))
+
+    def change_category_model_comboBox(self):
+        category_comboBox_text = self.ui.category_comboBox.currentText()
+        model_comboBox_text = self.ui.model_comboBox.currentText()
+        if (category_comboBox_text == "Locks"):
+            self.ui.model_comboBox.clear()
+            self.ui.model_comboBox.addItems(
+                ["All", "SmartHome1", "Safe1", "Safe2"])
+        elif (category_comboBox_text == "Lights"):
+            self.ui.model_comboBox.clear()
+            self.ui.model_comboBox.addItems(
+                ["All", "SmartHome1", "Light1", "Light2"])
+        else:
+            self.ui.model_comboBox.clear()
+            self.ui.model_comboBox.addItems(
+                ["All", "Light1", "Light2", "SmartHome1", "Safe1", "Safe2"])
 
     def exit_mainwindow(self):
         self.close()
