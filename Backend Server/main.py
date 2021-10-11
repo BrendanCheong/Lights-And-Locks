@@ -180,6 +180,7 @@ def invalid(error):
 if __name__ == "__main__":
     import AdminRoutes.admin
     import AdminRoutes.admin_frontpage
+    import AdminRoutes.item_search
     import CustomerRoutes.customer
     import CustomerRoutes.requests
     app.run(debug=True)

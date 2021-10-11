@@ -79,3 +79,21 @@ INNER JOIN (SELECT `Product ID`, COUNT(*) AS `Unsold Items`
 			WHERE `Purchase Status` = "Unsold" 
 			GROUP BY `Product ID`) AS `Unsold`
 ON `Sold`.`Product ID` = `Unsold`.`Product ID`;
+
+-- find all items under service
+SELECT p1.`Product ID`, r1.`Item ID`, Item.`Production Year`, Item.`Power Supply`, Item.`Color`, Item.`Factory`, Item.`Purchase Status`, p1.`Model`, p1.`Category`, p1.`Warranty`,p1.`Price`, p1.`Cost`
+FROM OSHES.Request r1
+INNER JOIN OSHES.Item ON r1.`Item ID` = OSHES.Item.`Item ID`
+INNER JOIN OSHES.Service s1 ON r1.`Request ID` = s1.`Request ID`
+INNER JOIN OSHES.Product p1 ON p1.`Product ID` = OSHES.Item.`Product ID`
+WHERE (s1.`Service Status` = "Waiting for approval" OR s1.`Service Status`= "In Progress")
+-- AND r1.`Item ID` = "1003"
+ORDER BY `Item ID`;
+
+-- find a specific item by id, return category and model also
+SELECT *
+FROM `Item`
+INNER JOIN `Product` USING (`Product ID`)
+WHERE (`Purchase Status` = "Sold" OR `Purchase Status` = "Unsold")
+-- AND `Item ID` = "1096" 
+ORDER BY `Item ID`;

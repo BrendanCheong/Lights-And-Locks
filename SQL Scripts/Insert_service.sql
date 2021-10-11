@@ -5,3 +5,9 @@ FROM OSHES.Request r1
 INNER JOIN OSHES.Item ON r1.`Item ID` = OSHES.Item.`Item ID`
 INNER JOIN OSHES.Service s1 ON r1.`Request ID` = s1.`Request ID`
 WHERE s1.`Service Status` = "Waiting for approval";
+
+-- insert service
+INSERT INTO `Service` (`Service Status`, `Admin ID`, `Request ID`)
+VALUES("Waiting for approval", "admin", 1);
+
+SELECT * FROM `Service`;

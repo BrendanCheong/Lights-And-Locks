@@ -81,6 +81,10 @@ class MainWindow(QMainWindow):
             lambda: UIFunctions.get_products_api(self)
         )
 
+        """Page 3"""
+        self.ui.item_search_button.clicked.connect(
+            self.view_all_items_api)
+
         """ End Of Page Buttons"""
 
         print(self.admin_info)
@@ -283,6 +287,68 @@ class MainWindow(QMainWindow):
         QtWidgets.QMessageBox.information(self, "Done", "API Request Complete")
         _translate = QtCore.QCoreApplication.translate
         self.ui.submit_query.setText(_translate("MainWindow", "Submit"))
+
+########################## Page 3, Item Search Page ########################################
+
+    def view_all_items_api(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.ui.item_search_button.setText(
+            _translate("MainWindow", "Loading..."))
+        self.ui.item_search_button.setEnabled(False)
+
+        """get the info from comboBox"""
+        service_status = self.ui.under_service_comboBox.currentText()
+        item_id = self.ui.item_id_comboBox.currentText()
+        PAYLOAD = {
+            "ITEM RESPONSE": service_status,
+            "Item ID": item_id
+        }
+        self.worker = Item_Search_Thread(PAYLOAD)
+        self.worker.start()
+        self.worker.finished.connect(
+            lambda: UIFunctions.finished_loading_text(self))
+        self.worker.api_data.connect(self.render_items_table)
+
+    def render_items_table(self, value: dict):
+        if ("success" in value):
+            arrays = value["success"]
+
+            """ Render Contents from API """
+            table_row = 0
+            self.ui.item_table.setRowCount(len(arrays))
+            for row in arrays:
+                self.ui.item_table.setItem(
+                    table_row, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                self.ui.item_table.setItem(
+                    table_row, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                self.ui.item_table.setItem(
+                    table_row, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                self.ui.item_table.setItem(
+                    table_row, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                self.ui.item_table.setItem(
+                    table_row, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                self.ui.item_table.setItem(
+                    table_row, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                self.ui.item_table.setItem(
+                    table_row, 6, QtWidgets.QTableWidgetItem(str(row[6])))
+                self.ui.item_table.setItem(
+                    table_row, 7, QtWidgets.QTableWidgetItem(str(row[7])))
+                self.ui.item_table.setItem(
+                    table_row, 8, QtWidgets.QTableWidgetItem(str(row[8])))
+                self.ui.item_table.setItem(
+                    table_row, 9, QtWidgets.QTableWidgetItem(str(row[9])))
+                self.ui.item_table.setItem(
+                    table_row, 10, QtWidgets.QTableWidgetItem(str(row[10])))
+                self.ui.item_table.setItem(
+                    table_row, 11, QtWidgets.QTableWidgetItem(str(row[11])))
+                table_row += 1
+            UIFunctions.messageBox(
+                self, "Success", "Fetch Items", "Finished Fetching Items")
+            UIFunctions.finished_loading_text(self)
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Item Search Error", value["error"])
+
 ######################## END ###############################################################
 
 
@@ -342,6 +408,25 @@ class Initialise_Database_Thread(QThread):
 
     def run(self):
         r = requests.get("http://localhost:5000/api/Initialise")
+        response = r.json()
+        self.api_data.emit(response)
+
+
+class Item_Search_Thread(QThread):
+
+    api_data = pyqtSignal(object)
+
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        self.info = info  # contains Item ID and service status search
+
+    def run(self):
+        PAYLOAD = {
+            "Item ID": self.info["Item ID"],
+            "ITEM RESPONSE": self.info["ITEM RESPONSE"]
+        }
+        r = requests.post(
+            "http://localhost:5000/api/Admin/view/all_items", json=PAYLOAD)
         response = r.json()
         self.api_data.emit(response)
 
