@@ -65,6 +65,8 @@ class UIFunctions(MainWindow):
         self.ui.view_customers_button.setEnabled(True)
         self.ui.initialise_database_button.setEnabled(True)
         self.ui.item_search_button.setEnabled(True)
+        self.ui.fetch_requests_button.setEnabled(True)
+        self.ui.refresh_servicing_button.setEnabled(True)
 
         """Change Loading Text"""
         self.ui.refresh_button_admin.setText(_translate(
@@ -79,6 +81,10 @@ class UIFunctions(MainWindow):
             _translate("MainWindow", "Search"))
         self.ui.submit_query.setText(
             _translate("MainWindow", "Submit"))
+        self.ui.fetch_requests_button.setText(
+            _translate("MainWindow", "Fetch Requests"))
+        self.ui.refresh_servicing_button.setText(
+            _translate("MainWindow", "Refresh"))
 
     def change_category_model_comboBox(self):
         category_comboBox_text = self.ui.category_comboBox.currentText()

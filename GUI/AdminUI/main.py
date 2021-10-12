@@ -82,11 +82,19 @@ class MainWindow(QMainWindow):
 
         """Page 2"""
         # Render Product Table
-        self.ui.submit_query.clicked.connect(self.get_products_api)  # help la
+        self.ui.submit_query.clicked.connect(self.get_products_api)
 
         """Page 3"""
         self.ui.item_search_button.clicked.connect(
             self.view_all_items_api)
+
+        """Page 4"""
+        self.ui.fetch_requests_button.clicked.connect(
+            self.get_requests_api)
+
+        """Page 5"""
+        self.ui.refresh_servicing_button.clicked.connect(
+            self.complete_service_api)
 
         """ End Of Page Buttons"""
 
@@ -406,7 +414,158 @@ class MainWindow(QMainWindow):
         else:
             UIFunctions.messageBox(
                 self, "Error", "Item Search Error", value["error"])
+####################### Page 4 Fetch Services/Request to be approved #######################
 
+    def get_requests_api(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.ui.fetch_requests_button.setText(
+            _translate("MainWindow", "Loading..."))
+        self.ui.fetch_requests_button.setEnabled(False)
+        self.worker = Get_Requests_Approving_Thread()
+        self.worker.start()
+        self.worker.api_data.connect(self.render_requests_table)
+
+    def render_requests_table(self, value: dict):
+        if ("success" in value):
+            arrays = value["success"]
+
+            """ Render Contents from API """
+            table_row = 0
+            self.ui.request_table.setRowCount(len(arrays))
+
+            for row in arrays:
+                self.approve_request = QtWidgets.QPushButton('Approve!')
+                self.approve_request.clicked.connect(self.approve_request_func)
+                self.ui.request_table.setItem(
+                    table_row, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                self.ui.request_table.setItem(
+                    table_row, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                self.ui.request_table.setItem(
+                    table_row, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                self.ui.request_table.setItem(
+                    table_row, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                self.ui.request_table.setItem(
+                    table_row, 4, QtWidgets.QTableWidgetItem(str(row[4])))
+                self.ui.request_table.setItem(
+                    table_row, 5, QtWidgets.QTableWidgetItem(str(row[5])))
+                self.ui.request_table.setCellWidget(
+                    table_row, 6, self.approve_request
+                )
+                table_row += 1
+            UIFunctions.messageBox(
+                self, "Success", "Fetch Requests", "Fetched All Requests to be Approved")
+            UIFunctions.finished_loading_text(self)
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Request Searching", value["error"])
+
+    def approve_request_func(self):
+        button = QtWidgets.qApp.focusWidget()
+        index = self.ui.request_table.indexAt(button.pos())
+        admin_id_table = self.ui.request_table.item(index.row(), 3).text()
+        if index.isValid() and admin_id_table == "None":
+            column_index = index.column()
+            row_index = index.row()
+            request_id = self.ui.request_table.item(row_index, 0).text()
+            service_id = self.ui.request_table.item(row_index, 1).text()
+            admin_id: str = self.admin_info["Admin ID"]
+            PAYLOAD = {
+                "Admin ID": admin_id,
+                "Service ID": service_id,
+                "Request ID": request_id,
+                "row_count": row_index
+            }
+            self.worker = Approve_Request_Thread(PAYLOAD)
+            self.worker.start()
+            self.worker.api_data.connect(self.handle_approve_request_response)
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Approving Error", "You cannot approve something that is already approved")
+
+    def handle_approve_request_response(self, value: dict):
+        if ("success" in value):
+            self.ui.request_table.setItem(
+                value["row_count"], 3, QtWidgets.QTableWidgetItem(self.admin_info["Admin ID"]))
+            UIFunctions.messageBox(
+                self, "Success", "Approving", "Approving Request Success!")
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Approving Error", value["error"])
+
+######################## Page 5 Complete the Service ######################################
+
+    def complete_service_api(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.ui.refresh_servicing_button.setText(
+            _translate("MainWindow", "Refreshing..."))
+        self.ui.refresh_servicing_button.setEnabled(False)
+        self.worker = Get_All_Services_To_Complete_Thread()
+        self.worker.start()
+        self.worker.api_data.connect(self.render_servicing_table)  # fuck
+
+    def render_servicing_table(self, value: dict):
+        if ("success" in value):
+            arrays = value["success"]
+
+            """ Render Contents from API """
+            table_row = 0
+            self.ui.servicing_table.setRowCount(len(arrays))
+            for row in arrays:
+                self.btn_complete_service = QtWidgets.QPushButton(
+                    'Complete Service!')
+                self.btn_complete_service.clicked.connect(
+                    self.complete_service_func)
+
+                self.ui.servicing_table.setItem(
+                    table_row, 0, QtWidgets.QTableWidgetItem(str(row[0])))
+                self.ui.servicing_table.setItem(
+                    table_row, 1, QtWidgets.QTableWidgetItem(str(row[1])))
+                self.ui.servicing_table.setItem(
+                    table_row, 2, QtWidgets.QTableWidgetItem(str(row[2])))
+                self.ui.servicing_table.setItem(
+                    table_row, 3, QtWidgets.QTableWidgetItem(str(row[3])))
+                self.ui.servicing_table.setCellWidget(
+                    table_row, 4, self.btn_complete_service)
+                table_row += 1
+            UIFunctions.messageBox(
+                self, "Success", "Fetch Services", "Finished Fetching all Services to Complete")
+            UIFunctions.finished_loading_text(self)
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Fetching all Services", value["error"])
+
+    def complete_service_func(self):
+        button = QtWidgets.qApp.focusWidget()
+        index = self.ui.servicing_table.indexAt(button.pos())
+        service_status = self.ui.servicing_table.item(index.row(), 3).text()
+        if index.isValid() and service_status == "In Progress":
+            column_index = index.column()
+            row_index = index.row()
+            request_id = self.ui.servicing_table.item(row_index, 1).text()
+            service_id = self.ui.servicing_table.item(row_index, 2).text()
+            PAYLOAD = {
+                "Service ID": service_id,
+                "Request ID": request_id,
+                "service_status": service_status,
+                "row_index": row_index
+            }
+            self.worker = Complete_Service_Thread(PAYLOAD)
+            self.worker.start()
+            self.worker.api_data.connect(self.handle_complete_response)
+
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Completing Error", "You cannot Complete a service that is already completed")
+
+    def handle_complete_response(self, value: dict):
+        if ("success" in value):
+            self.ui.servicing_table.setItem(
+                value["row_index"], 3, QtWidgets.QTableWidgetItem("Completed"))
+            UIFunctions.messageBox(
+                self, "Success", "Approving", "Approving Request Success!")
+        else:
+            UIFunctions.messageBox(
+                self, "Error", "Approving Error", value["error"])
 ######################## END ###############################################################
 
 
@@ -495,6 +654,69 @@ class Item_Search_Thread(QThread):
         }
         r = requests.post(
             "http://localhost:5000/api/Admin/view/all_items", json=PAYLOAD)
+        response = r.json()
+        self.api_data.emit(response)
+
+
+class Approve_Request_Thread(QThread):
+
+    api_data = pyqtSignal(object)
+
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        self.info = info
+
+    def run(self):
+        PAYLOAD = {
+            "Admin ID": self.info["Admin ID"],
+            "Service ID": self.info["Service ID"],
+            "Request ID": self.info["Request ID"]
+        }
+        r = requests.patch(
+            "http://localhost:5000/api/Admin/approve/services", json=PAYLOAD)
+        response = r.json()
+        response["row_count"] = self.info["row_count"]
+        self.api_data.emit(response)
+
+
+class Complete_Service_Thread(QThread):
+
+    api_data = pyqtSignal(object)
+
+    def __init__(self, info: dict, parent=None):
+        QThread.__init__(self, parent)
+        self.info = info
+
+    def run(self):
+        PAYLOAD = {
+            "Service ID": self.info["Service ID"],
+            "Request ID": self.info["Request ID"]
+        }
+        r = requests.patch(
+            "http://localhost:5000/api/Admin/complete/services", json=PAYLOAD)
+        response = r.json()
+        response["service_status"] = self.info["service_status"]
+        response["row_index"] = self.info["row_index"]
+        self.api_data.emit(response)
+
+
+class Get_Requests_Approving_Thread(QThread):
+
+    api_data = pyqtSignal(object)
+
+    def run(self):
+        r = requests.get(
+            "http://localhost:5000/api/Admin/view/approving_services")
+        response = r.json()
+        self.api_data.emit(response)
+
+
+class Get_All_Services_To_Complete_Thread(QThread):
+
+    api_data = pyqtSignal(object)
+
+    def run(self):
+        r = requests.get("http://localhost:5000/api/Admin/view/all_services")
         response = r.json()
         self.api_data.emit(response)
 
