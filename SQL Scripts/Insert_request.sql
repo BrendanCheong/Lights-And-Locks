@@ -91,6 +91,7 @@ WHERE `Customer ID` = "Brendan";
 -- for canceling requests!
 -- you can't cancel if its Approved, Canceled already or Completed
 -- once canceled, remove the service in service table regardless of service status
+-- if service in service table does not exist (due to no payment) it will not throw an error
 START TRANSACTION;
 
 UPDATE `Request` 
@@ -113,7 +114,7 @@ WHERE
         
         WHERE
             `Customer ID` = 'Zuko' -- var
-            AND `Item ID` = '1003') AS `Selected ID`); -- var
+            AND `Item ID` = '1050') AS `Selected ID`); -- var
 
 COMMIT;
 

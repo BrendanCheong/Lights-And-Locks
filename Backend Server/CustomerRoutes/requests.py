@@ -70,8 +70,8 @@ def add_request():
                         success="Request for Service Created Successfully")
                     resp.status_code = 200
                     return resp
-                except Exception as e:
-                    print(str(e))  # not sure about this
+                except Exception as e:  # catch scenario where the request needs to be paid and thus we can't make a new service
+                    print(str(e))
                     resp = jsonify(
                         success="Request is Submitted and Waiting for Payment")
                     resp.status_code = 200
@@ -110,8 +110,8 @@ def add_request():
                         success="Request for Service Created Successfully")
                     resp.status_code = 200
                     return resp
-                except Exception as e:
-                    print(str(e))  # not sure about this
+                except Exception as e:  # catch scenario where the request needs to be paid and thus we can't make a new service
+                    print(str(e))
                     resp = jsonify(
                         success="Request is Submitted and Waiting for Payment")
                     resp.status_code = 200
@@ -166,6 +166,7 @@ def pay_service_fee():
     # pay for the service fee, resulting in status changing to "In Progress"
     # and calculate the service fee as well and set payment date to current date
     # return back the service fee as well, to render on the table
+    # upon successful payment of service fee, create a new service in service table to be approved by admin
     conn = mysql.connection
     cursor = conn.cursor()
     try:
@@ -184,6 +185,10 @@ def pay_service_fee():
         WHERE `Customer ID` = "{customer_id}" AND `Item ID` = "{item_id}" AND `Request Status` = "Submitted and Waiting for Payment";
         """
         sql2 = f"""-- sql
+        INSERT INTO `Service` (`Service Status`, `Admin ID`, `Request ID`)
+        VALUES ("Waiting for approval", NULL, (SELECT `Request ID` FROM `Request` WHERE `Item ID` = "{item_id}" AND `Customer ID` = "{customer_id}"));
+        """
+        sql3 = f"""-- sql
         SELECT (`Cost` / 20) + 40 AS `Service Fee`
         FROM `Product`
         INNER JOIN `Item`
@@ -192,6 +197,7 @@ def pay_service_fee():
         """
         cursor.execute(sql1)
         cursor.execute(sql2)
+        cursor.execute(sql3)
         conn.commit()
         rows = json.dumps(cursor.fetchall())
         processed = str(rows).replace('[', '').replace(']', '')
@@ -208,6 +214,10 @@ def pay_service_fee():
 @app.route("/api/Customer/update/request", methods=["PATCH"])
 def change_request_state():
     # updates the request based on customer id and item id to desired status from client side
+    # assume that this is ALWAYS Status = "Canceled"
+    # upon canceling, cancel any possible SERVICES from the service table
+    # This means that canceling a request stops the admin from servicing said item!
+    # this is because there is nothing to service when you cancel a request
     conn = mysql.connection
     cursor = conn.cursor()
     try:
@@ -215,12 +225,29 @@ def change_request_state():
         request_status = resp["Request Status"]
         customer_id = resp["Customer ID"]
         item_id = resp["Item ID"]
-        sql = f"""-- sql
+        sql1 = f"""-- sql
         UPDATE `Request`
         SET `Request Status` = "{request_status}"
         WHERE `Customer ID` = "{customer_id}" AND `Item ID` = "{item_id}";
         """
-        cursor.execute(sql)
+        sql2 = f"""-- sql
+        DELETE FROM `Service` 
+        WHERE
+            `Service ID` = (SELECT 
+                *
+            FROM
+                (SELECT 
+                    `Service ID`
+                FROM
+                    `Service`
+                INNER JOIN `Request` USING (`Request ID`)
+                
+                WHERE
+                    `Customer ID` = '{customer_id}'
+                    AND `Item ID` = '{item_id}') AS `Selected ID`);
+        """
+        cursor.execute(sql1)
+        cursor.execute(sql2)
         conn.commit()
         resp = jsonify(success="Request Status Updated Successfully")
         resp.status_code = 200
