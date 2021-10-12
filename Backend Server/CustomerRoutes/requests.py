@@ -7,6 +7,9 @@ import simplejson as json
 @app.route("/api/Customer/add/request", methods=["POST"])
 def add_request():
     # add a new request based on customer, item id and calculates request status
+    # NOTE: Before adding a new request, check if there is already an existing request that is either "Canceled" or "Completed"
+    # If so, delete that request using item ID, THEN add a new request
+    # BUT if its your first time, just add the request
     conn = mysql.connection
     cursor = conn.cursor()
     try:

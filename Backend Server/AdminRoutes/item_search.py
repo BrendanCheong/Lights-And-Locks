@@ -3,7 +3,7 @@ from db_config import *
 from flask import jsonify, request
 
 
-@app.route("/api/Admin/view/all_items", methods=["POST"])
+@app.route("/api/Admin/view/all_items", methods=["POST"])  # item search
 def view_all_items():
     conn = mysql.connection
     cursor = conn.cursor()
@@ -54,7 +54,7 @@ def view_all_items():
         cursor.close()
 
 
-@app.route("/api/Admin/search/products", methods=["POST"])
+@app.route("/api/Admin/search/products", methods=["POST"])  # product search
 def view_all_products():
     conn = mysql.connection
     cursor = conn.cursor()

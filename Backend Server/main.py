@@ -181,6 +181,7 @@ if __name__ == "__main__":
     import AdminRoutes.admin
     import AdminRoutes.admin_frontpage
     import AdminRoutes.item_search
+    import AdminRoutes.services
     import CustomerRoutes.customer
     import CustomerRoutes.requests
     app.run(debug=True)

@@ -39,20 +39,20 @@ SELECT `Category`, `Price`, `Warranty`, `Model`, `Cost`, COUNT(*) AS `Inventory 
 												WHERE Category = "Lights"
 													AND `Purchase Status` = "Sold" -- idea?
 													AND Model = "Light1"
-												--  AND Price = "50"
-												--  AND Color = "Green"
-												--  AND Factory = "Malaysia"
-												--  AND `Production Year` = "2015"
+												 AND Price = "50"
+												 AND Color = "Green"
+												 AND Factory = "Malaysia"
+												 AND `Production Year` = "2015"
 												--  AND `Power Supply` = "USB"
 												--  AND Warranty = 10
 													ORDER BY `Product ID`, `Item ID`) AS `Sold Items`
 FROM Product LEFT JOIN Item USING (`Product ID`)
 WHERE Category = "Lights"
 	AND Model = "Light1"
---  AND Price = "50"
---  AND Color = "Green"
---  AND Factory = "Malaysia"
---  AND `Production Year` = "2015"
+ AND Price = "50"
+ AND Color = "Green"
+ AND Factory = "Malaysia"
+ AND `Production Year` = "2015"
 --  AND `Power Supply` = "USB"
 --  AND Warranty = 10
     AND `Purchase Status` = "Unsold"
