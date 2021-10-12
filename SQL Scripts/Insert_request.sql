@@ -46,6 +46,14 @@ VALUES ('2022-12-22',
 "Zuko",
 NULL,
 "1003");
+
+-- test out if can add new request when existing requests exist
+INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
+VALUES ('2022-12-22', 
+"Completed",
+"Zuko",
+"admin",
+"1100");
 #########################################################
 
 -- insert query that uses current date, as per normal
@@ -65,7 +73,7 @@ NULL,
 "1098");
 
 
-INSERT INTO `Service` (`Service Status`, `Admin ID`, `Request ID`) -- handle error thrown here with another try catch block
+INSERT INTO `Service` (`Service Status`, `Admin ID`, `Request ID`) -- handle error thrown here with another try catch block, error being that its submitted and waiting for payment
 VALUES (
 	(CASE WHEN curdate() <= '2022-12-15' THEN "Waiting for approval" END),
     (CASE WHEN curdate() <= '2022-12-15' THEN NULL END),

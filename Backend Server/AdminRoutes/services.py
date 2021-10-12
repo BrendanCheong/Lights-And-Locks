@@ -126,7 +126,7 @@ def complete_service():
 def not_found(error):
     message = {
         'status': 404,
-        'message': 'Not Found: ' + error,
+        'error': 'Not Found: ' + error,
         'error location': request.url
     }
     response = jsonify(message)

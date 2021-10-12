@@ -17,25 +17,111 @@ def add_request():
         warranty_end_date = resp["Warranty End"]
         customer_id = resp["Customer ID"]
         item_id = resp["Item ID"]
-        sql = f"""-- sql
-        INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
-        VALUES (curdate(), 
-        CASE WHEN curdate() <= '{warranty_end_date}' -- I compare request date to warranty date
-        THEN "Submitted"
-        ELSE "Submitted and Waiting for Payment"
-        END,
-        "{customer_id}",
-        NULL,
-        "{item_id}");
+
+        # check if there's a Canceled or Completed Request, where if there is, we must delete that request and make a new one
+        # if there isn't, its probably the first time they are making a request, so try to make a request and service
+        sql1 = f"""-- sql
+        SELECT * 
+        FROM `Request`
+        WHERE (`Request Status` = "Canceled" OR `Request Status` = "Completed")
+        AND `Item ID` = "{item_id}";
         """
-        cursor.execute(sql)
+        cursor.execute(sql1)
         conn.commit()
-        resp = jsonify(success="Successfully added to Request Table")
-        resp.status_code = 200
-        return resp
+        rows = cursor.fetchall()
+        print(rows)
+        if (len(rows) > 0):
+            # delete the pre-existing request
+            sql2 = "SET FOREIGN_KEY_CHECKS=0;"
+            sql3 = f"""DELETE FROM `Request` WHERE `Item ID` = "{item_id}";"""
+            sql4 = "SET FOREIGN_KEY_CHECKS=1;"
+            cursor.execute(sql2)
+            cursor.execute(sql3)
+            cursor.execute(sql4)
+            conn.commit()
+            # now try to make a brand new request that also adds in a service
+            try:
+                sql5 = f"""-- sql
+                INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
+                VALUES (curdate(),
+                CASE WHEN curdate() <= '{warranty_end_date}' -- I compare request date to warranty date
+                THEN "Submitted"
+                ELSE "Submitted and Waiting for Payment"
+                END,
+                "{customer_id}",
+                NULL,
+                "{item_id}");
+                """
+                cursor.execute(sql5)
+                conn.commit()
+                # try to make a new service
+                try:
+                    sql6 = f"""-- sql
+                    INSERT INTO `Service` (`Service Status`, `Admin ID`, `Request ID`) 
+                    VALUES (
+                        (CASE WHEN curdate() <= '{warranty_end_date}' THEN "Waiting for approval" END),
+                        (CASE WHEN curdate() <= '{warranty_end_date}' THEN NULL END),
+                        (CASE WHEN curdate() <= '{warranty_end_date}' THEN (SELECT `Request ID` FROM `Request` WHERE `Item ID` = "{item_id}" AND `Customer ID` = "{customer_id}") END)
+                    );
+                    """
+                    cursor.execute(sql6)
+                    conn.commit()
+                    resp = jsonify(
+                        success="Request for Service Created Successfully")
+                    resp.status_code = 200
+                    return resp
+                except Exception as e:
+                    print(str(e))  # not sure about this
+                    resp = jsonify(
+                        success="Request is Submitted and Waiting for Payment")
+                    resp.status_code = 200
+                    return resp
+            except Exception as e:
+                print(str(e))
+                return invalid("That Item has already been requested!")
+        else:  # if no existing request, this is probably the first time you are making that request
+            try:
+                sql7 = f"""-- sql
+                INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
+                VALUES (curdate(),
+                CASE WHEN curdate() <= '{warranty_end_date}' -- I compare request date to warranty date
+                THEN "Submitted"
+                ELSE "Submitted and Waiting for Payment"
+                END,
+                "{customer_id}",
+                NULL,
+                "{item_id}");
+                """
+                cursor.execute(sql7)
+                conn.commit()
+                # try to make a new service
+                try:
+                    sql8 = f"""-- sql
+                    INSERT INTO `Service` (`Service Status`, `Admin ID`, `Request ID`) 
+                    VALUES (
+                        (CASE WHEN curdate() <= '{warranty_end_date}' THEN "Waiting for approval" END),
+                        (CASE WHEN curdate() <= '{warranty_end_date}' THEN NULL END),
+                        (CASE WHEN curdate() <= '{warranty_end_date}' THEN (SELECT `Request ID` FROM `Request` WHERE `Item ID` = "{item_id}" AND `Customer ID` = "{customer_id}") END)
+                    );
+                    """
+                    cursor.execute(sql8)
+                    conn.commit()
+                    resp = jsonify(
+                        success="Request for Service Created Successfully")
+                    resp.status_code = 200
+                    return resp
+                except Exception as e:
+                    print(str(e))  # not sure about this
+                    resp = jsonify(
+                        success="Request is Submitted and Waiting for Payment")
+                    resp.status_code = 200
+                    return resp
+            except Exception as e:
+                print(str(e))
+                return invalid("That Item has already been requested!")
     except Exception as e:
         print(str(e))
-        return invalid("That Item has already been requested!")
+        return invalid("Something went wrong: " + str(e))
     finally:
         cursor.close()
 
@@ -150,7 +236,7 @@ def change_request_state():
 def not_found(error):
     message = {
         'status': 404,
-        'message': 'Not Found: ' + error,
+        'error': 'Not Found: ' + error,
         'error location': request.url
     }
     response = jsonify(message)
