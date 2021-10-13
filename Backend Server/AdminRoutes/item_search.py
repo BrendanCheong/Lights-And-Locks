@@ -56,64 +56,110 @@ def view_all_items():
 
 @app.route("/api/Admin/search/products", methods=["POST"])  # product search
 def view_all_products():
-    conn = mysql.connection
-    cursor = conn.cursor()
     try:
         resp = request.json
-        category = resp["Category"]
-        model = resp["Model"]
-        price = resp["Price"]
-        color = resp["Color"]
-        factory = resp["Factory"]
-        production_year = resp["Production Year"]
-        power_supply = resp["Power Supply"]
-        warranty = resp["Warranty"]
-        statement2 = (
-            "(SELECT COUNT(*) AS `Sold Items` ",
-            "FROM Product LEFT JOIN Item USING (`Product ID`) ",
-            """WHERE `Purchase Status` = "Sold" """,
-            f"""AND Model = "{model}" """ if model != "All" else "",
-            f"""AND Price = {price} """ if price != "All" else "",
-            f"""AND color = "{color}" """ if color != "All" else "",
-            f"""AND factory = "{factory}" """ if factory != "All" else "",
-            f"""AND `Production Year` = "{production_year}" """ if production_year != "All" else "",
-            f"""AND `Power Supply` = "{power_supply}" """ if power_supply != "All" else "",
-            f"""AND Warranty = {warranty} """ if warranty != "All" else "",
-            f"""AND Category = "{category}" """ if category != "All" else "",
-            "ORDER BY `Product ID`, `Item ID`) AS `Sold Items` "
-        )
-        sql2 = ""
-        for text in statement2:
-            sql2 += text
-        statement1 = (
-            "SELECT `Category`, `Price`, `Warranty`, `Model`, `Cost`, COUNT(*) AS `Inventory Level`, ",
-            f"""{sql2}""",
-            "FROM Product LEFT JOIN Item USING (`Product ID`) ",
-            """WHERE `Purchase Status` = "Unsold" """,
-            f"""AND Model = "{model}" """ if model != "All" else "",
-            f"""AND Price = {price} """ if price != "All" else "",
-            f"""AND color = "{color}" """ if color != "All" else "",
-            f"""AND factory = "{factory}" """ if factory != "All" else "",
-            f"""AND `Production Year` = "{production_year}" """ if production_year != "All" else "",
-            f"""AND `Power Supply` = "{power_supply}" """ if power_supply != "All" else "",
-            f"""AND Warranty = {warranty} """ if warranty != "All" else "",
-            f"""AND Category = "{category}" """ if category != "All" else "",
-            "ORDER BY `Product ID`, `Item ID`;"
-        )
-        sql = ""
-        for text in statement1:
-            sql += text
-        cursor.execute(sql)
-        conn.commit()
-        rows = cursor.fetchall()
-        resp = jsonify(success=rows)
+
+        def is_int_try(val: str) -> bool:
+            try:
+                int(val)
+                return True
+            except ValueError:
+                return False
+
+        resp = request.json
+
+        # Use Mongodb to get all the information like Item ID to buy and category/model name etc
+        items = mongo["items"]
+        pipeline = [
+            {
+                "$lookup": {
+                    "from": "products",
+                    "localField": "Category",
+                    "foreignField": "Category",
+                    "as": "product_doc"
+                }
+            },
+            {
+                "$unwind": "$product_doc"
+            },
+            {
+                "$redact": {
+                    "$cond": [
+                        {"$eq": ["$Model", "$product_doc.Model"]},
+                        "$$KEEP",
+                        "$$PRUNE"
+                    ]
+                }
+            },
+            {
+                "$project": {
+                    "Category": 1,
+                    "Model": 1,
+                    "ItemID": "$ItemID",
+                    "Color": "$Color",
+                    "Factory": "$Factory",
+                    "Power Supply": "$PowerSupply",
+                    "Purchase Status": "$PurchaseStatus",
+                    "Production Year": "$ProductionYear",
+                    "ProductID": "$product_doc.ProductID",
+                    "Cost": "$product_doc.Cost ($)",
+                    "Price": "$product_doc.Price ($)",
+                    "Warranty": "$product_doc.Warranty (months)"
+                }
+            }
+        ]
+        and_array = [{"Purchase Status": "Unsold"}]
+        sold_array = [{"Purchase Status": "Sold"}]
+        for k, v in resp.items():
+            if (v != "All" and is_int_try(v)):
+                and_array.append({k: int(v)})
+                sold_array.append({k: int(v)})
+            elif (v != "All"):
+                and_array.append({k: v})
+                sold_array.append({k: v})
+        match1 = {
+            "$match": {
+                "$and": and_array
+            }
+        }
+        match2 = {
+            "$match": {
+                "$and": sold_array
+            }
+        }
+        pipeline.append(match1)
+        result = list(items.aggregate(pipeline))
+        pipeline = pipeline[:-1] + [match2]  # calculate total sold
+        sold_items_amount = len(list(items.aggregate(pipeline)))
+        output = list()
+        if (len(result) == 0):
+            output = [
+                None,
+                None,
+                None,
+                None,
+                None,
+                0,
+                None
+            ]
+        else:
+            output = [
+                result[0]["Category"],
+                result[0]["Price"],
+                result[0]["Warranty"],
+                result[0]["Model"],
+                result[0]["Cost"],
+                len(result),
+                sold_items_amount
+            ]
+        print(output)
+
+        resp = jsonify(success=output)
         resp.status_code = 200
         return resp
     except Exception as e:
         print(str(e))
         return invalid(str(e))
-    finally:
-        cursor.close()
 
 
 @app.errorhandler(404)

@@ -1,4 +1,5 @@
 import os
+import json
 from flask import jsonify, flash, request
 from app import app
 # NOTE:change this to db_local_config (if needed) for those who cannot connect to our AWS RDS and call the Initalise database GET route
@@ -108,11 +109,24 @@ def initialise_db():
     # creates a path to the folder containing the initialise database script
     # then read and execute the sql file with cursor
     try:
-        with open(new_path) as f:
+        with open(new_path) as f:  # execute mongo db scripts
             cursor.execute(f.read())
 
+        # drop current mongo db collections, then add them back in
+        cur_path = os.path.dirname(__file__)
+
+        mongo.drop_collection("items")
+        mongo.drop_collection("products")
+
+        with open(cur_path + "\\items.json") as f:
+            item_data = json.load(f)
+        with open(cur_path + "\\products.json") as g:
+            product_data = json.load(g)
+
+        mongo["items"].insert_many(item_data)
+        mongo["products"].insert_many(product_data)
+
         # Add MongoDB's Products and Items According to MySQL schema
-        # takes like 20 seconds to execute all lol
         collection = mongo["products"]
         for doc in collection.find({}):
             sql = f"""-- sql

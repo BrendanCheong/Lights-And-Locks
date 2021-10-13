@@ -148,6 +148,7 @@ class MainWindow(QMainWindow):
 
     def handle_purchase_now(self, item_id: str):
         # item_id is in CHAR(4)
+        print(item_id)
         _translate = QtCore.QCoreApplication.translate
         self.ui.purchase_now_button.setText(
             _translate("MainWindow", "Purchasing..."))

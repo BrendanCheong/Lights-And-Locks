@@ -1,3 +1,4 @@
+from pprint import pprint
 from app import app
 from db_config import *
 from flask import jsonify, request
@@ -56,54 +57,105 @@ def view_purchases():
 @app.route("/api/Customer/search/products", methods=["POST"])
 def search_product_customer():
     # Search for a product based on a number of queries selected from the advanced search
-    # note that Category is FIXED while all other fields are ambiguous
+    # note that Purchase Status is FIXED while all other fields are ambiguous
     # returns the inventory level for said item
-    conn = mysql.connection
-    cursor = conn.cursor()
     try:
+
+        def is_int_try(val: str) -> bool:
+            try:
+                int(val)
+                return True
+            except ValueError:
+                return False
+
         resp = request.json
-        category = resp["Category"]
-        model = resp["Model"]
-        price = resp["Price"]
-        color = resp["Color"]
-        factory = resp["Factory"]
-        production_year = resp["Production Year"]
-        power_supply = resp["Power Supply"]
-        warranty = resp["Warranty"]
-        statement = (
-            "SELECT `Category`, `Model`, `Warranty`, `Price`, COUNT(*) AS `Inventory Level`, `Item ID` ",
-            "FROM Product LEFT JOIN Item USING (`Product ID`) ",
-            """WHERE `Purchase Status` = "Unsold" """,
-            f"""AND Model = "{model}" """ if model != "All" else "",
-            f"""AND Price = {price} """ if price != "All" else "",
-            f"""AND color = "{color}" """ if color != "All" else "",
-            f"""AND factory = "{factory}" """ if factory != "All" else "",
-            f"""AND `Production Year` = "{production_year}" """ if production_year != "All" else "",
-            f"""AND `Power Supply` = "{power_supply}" """ if power_supply != "All" else "",
-            f"""AND Warranty = {warranty} """ if warranty != "All" else "",
-            f"""AND Category = "{category}" """ if category != "All" else "",
-            "ORDER BY `Product ID`, `Item ID`;"
-        )
-        sql = ""
-        for text in statement:
-            sql += text
-        cursor.execute(sql)
-        conn.commit()
-        rows = cursor.fetchall()
-        resp = jsonify(success=rows)
+
+        # Use Mongodb to get all the information like Item ID to buy and category/model name etc
+        items = mongo["items"]
+        pipeline = [
+            {
+                "$lookup": {
+                    "from": "products",
+                    "localField": "Category",
+                    "foreignField": "Category",
+                    "as": "product_doc"
+                }
+            },
+            {
+                "$unwind": "$product_doc"
+            },
+            {
+                "$redact": {
+                    "$cond": [
+                        {"$eq": ["$Model", "$product_doc.Model"]},
+                        "$$KEEP",
+                        "$$PRUNE"
+                    ]
+                }
+            },
+            {
+                "$project": {
+                    "Category": 1,
+                    "Model": 1,
+                    "ItemID": "$ItemID",
+                    "Color": "$Color",
+                    "Factory": "$Factory",
+                    "Power Supply": "$PowerSupply",
+                    "Purchase Status": "$PurchaseStatus",
+                    "Production Year": "$ProductionYear",
+                    "ProductID": "$product_doc.ProductID",
+                    "Cost": "$product_doc.Cost ($)",
+                    "Price": "$product_doc.Price ($)",
+                    "Warranty": "$product_doc.Warranty (months)"
+                }
+            }
+        ]
+        and_array = [{"Purchase Status": "Unsold"}]
+
+        for k, v in resp.items():
+            if (v != "All" and is_int_try(v)):
+                and_array.append({k: int(v)})
+            elif (v != "All"):
+                and_array.append({k: v})
+        match = {
+            "$match": {
+                "$and": and_array
+            }
+        }
+        pipeline.append(match)
+        result = list(items.aggregate(pipeline))
+        output = list()
+        if (len(result) == 0):
+            output = [
+                None,
+                None,
+                None,
+                None,
+                0,
+                0
+            ]
+        else:
+            output = [
+                result[0]["Category"],
+                result[0]["Model"],
+                result[0]["Warranty"],
+                result[0]["Price"],
+                len(result),
+                result[0]["ItemID"]
+            ]
+        resp = jsonify(success=[output])
         resp.status_code = 200
         return resp
     except Exception as e:
         print(str(e))
         return invalid(str(e))
-    finally:
-        cursor.close()
 
 
 @app.route("/api/Customer/add/purchases", methods=["POST"])
 def add_purchase():
     # add to the purchase table based on item Id and Customer Id
     # then update the item status to Sold
+    # also update the mongodb while you're at it
     conn = mysql.connection
     cursor = conn.cursor()
     try:
@@ -122,6 +174,13 @@ def add_purchase():
         cursor.execute(sql1)
         cursor.execute(sql2)
         conn.commit()
+
+        items = mongo["items"]
+        items.update_one(
+            {"ItemID": item_id},
+            {"$set": {"PurchaseStatus": "Sold"}}
+        )
+
         resp = jsonify(success="Successfully Purchased Item!")
         resp.status_code = 200
         return resp

@@ -1,0 +1,58 @@
+[
+  {
+    "Category": "Lights",
+    "Cost ($)": 20,
+    "Model": "Light1",
+    "Price ($)": 50,
+    "ProductID": 1,
+    "Warranty (months)": 10
+  },
+  {
+    "Category": "Lights",
+    "Cost ($)": 22,
+    "Model": "Light2",
+    "Price ($)": 60,
+    "ProductID": 2,
+    "Warranty (months)": 6
+  },
+  {
+    "Category": "Lights",
+    "Cost ($)": 30,
+    "Model": "SmartHome1",
+    "Price ($)": 70,
+    "ProductID": 3,
+    "Warranty (months)": 8
+  },
+  {
+    "Category": "Locks",
+    "Cost ($)": 30,
+    "Model": "Safe1",
+    "Price ($)": 100,
+    "ProductID": 4,
+    "Warranty (months)": 10
+  },
+  {
+    "Category": "Locks",
+    "Cost ($)": 50,
+    "Model": "Safe2",
+    "Price ($)": 120,
+    "ProductID": 5,
+    "Warranty (months)": 10
+  },
+  {
+    "Category": "Locks",
+    "Cost ($)": 50,
+    "Model": "Safe3",
+    "Price ($)": 125,
+    "ProductID": 6,
+    "Warranty (months)": 10
+  },
+  {
+    "Category": "Locks",
+    "Cost ($)": 100,
+    "Model": "SmartHome1",
+    "Price ($)": 200,
+    "ProductID": 7,
+    "Warranty (months)": 12
+  }
+]

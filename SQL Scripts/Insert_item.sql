@@ -22,15 +22,15 @@ ON `Item`.`Product ID` = `Product`.`Product ID`;
 -- make criterias modular
 SELECT *, COUNT(*) AS `Inventory Level`, `Item ID`
 FROM Product LEFT JOIN Item USING (`Product ID`)
-WHERE Category = "Lights"
--- 	AND Model = "Light1"
+WHERE Category = "Lock"
+-- 	   AND Model = "Light1"
 --     AND Price = "50"
---     AND Color = "Green"
+     AND Color = "Green"
 --     AND Factory = "Malaysia"
 --     AND `Production Year` = "2015"
 --     AND `Power Supply` = "USB"
 --     AND Warranty = 10
---     AND `Purchase Status` = "Unsold"
+     AND `Purchase Status` = "Unsold"
 ORDER BY `Product ID`, `Item ID`;
 
 -- find items as above, make modular, but also return cost and number of Sold items
