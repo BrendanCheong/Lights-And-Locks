@@ -319,6 +319,12 @@ class MainWindow(QMainWindow):
                 product_array[3]) if product_array[3] is not None else "--"))
             self.ui.cost_amount_label.setText(_translate("MainWindow", "$ " + str(
                 product_array[4]) if product_array[4] is not None else "$ --"))
+            self.ui.color_amount_label.setText(_translate("MainWindow", str(
+                product_array[5]) if product_array[5] is not None else "--"))
+            self.ui.producti_year_amount_label.setText(_translate("MainWindow", str(
+                product_array[6]) if product_array[6] is not None else "--"))
+            self.ui.power_supply_amount_label.setText(_translate("MainWindow", str(
+                product_array[7]) if product_array[7] is not None else "--"))
             self.ui.inventory_amount_label.setText(_translate("MainWindow", str(
                 product_array[-2]) if product_array[-2] is not None else none_found))
             self.ui.sold_items_amount_label.setText(_translate("MainWindow", str(
