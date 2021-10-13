@@ -23,6 +23,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.customer_info = customer_info
+        self.global_Item_ID_state = ""
         # TOGGLE/BURGER MENU
         ########################################################################
         self.ui.Btn_Toggle.clicked.connect(
@@ -54,6 +55,9 @@ class MainWindow(QMainWindow):
         )
 
         # Purchase Now Button
+        self.ui.purchase_now_button.clicked.connect(
+            lambda: self.handle_purchase_now(self.global_Item_ID_state)
+        )
 
         """ For Tables"""
         # product tables
@@ -116,6 +120,12 @@ class MainWindow(QMainWindow):
             product_array[1]) if product_array[1] is not None else "--"))
         self.ui.inventory_amount_label.setText(_translate("MainWindow", str(
             product_array[4]) if product_array[4] is not None else none_found))
+        self.ui.color_amount_label.setText(_translate(
+            "MainWindow", str(product_array[5]) if product_array[5] else "--"))
+        self.ui.product_year_amount_label.setText(_translate(
+            "MainWindow", str(product_array[6]) if product_array[6] else "--"))
+        self.ui.power_supply_amount_label.setText(_translate(
+            "MainWindow", str(product_array[7] if product_array[7] else "--")))
 
         if (category_type == "Locks"):
             self.ui.category_div.setStyleSheet("""
@@ -141,38 +151,40 @@ class MainWindow(QMainWindow):
                 border-radius: 20px;
             }
             """)
+        self.global_Item_ID_state = product_array[-1]
 
-        self.ui.purchase_now_button.clicked.connect(
-            lambda: self.handle_purchase_now(product_array[-1])
-        )
-
-    def handle_purchase_now(self, item_id: str):
+    def handle_purchase_now(self, item_id: str = "NOTHING"):
         # item_id is in CHAR(4)
-        print(item_id)
+        category_amt = self.ui.category_amount_label.text()
         _translate = QtCore.QCoreApplication.translate
         self.ui.purchase_now_button.setText(
             _translate("MainWindow", "Purchasing..."))
-        current_inventory_level = int(self.ui.inventory_amount_label.text())
-        if current_inventory_level > 0:
-            print(item_id)
-            self.worker = Purchase_Product_Thread({
-                "Customer ID": self.customer_info["Customer ID"],
-                "Item ID": item_id
-            })
-            self.worker.start()
-            # refresh table after purchase
-            self.worker.finished.connect(
-                self.get_products_api)  # refresh the table
-            self.worker.finished.connect(lambda: UIFunctions.messageBox(
-                self, "Success", "Purchasing Item", "Item Purchased Successfully!"))
-        else:
+        if (category_amt == "All"):
             UIFunctions.messageBox(
-                self, "Error", "Purchasing Error", "Product Out Of Stock")
+                self, "Error", "Purchasing Error", "You Haven't Searched For anything yet!")
+        else:
+            current_inventory_level = int(
+                self.ui.inventory_amount_label.text())
+            if current_inventory_level > 0:
+                print(item_id)
+                self.worker = Purchase_Product_Thread({
+                    "Customer ID": self.customer_info["Customer ID"],
+                    "Item ID": item_id
+                })
+                self.worker.start()
+                # refresh table after purchase
+                self.worker.finished.connect(
+                    self.get_products_api)  # refresh the table
+                self.worker.finished.connect(lambda: UIFunctions.messageBox(
+                    self, "Success", "Purchasing Item", "Item Purchased Successfully!"))
+            else:
+                UIFunctions.messageBox(
+                    self, "Error", "Purchasing Error", "Product Out Of Stock")
         UIFunctions.fetch_table_data_response(self)
-        return
 
 
 ####################### Get Purchases API ##############################
+
 
     def get_purchases_api(self):
         _translate = QtCore.QCoreApplication.translate
@@ -326,13 +338,13 @@ class MainWindow(QMainWindow):
                     self, "Error", "Service Fee Error", "You can't pay for an item with a request that's canceled")
             elif current_status == "In Progress" or current_status == "Approved":
                 UIFunctions.messageBox(
-                    self, "Error", "Service Fee Error", "You already paid for this Request!")
+                    self, "Error", "Service Fee Error", "You already paid for this Request or Request is already Approved!")
             elif current_status == "Submitted":
                 UIFunctions.messageBox(
                     self, "Error", "Service Fee Error", "You don't have to pay for items under warranty")
             elif current_status == "Completed":
                 UIFunctions.messageBox(
-                    self, "Error", "Service Fee Error", "Request has already been serviced. There's nothing to pay fool")
+                    self, "Error", "Service Fee Error", "Request has already been serviced. There's nothing to pay fool!")
             else:
                 self.ui.requests_table.setCellWidget(
                     row_index, column_index, QtWidgets.QPushButton('Paying...'))

@@ -1,4 +1,3 @@
-from pprint import pprint
 from app import app
 from db_config import *
 from flask import jsonify, request
@@ -132,6 +131,9 @@ def search_product_customer():
                 None,
                 None,
                 0,
+                None,
+                None,
+                None,
                 0
             ]
         else:
@@ -141,6 +143,9 @@ def search_product_customer():
                 result[0]["Warranty"],
                 result[0]["Price"],
                 len(result),
+                result[0]["Color"],
+                result[0]["Production Year"],
+                result[0]["Power Supply"],
                 result[0]["ItemID"]
             ]
         resp = jsonify(success=[output])

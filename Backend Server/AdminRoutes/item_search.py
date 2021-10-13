@@ -21,15 +21,9 @@ def view_all_items():
             f"""AND r1.`Item ID` = "{item_id}" """ if item_id else "",
             """ORDER BY `Item ID`;"""
         )
-        statement2 = (
-            "SELECT * FROM `Item` ",
-            "INNER JOIN `Product` USING (`Product ID`) ",
-            """WHERE (`Purchase Status` = "Sold" OR `Purchase Status` = "Unsold") """,
-            f"""AND `Item ID` = "{item_id}" """ if item_id else "",
-            "ORDER BY `Item ID`;"
-        )
+
         sql = ""
-        if (ITEM_RESPONSE == "Yes"):
+        if (ITEM_RESPONSE == "Yes"):  # if yes then do the sql style
             for text in statement1:
                 sql += text
             cursor.execute(sql)
@@ -38,20 +32,79 @@ def view_all_items():
             resp = jsonify(success=rows)
             resp.status_code = 200
             return resp
-        else:
-            for text in statement2:
-                sql += text
-            cursor.execute(sql)
-            conn.commit()
-            rows = cursor.fetchall()
-            resp = jsonify(success=rows)
+        else:  # else do the mongodb style because its item search not item service search
+            items = mongo["items"]
+            pipeline = [
+                {
+                    "$lookup": {
+                        "from": "products",
+                        "localField": "Category",
+                        "foreignField": "Category",
+                        "as": "product_doc"
+                    }
+                },
+                {
+                    "$unwind": "$product_doc"
+                },
+                {
+                    "$redact": {
+                        "$cond": [
+                            {"$eq": ["$Model", "$product_doc.Model"]},
+                            "$$KEEP",
+                            "$$PRUNE"
+                        ]
+                    }
+                },
+                {
+                    "$project": {
+                        "Category": 1,
+                        "Model": 1,
+                        "ItemID": "$ItemID",
+                        "Color": "$Color",
+                        "Factory": "$Factory",
+                        "Power Supply": "$PowerSupply",
+                        "Purchase Status": "$PurchaseStatus",
+                        "Production Year": "$ProductionYear",
+                        "ProductID": "$product_doc.ProductID",
+                        "Cost": "$product_doc.Cost ($)",
+                        "Price": "$product_doc.Price ($)",
+                        "Warranty": "$product_doc.Warranty (months)"
+                    }
+                }
+            ]
+
+            result_array = []
+
+            if (item_id):
+                pipeline.append({
+                    "$match": {
+                        "$and": [{"ItemID": item_id}]
+                    }
+                })
+            result = list(items.aggregate(pipeline))
+
+            for doc in result:
+                holder = []
+                holder.append(doc["ProductID"])
+                holder.append(doc["ItemID"])
+                holder.append(doc["Production Year"])
+                holder.append(doc["Power Supply"])
+                holder.append(doc["Color"])
+                holder.append(doc["Factory"])
+                holder.append(doc["Purchase Status"])
+                holder.append(doc["Model"])
+                holder.append(doc["Category"])
+                holder.append(doc["Warranty"])
+                holder.append(doc["Price"])
+                holder.append(doc["Cost"])
+                result_array.append(holder)
+
+            resp = jsonify(success=result_array)
             resp.status_code = 200
             return resp
     except Exception as e:
         print(str(e))
         return invalid("Could Not Find that Item")
-    finally:
-        cursor.close()
 
 
 @app.route("/api/Admin/search/products", methods=["POST"])  # product search
@@ -139,8 +192,11 @@ def view_all_products():
                 None,
                 None,
                 None,
+                None,
+                None,
+                None,
                 0,
-                None
+                0
             ]
         else:
             output = [
@@ -149,12 +205,15 @@ def view_all_products():
                 result[0]["Warranty"],
                 result[0]["Model"],
                 result[0]["Cost"],
+                result[0]["Color"],
+                result[0]["Production Year"],
+                result[0]["Power Supply"],
                 len(result),
                 sold_items_amount
             ]
         print(output)
 
-        resp = jsonify(success=output)
+        resp = jsonify(success=[output])
         resp.status_code = 200
         return resp
     except Exception as e:
