@@ -45,9 +45,9 @@ Make sure you have python version 3.7.5 and above
 1) run the local Backend Flask server under Backend/main.py
 
 ```
-cd Backend && python main.py
+cd Backend\ Server/ && python main.py
 ```
-2) run the GUI under GUI/LoginForm.py
+2) run the GUI under GUI/LoginForm.py (you need to open a seperate terminal to run the GUI below)
 
 ```
 cd GUI && python LoginForm.py
