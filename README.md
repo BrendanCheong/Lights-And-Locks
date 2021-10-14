@@ -50,6 +50,7 @@ cd Backend\ Server/ && python main.py
 2) run the GUI under GUI/LoginForm.py (you need to open a seperate terminal to run the GUI below)
 
 ```
+# open a seperate terminal and make sure you are on the .../BT2102-OSHES-Group16/ directory before performing the command below
 cd GUI && python LoginForm.py
 ```
 
