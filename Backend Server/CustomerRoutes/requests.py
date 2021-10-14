@@ -181,7 +181,7 @@ def pay_service_fee():
                                 FROM `Product`
                                 INNER JOIN `Item`
                                 ON `Item`.`Product ID` = `Product`.`Product ID`
-                                WHERE `Item ID` = "{item_id}") / 20) + 40
+                                WHERE `Item ID` = "{item_id}") * 0.2) + 40
         WHERE `Customer ID` = "{customer_id}" AND `Item ID` = "{item_id}" AND `Request Status` = "Submitted and Waiting for Payment";
         """
         sql2 = f"""-- sql
@@ -189,7 +189,7 @@ def pay_service_fee():
         VALUES ("Waiting for approval", NULL, (SELECT `Request ID` FROM `Request` WHERE `Item ID` = "{item_id}" AND `Customer ID` = "{customer_id}"));
         """
         sql3 = f"""-- sql
-        SELECT (`Cost` / 20) + 40 AS `Service Fee`
+        SELECT (`Cost` * 0.2) + 40 AS `Service Fee`
         FROM `Product`
         INNER JOIN `Item`
         ON `Item`.`Product ID` = `Product`.`Product ID`
