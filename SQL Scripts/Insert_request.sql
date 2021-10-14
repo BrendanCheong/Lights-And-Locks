@@ -131,13 +131,13 @@ SET `Request Status` = "In Progress",
 						FROM `Product`
 						INNER JOIN `Item`
 						ON `Item`.`Product ID` = `Product`.`Product ID`
-						WHERE `Item ID` = "1096") / 20) + 40
+						WHERE `Item ID` = "1096") * 0.2) + 40
 WHERE `Customer ID` = "Zuko" AND `Item ID` = "1003" AND `Request Status` = "Submitted and Waiting for Payment";
 
 INSERT INTO `Service` (`Service Status`, `Admin ID`, `Request ID`)
 VALUES ("Waiting for approval", NULL, (SELECT `Request ID` FROM `Request` WHERE `Item ID` = "1003" AND `Customer ID` = "Zuko"));
 
-SELECT (`Cost` / 20) + 40 AS `Service Fee`
+SELECT (`Cost` * 0.2) + 40 AS `Service Fee`
 FROM `Product`
 INNER JOIN `Item`
 ON `Item`.`Product ID` = `Product`.`Product ID`
