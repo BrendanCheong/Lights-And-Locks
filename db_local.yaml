@@ -1,6 +1,0 @@
-mysql_host: '127.0.0.1'
-mysql_user: 'root'
-mysql_db: 'OSHES'
-mysql_password: 'password' # PLEASE TYPE IN YOUR PASSWORD FOR MYSQL HERE
-mongo_uri: 'mongodb://localhost:27017'
-mongo_db_name: 'admin' # BY DEFAULT THIS IS 'admin', this may be different on your side
