@@ -35,7 +35,14 @@ cluster_name: 'admin'
 you can configure all this in the db_config.py file under the Backend folder
 
 # Usage
-Make sure you have python version 3.7.5 and above and run the command below
+Make sure you have python version 3.7.5 and above
+
+1) run the local Backend Flask server under Backend/main.py
+
+```
+cd Backend && python main.py
+```
+2) run the GUI under GUI/LoginForm.py
 
 ```
 cd GUI && python LoginForm.py
