@@ -37,6 +37,11 @@ you can configure all this in the db_config.py file under the Backend folder
 # Usage
 Make sure you have python version 3.7.5 and above
 
+**Make sure your console starts off from this before performing the commands below**
+```
+.../BT2102-OSHES-Group16/
+```
+
 1) run the local Backend Flask server under Backend/main.py
 
 ```
