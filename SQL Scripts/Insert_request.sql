@@ -19,41 +19,44 @@ SET FOREIGN_KEY_CHECKS=1;
 ###########################
 -- insert Request that is not under warranty and will be auto canceled after 10 days
 -- when the case is "Submitted", create a new Service using the new Request ID
+-- *** IMPORTANT: Make sure you actually Purchased the Item
 -- if not, don't create a new service
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
-VALUES (DATE("2015-12-17"), 
-CASE WHEN '2015-12-17' <= DATE_ADD((SELECT `Purchase Date` FROM `Purchase` WHERE `Item ID` = "1096"), INTERVAL 10 MONTH) -- I need to add the purchase date here based on item ID
+VALUES (DATE("2021-10-21"), 
+CASE WHEN '2021-10-21' <= DATE_ADD((SELECT `Purchase Date` FROM `Purchase` WHERE `Item ID` = "1105"), INTERVAL 10 MONTH) -- var
 THEN "Submitted"
 ELSE "Submitted and Waiting for Payment"
 END,
-"Brendan",
+"Brendan", -- var
 NULL,
-"1001"); -- selected item ID
+"1105"); -- selected item ID
 
 #########################################################
 -- insert query that is not under warranty that will get auto canceled
+-- auto canceled as it was not approved within 10 days from Request Date
+-- obviously this request is a year old
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
-VALUES ('2020-12-22', 
+VALUES ('2020-12-22', -- var
 "Submitted and Waiting for Payment",
-"Zuko",
+"Zuko", -- var
 NULL,
-"1002");
+"1002"); -- var
 
 -- query not under warranty that won't get auto canceled
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
 VALUES ('2022-12-22', 
 "Submitted and Waiting for Payment",
-"Zuko",
+"Brendan",
 NULL,
 "1003");
 
 -- test out if can add new request when existing requests exist
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
-VALUES ('2022-12-22', 
+VALUES ('2022-12-22', -- var
 "Completed",
-"Zuko",
-"admin",
-"1100");
+"Zuko", -- var
+"admin", -- var
+"1100"); -- var
 #########################################################
 
 -- insert query that uses current date, as per normal
@@ -64,13 +67,13 @@ START TRANSACTION;
 
 INSERT INTO `Request` (`Request Date`, `Request Status`, `Customer ID`, `Admin ID`, `Item ID`)
 VALUES (curdate(), 
-CASE WHEN curdate() <= '2022-12-15' -- I compare request date to warranty date
+CASE WHEN curdate() <= '2022-12-15' -- I compare request date to warranty date #ASSUME warranty date: 2022-12-15
 THEN "Submitted"
 ELSE "Submitted and Waiting for Payment"
 END,
-"Brendan",
+"Brendan", -- var
 NULL,
-"1098");
+"1098"); -- var
 
 
 INSERT INTO `Service` (`Service Status`, `Admin ID`, `Request ID`) -- handle error thrown here with another try catch block, error being that its submitted and waiting for payment
