@@ -37,14 +37,20 @@ you can configure all this in the db_config.py file under the Backend folder
 # Usage
 Make sure you have python version 3.7.5 and above
 
+**Make sure your console starts off from this before performing the commands below**
+```
+.../BT2102-OSHES-Group16/
+```
+
 1) run the local Backend Flask server under Backend/main.py
 
 ```
-cd Backend && python main.py
+cd Backend\ Server/ && python main.py
 ```
-2) run the GUI under GUI/LoginForm.py
+2) run the GUI under GUI/LoginForm.py (you need to open a seperate terminal to run the GUI below)
 
 ```
+# open a seperate terminal and make sure you are on the .../BT2102-OSHES-Group16/ directory before performing the command below
 cd GUI && python LoginForm.py
 ```
 
