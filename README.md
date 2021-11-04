@@ -1,5 +1,5 @@
 # Welcome to Lights and Locks!
-
+<img alt="Python" src="https://img.shields.io/badge/python%20-%2314354C.svg?&style=for-the-badge&logo=python&logoColor=white"/> <img alt="MySQL" src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white"/> ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ## About
 
 With the advent and popularity of ecommerce, more and more consumers are purchasing smart-home equipment online. A company that focuses its business on smart home equipment has decided to incorporate a new Online Smart Home Ecommerce System. The company’s in-house IT team is expected to deliver a database software application (named “OSHES”) to manage product sales, administration, and maintenance.
